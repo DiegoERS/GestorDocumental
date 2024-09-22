@@ -13,12 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="DTOs\" />
-    <Folder Include="Utility\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\GestorDocumentalOIJ.BC\GestorDocumentalOIJ.BC.csproj" />
     <ProjectReference Include="..\GestorDocumentalOIJ.BW\GestorDocumentalOIJ.BW.csproj" />
     <ProjectReference Include="..\GestorDocumentalOIJ.DA\GestorDocumentalOIJ.DA.csproj" />
