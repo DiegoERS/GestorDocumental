@@ -1,0 +1,6 @@
+@GestorDocumentalOIJ_HostAddress = http://localhost:5088
+
+GET {{GestorDocumentalOIJ_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
