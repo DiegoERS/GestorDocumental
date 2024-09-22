@@ -25,7 +25,7 @@ namespace GestorDocumentalOIJ.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Categoria>> ObtenerCategoria(int id)
+        public async Task<ActionResult<CategoriaDTO>> ObtenerCategoria(int id)
         {
             return Ok(CategoriaDTOMapper.ConvertirCategoriaADTO(await _gestionarCategoriaBW.ObtenerCategoria(id)));
         }
