@@ -1,0 +1,18 @@
+﻿using GestorDocumentalOIJ.BC.Modelos;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace GestorDocumentalOIJ.BW.Interfaces.DA
+{
+    public interface IGestionarTipoDocumentoDA
+    {
+        Task<IEnumerable<TipoDocumento>> ObtenerTipoDocumentos();
+        Task<TipoDocumento> ObtenerTipoDocumentoPorId(int id);
+        Task<bool> CrearTipoDocumento(TipoDocumento tipoDocumento);
+        Task<bool> ActualizarTipoDocumento(TipoDocumento tipoDocumento);
+        Task<bool> EliminarTipoDocumento(int id);
+    }
+}

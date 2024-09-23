@@ -37,23 +37,21 @@ namespace GestorDocumentalOIJ.DA.Acciones
             );
 
             // Devuelve true si se afectó al menos una fila
-            return resultado > 0;
+            return resultado == 0;
         }
 
         public async Task<bool> CrearCategoria(Categoria categoria)
         {
             var nombreParameter = new SqlParameter("@Nombre", categoria.Nombre);
             var descripcionParameter = new SqlParameter("@Descripcion", categoria.Descripcion);
-            var eliminadoParameter = new SqlParameter("@Eliminado", categoria.Eliminado);
 
             int resultado=await _context.Database.ExecuteSqlRawAsync(
-                "EXEC  sp_InsertarCategoria @Nombre, @Descripcion, @Eliminado",
+                "EXEC  sp_InsertarCategoria @Nombre, @Descripcion",
                 nombreParameter,
-                descripcionParameter,
-                eliminadoParameter
+                descripcionParameter
             );
 
-            return resultado > 0;
+            return resultado == 0;
 
         }
 
@@ -64,7 +62,7 @@ namespace GestorDocumentalOIJ.DA.Acciones
             new SqlParameter("@Id", id)
         );
 
-            return resultado > 0;
+            return resultado == 0;
 
         }
 

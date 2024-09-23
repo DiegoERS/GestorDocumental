@@ -18,13 +18,22 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IGestionarCategoriaBW, GestionarCategoriaBW>();
 builder.Services.AddTransient<IGestionarCategoriaDA, GestionarCategoriaDA>();
 
+builder.Services.AddTransient<IGestionarTipoDocumentoBW, GestionarTipoDocumentoBW>();
+builder.Services.AddTransient<IGestionarTipoDocumentoDA, GestionarTipoDocumentoDA>();
+
+builder.Services.AddTransient<IGestionarNormaBW, GestionarNormaBW>();
+builder.Services.AddTransient<IGestionarNormaDA, GestionarNormaDA>();
+
+builder.Services.AddTransient<IGestionarEtapaBW, GestionarEtapaBW>();
+builder.Services.AddTransient<IGestionarEtapaDA, GestionarEtapaDA>();
+
 
 // Configurar la cadena de conexión a la base de datos
 
 builder.Services.AddDbContext<GestorDocumentalContext>(options =>
 {
     // Usar la cadena de conexión desde la configuración
-    var connectionString = "Server=Diego;Database=WebServices;Trusted_Connection=True;TrustServerCertificate=True;";
+    var connectionString = builder.Configuration.GetConnectionString("GestorDocumentalConnection");
     options.UseSqlServer(connectionString);
     // Otros ajustes del contexto de base de datos pueden ser configurados aquí, si es necesario
 });
