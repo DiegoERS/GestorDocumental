@@ -36,7 +36,7 @@ namespace GestorDocumentalOIJ.DA.Acciones
                                                normaIDParameter);
 
             // Devuelve true si se afectó al menos una fila
-            return resultado == 0;
+            return resultado > 0;
         }
 
         public async Task<bool> CrearEtapa(Etapa etapa)
@@ -50,7 +50,7 @@ namespace GestorDocumentalOIJ.DA.Acciones
                                                              nombreParameter,
                                                              descripcionParameter,
                                                              normaIDParameter);
-            return resultado == 0;
+            return resultado > 0;
         }
 
         public async Task<bool> EliminarEtapa(int id)
@@ -58,46 +58,55 @@ namespace GestorDocumentalOIJ.DA.Acciones
             int resultado = await _context.Database.ExecuteSqlRawAsync(
                                                              "EXEC sp_EliminarEtapa @Id", new SqlParameter("@Id", id));
 
-            return resultado == 0;
+            return resultado > 0;
         }
 
         public async Task<IEnumerable<Etapa>> ObtenerEtapas()
         {
-            return await _context.Etapas
-            .FromSqlRaw("EXEC sp_ListarEtapas")
-            .Select(e => new Etapa
+ 
+            var etapas = await _context.Etapas
+                .FromSqlRaw("EXEC sp_ListarEtapas")
+                .ToListAsync(); 
+
+            return etapas.Select(e => new Etapa
             {
                 Id = e.Id,
                 Nombre = e.Nombre,
                 Descripcion = e.Descripcion,
                 eliminado = e.eliminado,
                 normaID = e.normaID
-            })
-            .ToListAsync();
+            }).ToList(); 
         }
 
         public async Task<Etapa> ObtenerEtapaPorId(int id)
         {
-            var idParametro = new SqlParameter("@Id", id);
-
-            var etapaDA = await _context.Etapas
-                .FromSqlRaw("EXEC sp_ObtenerEtapaPorId @Id", idParametro)
-                .FirstOrDefaultAsync();
-
-            if (etapaDA != null)
+            try
             {
-                return new Etapa()
+                var idParametro = new SqlParameter("@Id", id);
+
+                var etapas = await _context.Etapas
+                    .FromSqlRaw("EXEC sp_ObtenerEtapaPorId @Id", idParametro)
+                    .ToListAsync(); 
+                var etapaDA = etapas.FirstOrDefault();
+
+                if (etapaDA != null)
                 {
-                    Id = etapaDA.Id,
-                    Nombre = etapaDA.Nombre,
-                    Descripcion = etapaDA.Descripcion,
-                    eliminado = etapaDA.eliminado,
-                    normaID = etapaDA.normaID
-                };
+                    return new Etapa()
+                    {
+                        Id = etapaDA.Id,
+                        Nombre = etapaDA.Nombre,
+                        Descripcion = etapaDA.Descripcion,
+                        eliminado = etapaDA.eliminado,
+                        normaID = etapaDA.normaID
+                    };
+                }
 
+                return new Etapa();
             }
-
-            return new Etapa();
+            catch (SqlException)
+            {
+                return new Etapa();
+            }
         }
     }
 }

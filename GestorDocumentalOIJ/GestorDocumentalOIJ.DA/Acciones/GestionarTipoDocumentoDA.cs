@@ -33,7 +33,7 @@ namespace GestorDocumentalOIJ.DA.Acciones
                                              eliminadoParameter);
 
             // Devuelve true si se afectó al menos una fila
-            return resultado == 0;
+            return resultado > 0;
         }
 
         public async Task<bool> CrearTipoDocumento(TipoDocumento tipoDocumento)
@@ -46,59 +46,64 @@ namespace GestorDocumentalOIJ.DA.Acciones
                                               nombreParameter,
                                               descripcionParameter);
 
-            return resultado == 0;
+            return resultado > 0;
 
         }
 
         public async Task<bool> EliminarTipoDocumento(int id)
         {
             int resultado = await _context.Database.ExecuteSqlRawAsync(
-                                              "EXEC sp_EliminarTipoDocumento @Id",new SqlParameter("@Id", id));
+                                              "EXEC sp_EliminarTipoDocumento @Id", new SqlParameter("@Id", id));
 
-            return resultado == 0;
+            return resultado > 0;
 
         }
 
         public async Task<IEnumerable<TipoDocumento>> ObtenerTipoDocumentos()
         {
-            return await _context.TiposDocumentos
-            .FromSqlRaw("EXEC sp_ListarTipoDocumentos")
-            .Select(td => new TipoDocumento
+            var tiposDocumentos = await _context.TiposDocumentos
+          .FromSqlRaw("EXEC sp_ListarTiposDocumento")
+          .ToListAsync(); 
+
+            return tiposDocumentos.Select(td => new TipoDocumento
             {
                 Id = td.Id,
                 Nombre = td.Nombre,
                 Descripcion = td.Descripcion,
                 Eliminado = td.Eliminado
-            })
-            .ToListAsync();
+            }).ToList();
         }
 
         public async Task<TipoDocumento> ObtenerTipoDocumentoPorId(int id)
         {
-            var idParametro = new SqlParameter("@Id", id);
-
-            var tipoDocumentoDA = await _context.TiposDocumentos
-                .FromSqlRaw("EXEC sp_ObtenerTipoDocumentoPorId @Id", idParametro)
-                .FirstOrDefaultAsync();
-
-            if (tipoDocumentoDA != null)
+            try
             {
-                return new TipoDocumento()
+                var idParametro = new SqlParameter("@Id", id);
+
+                var tiposDocumentos = await _context.TiposDocumentos
+                    .FromSqlRaw("EXEC sp_ObtenerTipoDocumentoPorId @Id", idParametro)
+                    .ToListAsync(); 
+                var tipoDocumentoDA = tiposDocumentos.FirstOrDefault();
+
+                if (tipoDocumentoDA != null)
                 {
-                    Id = tipoDocumentoDA.Id,
-                    Nombre = tipoDocumentoDA.Nombre,
-                    Descripcion = tipoDocumentoDA.Descripcion,
-                    Eliminado = tipoDocumentoDA.Eliminado
-                };
+                    return new TipoDocumento()
+                    {
+                        Id = tipoDocumentoDA.Id,
+                        Nombre = tipoDocumentoDA.Nombre,
+                        Descripcion = tipoDocumentoDA.Descripcion,
+                        Eliminado = tipoDocumentoDA.Eliminado
+                    };
+                }
 
+                return new TipoDocumento(); 
             }
-
-            return new TipoDocumento();
+            catch (SqlException)
+            {
+                return new TipoDocumento();
+            }
         }
 
 
-
-       
-      
     }
 }

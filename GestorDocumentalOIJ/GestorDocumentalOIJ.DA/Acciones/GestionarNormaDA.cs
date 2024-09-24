@@ -36,7 +36,7 @@ namespace GestorDocumentalOIJ.DA.Acciones
                                               eliminadoParameter );
 
             // Devuelve true si se afectó al menos una fila
-            return resultado == 0;
+            return resultado > 0;
         }
 
         public async Task<bool> CrearNorma(Norma norma)
@@ -49,7 +49,7 @@ namespace GestorDocumentalOIJ.DA.Acciones
                                               nombreParameter,
                                               descripcionParameter );
 
-            return resultado == 0;
+            return resultado > 0;
 
         }
 
@@ -59,47 +59,55 @@ namespace GestorDocumentalOIJ.DA.Acciones
             int resultado = await _context.Database.ExecuteSqlRawAsync(
                           "EXEC sp_EliminarNorma @Id", new SqlParameter("@Id", id));
 
-            return resultado == 0;
+            return resultado > 0;
 
         }
 
 
         public async Task<IEnumerable<Norma>> ListarNormas()
         {
-            return await _context.Normas
-            .FromSqlRaw("EXEC sp_ListarNormas")
-            .Select(n => new Norma
+            var normas = await _context.Normas
+         .FromSqlRaw("EXEC sp_ListarNormas")
+         .ToListAsync();
+            return normas.Select(n => new Norma
             {
                 Id = n.Id,
                 Nombre = n.Nombre,
                 Descripcion = n.Descripcion,
                 Eliminado = n.Eliminado
-            })
-            .ToListAsync();
+            }).ToList(); 
         }
 
 
         public async Task<Norma> ObtenerNorma(int id)
         {
-            var idParametro = new SqlParameter("@Id", id);
-
-            var normaDA = await _context.Normas
-                .FromSqlRaw("EXEC sp_ObtenerNormaPorId @Id", idParametro)
-                .FirstOrDefaultAsync();
-
-            if (normaDA != null)
+            try
             {
-                return new Norma()
+                var idParametro = new SqlParameter("@Id", id);
+
+                var normas = await _context.Normas
+                    .FromSqlRaw("EXEC sp_ObtenerNormaPorId @Id", idParametro)
+                    .ToListAsync();
+
+                var normaDA = normas.FirstOrDefault();
+
+                if (normaDA != null)
                 {
-                    Id = normaDA.Id,
-                    Nombre = normaDA.Nombre,
-                    Descripcion = normaDA.Descripcion,
-                    Eliminado = normaDA.Eliminado
-                };
+                    return new Norma()
+                    {
+                        Id = normaDA.Id,
+                        Nombre = normaDA.Nombre,
+                        Descripcion = normaDA.Descripcion,
+                        Eliminado = normaDA.Eliminado
+                    };
+                }
 
+                return new Norma(); 
             }
-
-            return new Norma();
+            catch (SqlException)
+            {
+                return new Norma();
+            }
         }
     }
 }

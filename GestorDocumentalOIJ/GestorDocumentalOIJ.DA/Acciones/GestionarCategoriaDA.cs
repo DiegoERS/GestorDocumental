@@ -36,8 +36,7 @@ namespace GestorDocumentalOIJ.DA.Acciones
                 eliminadoParameter
             );
 
-            // Devuelve true si se afectó al menos una fila
-            return resultado == 0;
+            return resultado > 0;
         }
 
         public async Task<bool> CrearCategoria(Categoria categoria)
@@ -51,7 +50,7 @@ namespace GestorDocumentalOIJ.DA.Acciones
                 descripcionParameter
             );
 
-            return resultado == 0;
+            return resultado > 0;
 
         }
 
@@ -62,34 +61,38 @@ namespace GestorDocumentalOIJ.DA.Acciones
             new SqlParameter("@Id", id)
         );
 
-            return resultado == 0;
+            return resultado > 0;
 
         }
 
         public async Task<IEnumerable<Categoria>> ListarCategorias()
         {
-            return await _context.Categorias
-            .FromSqlRaw("EXEC sp_ListarCategorias")
-            .Select(c => new Categoria
+     
+            var categorias = await _context.Categorias
+                .FromSqlRaw("EXEC sp_ListarCategorias")
+                .ToListAsync(); 
+            return categorias.Select(c => new Categoria
             {
-                 Id = c.Id,
-                 Nombre = c.Nombre,
-                 Descripcion = c.Descripcion,
-                 Eliminado = c.Eliminado
-            })
-            .ToListAsync();
+                Id = c.Id,
+                Nombre = c.Nombre,
+                Descripcion = c.Descripcion,
+                Eliminado = c.Eliminado
+            }).ToList();
         }
 
         public async Task<Categoria> ObtenerCategoria(int id)
         {
+            try
+            { 
             var idParametro = new SqlParameter("@Id", id);
 
-
-            var categoriaDA = await _context.Categorias
+            var categorias = await _context.Categorias
                 .FromSqlRaw("EXEC sp_ObtenerCategoriaPorId @Id", idParametro)
-                .FirstOrDefaultAsync();
+                .ToListAsync();
 
-         
+            var categoriaDA = categorias.FirstOrDefault();
+
+
             if (categoriaDA != null)
             {
                 return new Categoria()
@@ -102,7 +105,12 @@ namespace GestorDocumentalOIJ.DA.Acciones
 
             }
 
-            return new Categoria(); 
+            return new Categoria();
+            }
+            catch (SqlException)
+            {
+                return new Categoria();
+            }
 
 
         }
