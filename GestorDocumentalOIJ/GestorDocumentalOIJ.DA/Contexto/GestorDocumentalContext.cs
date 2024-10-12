@@ -16,5 +16,22 @@ namespace GestorDocumentalOIJ.DA.Contexto
         public DbSet<Entidades.TipoDocumentoDA> TiposDocumentos { get; set; }
         public DbSet<Entidades.NormaDA> Normas { get; set; }
         public DbSet<Entidades.EtapaDA> Etapas { get; set; }
+
+        public DbSet<Entidades.ClasificacionDA> Clasificaciones { get; set; }
+
+        public DbSet<Entidades.DocumentoDA> Documentos { get; set; }
+        
+        public DbSet<Entidades.DoctoDA> Doctos { get; set; }
+
+        public DbSet<Entidades.OficinaDA> Oficinas { get; set;}
+
+        public DbSet<Entidades.UsuarioDA> Usuarios { get; set; }
+
+        public DbSet<Entidades.SubclasificacionDA > Subclasificaciones { get; set; }
+
+        public DbSet<Entidades.VersionDA> Versiones { get; set; }
+
+
+
     }
 }

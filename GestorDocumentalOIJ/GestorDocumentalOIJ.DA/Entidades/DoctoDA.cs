@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GestorDocumentalOIJ.DA.Entidades
 {
-    internal class DoctoDA
+    public class DoctoDA
     {
     }
 }

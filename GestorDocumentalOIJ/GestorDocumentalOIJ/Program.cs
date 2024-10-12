@@ -27,6 +27,10 @@ builder.Services.AddTransient<IGestionarNormaDA, GestionarNormaDA>();
 builder.Services.AddTransient<IGestionarEtapaBW, GestionarEtapaBW>();
 builder.Services.AddTransient<IGestionarEtapaDA, GestionarEtapaDA>();
 
+builder.Services.AddTransient<IGestionarClasificacionBW, GestionarClasificacionBW>();
+builder.Services.AddTransient<IGestionarClasificacionDA, GestionarClasificacionDA>();
+
+
 
 // Configurar la cadena de conexión a la base de datos
 

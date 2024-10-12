@@ -19,7 +19,7 @@ namespace GestorDocumentalOIJ.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<CategoriaDTO>> ListarCategorias()
+        public async Task<ActionResult<IEnumerable<CategoriaDTO>>> ListarCategorias()
         {
             return Ok(CategoriaDTOMapper.ConvertirListaDeCategoriasADTO (await _gestionarCategoriaBW.ListarCategorias()));
         }
