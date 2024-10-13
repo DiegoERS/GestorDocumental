@@ -2777,25 +2777,26 @@
   },
   "projectFileDependencyGroups": {
     "net8.0": [
+      "GestorDocumentalOIJ.BC >= 1.0.0",
       "GestorDocumentalOIJ.BW >= 1.0.0",
       "Microsoft.EntityFrameworkCore >= 8.0.8",
       "Microsoft.EntityFrameworkCore.SqlServer >= 8.0.8"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Diego\\.nuget\\packages\\": {}
+    "C:\\Users\\nelso\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Diego\\Source\\Repos\\NewRepo\\GestorDocumentalOIJ\\GestorDocumentalOIJ.DA\\GestorDocumentalOIJ.DA.csproj",
+      "projectUniqueName": "C:\\Users\\nelso\\OneDrive\\Documentos\\2024\\Analisis\\Proyecto_Backend\\GestorDocumentalOIJ\\GestorDocumentalOIJ.DA\\GestorDocumentalOIJ.DA.csproj",
       "projectName": "GestorDocumentalOIJ.DA",
-      "projectPath": "C:\\Users\\Diego\\Source\\Repos\\NewRepo\\GestorDocumentalOIJ\\GestorDocumentalOIJ.DA\\GestorDocumentalOIJ.DA.csproj",
-      "packagesPath": "C:\\Users\\Diego\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Diego\\Source\\Repos\\NewRepo\\GestorDocumentalOIJ\\GestorDocumentalOIJ.DA\\obj\\",
+      "projectPath": "C:\\Users\\nelso\\OneDrive\\Documentos\\2024\\Analisis\\Proyecto_Backend\\GestorDocumentalOIJ\\GestorDocumentalOIJ.DA\\GestorDocumentalOIJ.DA.csproj",
+      "packagesPath": "C:\\Users\\nelso\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\nelso\\OneDrive\\Documentos\\2024\\Analisis\\Proyecto_Backend\\GestorDocumentalOIJ\\GestorDocumentalOIJ.DA\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Diego\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\nelso\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -2809,8 +2810,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\Diego\\Source\\Repos\\NewRepo\\GestorDocumentalOIJ\\GestorDocumentalOIJ.BW\\GestorDocumentalOIJ.BW.csproj": {
-              "projectPath": "C:\\Users\\Diego\\Source\\Repos\\NewRepo\\GestorDocumentalOIJ\\GestorDocumentalOIJ.BW\\GestorDocumentalOIJ.BW.csproj"
+            "C:\\Users\\nelso\\OneDrive\\Documentos\\2024\\Analisis\\Proyecto_Backend\\GestorDocumentalOIJ\\GestorDocumentalOIJ.BC\\GestorDocumentalOIJ.BC.csproj": {
+              "projectPath": "C:\\Users\\nelso\\OneDrive\\Documentos\\2024\\Analisis\\Proyecto_Backend\\GestorDocumentalOIJ\\GestorDocumentalOIJ.BC\\GestorDocumentalOIJ.BC.csproj"
+            },
+            "C:\\Users\\nelso\\OneDrive\\Documentos\\2024\\Analisis\\Proyecto_Backend\\GestorDocumentalOIJ\\GestorDocumentalOIJ.BW\\GestorDocumentalOIJ.BW.csproj": {
+              "projectPath": "C:\\Users\\nelso\\OneDrive\\Documentos\\2024\\Analisis\\Proyecto_Backend\\GestorDocumentalOIJ\\GestorDocumentalOIJ.BW\\GestorDocumentalOIJ.BW.csproj"
             }
           }
         }
@@ -2855,7 +2859,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files (x86)\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
