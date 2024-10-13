@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GestorDocumentalOIJ.BC\GestorDocumentalOIJ.BC.csproj" />
     <ProjectReference Include="..\GestorDocumentalOIJ.BW\GestorDocumentalOIJ.BW.csproj" />
   </ItemGroup>
 
