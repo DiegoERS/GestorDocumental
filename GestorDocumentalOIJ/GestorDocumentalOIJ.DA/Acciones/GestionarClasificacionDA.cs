@@ -22,13 +22,13 @@ namespace GestorDocumentalOIJ.DA.Acciones
 
         public async Task<bool> ActualizarClasificacion(Clasificacion clasificacion)
         {
-            var idParameter = new SqlParameter("@Id", clasificacion.Id);
-            var nombreParameter = new SqlParameter("@Nombre", clasificacion.Nombre);
-            var descripcionParameter = new SqlParameter("@Descripcion", clasificacion.Descripcion);
-            var eliminadoParameter = new SqlParameter("@Eliminado", clasificacion.Eliminado);
+            var idParameter = new SqlParameter("@pN_Id", clasificacion.Id);
+            var nombreParameter = new SqlParameter("@pC_Nombre", clasificacion.Nombre);
+            var descripcionParameter = new SqlParameter("@pC_Descripcion", clasificacion.Descripcion);
+            var eliminadoParameter = new SqlParameter("@pB_Eliminado", clasificacion.Eliminado);
 
             int resultado = await _context.Database.ExecuteSqlRawAsync(
-                               "EXEC sp_ActualizarClasificacion @Id, @Nombre, @Descripcion, @Eliminado",
+                               "EXEC GD.PA_ActualizarClasificacion @pN_Id, @pC_Nombre, @pC_Descripcion, @pB_Eliminado",
                                               idParameter,
                                               nombreParameter,
                                               descripcionParameter,
@@ -39,11 +39,11 @@ namespace GestorDocumentalOIJ.DA.Acciones
 
         public async Task<bool> CrearClasificacion(Clasificacion clasificacion)
         {
-            var nombreParameter = new SqlParameter("@Nombre", clasificacion.Nombre);
-            var descripcionParameter = new SqlParameter("@Descripcion", clasificacion.Descripcion);
+            var nombreParameter = new SqlParameter("@pC_Nombre", clasificacion.Nombre);
+            var descripcionParameter = new SqlParameter("@pC_Descripcion", clasificacion.Descripcion);
 
             int resultado = await _context.Database.ExecuteSqlRawAsync(
-                               "EXEC  sp_InsertarClasificacion @Nombre, @Descripcion",
+                               "EXEC  GD.PA_InsertarClasificacion @pC_Nombre, @pC_Descripcion",
                                               nombreParameter,
                                               descripcionParameter );
 
@@ -54,8 +54,8 @@ namespace GestorDocumentalOIJ.DA.Acciones
         public async Task<bool> EliminarClasificacion(int id)
         {
             int resultado = await _context.Database.ExecuteSqlRawAsync(
-                                              "EXEC sp_EliminarClasificacion @Id",
-                                              new SqlParameter("@Id", id)
+                                              "EXEC GD.PA_EliminarClasificacion @pN_Id",
+                                              new SqlParameter("@pN_Id", id)
                                                                                                                                                                   );
 
             return resultado > 0;
@@ -66,7 +66,7 @@ namespace GestorDocumentalOIJ.DA.Acciones
         {
 
             var clasificaciones = await _context.Clasificaciones
-                .FromSqlRaw("EXEC sp_ListarClasificaciones")
+                .FromSqlRaw("EXEC GD.PA_ListarClasificaciones")
                 .ToListAsync();
             return clasificaciones.Select(c => new Clasificacion
             {
@@ -81,10 +81,10 @@ namespace GestorDocumentalOIJ.DA.Acciones
         {
             try
             {
-                var idParametro = new SqlParameter("@Id", id);
+                var idParametro = new SqlParameter("@pN_Id", id);
 
                 var clasificaciones = await _context.Clasificaciones
-                    .FromSqlRaw("EXEC sp_ObtenerClasificacionPorId @Id", idParametro)
+                    .FromSqlRaw("EXEC GD.PA_ObtenerClasificacionPorId @pN_Id", idParametro)
                     .ToListAsync();
 
                 var clasificacionDA = clasificaciones.FirstOrDefault();

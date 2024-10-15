@@ -20,13 +20,13 @@ namespace GestorDocumentalOIJ.DA.Acciones
         }
         public async Task<bool> ActualizarTipoDocumento(TipoDocumento tipoDocumento)
         {
-            var idParameter = new SqlParameter("@Id", tipoDocumento.Id);
-            var nombreParameter = new SqlParameter("@Nombre", tipoDocumento.Nombre);
-            var descripcionParameter = new SqlParameter("@Descripcion", tipoDocumento.Descripcion);
-            var eliminadoParameter = new SqlParameter("@Eliminado", tipoDocumento.Eliminado);
+            var idParameter = new SqlParameter("@pN_Id", tipoDocumento.Id);
+            var nombreParameter = new SqlParameter("@pC_Nombre", tipoDocumento.Nombre);
+            var descripcionParameter = new SqlParameter(" @pC_Descripcion", tipoDocumento.Descripcion);
+            var eliminadoParameter = new SqlParameter("@pB_Eliminado", tipoDocumento.Eliminado);
 
             int resultado = await _context.Database.ExecuteSqlRawAsync(
-                               "EXEC sp_ActualizarTipoDocumento @Id, @Nombre, @Descripcion, @Eliminado",
+                               "EXEC PA_ActualizarTipoDocumento @pN_Id, @pC_Nombre,  @pC_Descripcion, @pB_Eliminado",
                                              idParameter,
                                              nombreParameter,
                                              descripcionParameter,
@@ -38,11 +38,11 @@ namespace GestorDocumentalOIJ.DA.Acciones
 
         public async Task<bool> CrearTipoDocumento(TipoDocumento tipoDocumento)
         {
-            var nombreParameter = new SqlParameter("@Nombre", tipoDocumento.Nombre);
-            var descripcionParameter = new SqlParameter("@Descripcion", tipoDocumento.Descripcion);
+            var nombreParameter = new SqlParameter("@pC_Nombre", tipoDocumento.Nombre);
+            var descripcionParameter = new SqlParameter("@pC_Descripcion", tipoDocumento.Descripcion);
 
             int resultado = await _context.Database.ExecuteSqlRawAsync(
-                               "EXEC  sp_InsertarTipoDocumento @Nombre, @Descripcion",
+                               "EXEC  GD.PA_InsertarTipoDocumento @pC_Nombre, @pC_Descripcion",
                                               nombreParameter,
                                               descripcionParameter);
 
@@ -53,7 +53,7 @@ namespace GestorDocumentalOIJ.DA.Acciones
         public async Task<bool> EliminarTipoDocumento(int id)
         {
             int resultado = await _context.Database.ExecuteSqlRawAsync(
-                                              "EXEC sp_EliminarTipoDocumento @Id", new SqlParameter("@Id", id));
+                                              "EXEC GD.PA_EliminarTipoDocumento @pN_Id", new SqlParameter("@pN_Id", id));
 
             return resultado > 0;
 
@@ -62,7 +62,7 @@ namespace GestorDocumentalOIJ.DA.Acciones
         public async Task<IEnumerable<TipoDocumento>> ObtenerTipoDocumentos()
         {
             var tiposDocumentos = await _context.TiposDocumentos
-          .FromSqlRaw("EXEC sp_ListarTiposDocumento")
+          .FromSqlRaw("EXEC GD.PA_ListarTiposDocumento")
           .ToListAsync(); 
 
             return tiposDocumentos.Select(td => new TipoDocumento
@@ -78,10 +78,10 @@ namespace GestorDocumentalOIJ.DA.Acciones
         {
             try
             {
-                var idParametro = new SqlParameter("@Id", id);
+                var idParametro = new SqlParameter("@pN_Id", id);
 
                 var tiposDocumentos = await _context.TiposDocumentos
-                    .FromSqlRaw("EXEC sp_ObtenerTipoDocumentoPorId @Id", idParametro)
+                    .FromSqlRaw("EXEC GD.PA_ObtenerTipoDocumentoPorId @pN_Id", idParametro)
                     .ToListAsync(); 
                 var tipoDocumentoDA = tiposDocumentos.FirstOrDefault();
 

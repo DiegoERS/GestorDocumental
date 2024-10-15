@@ -23,13 +23,13 @@ namespace GestorDocumentalOIJ.DA.Acciones
 
         public async Task<bool> ActualizarNorma(Norma norma)
         {
-            var idParameter = new SqlParameter("@Id", norma.Id);
-            var nombreParameter = new SqlParameter("@Nombre", norma.Nombre);
-            var descripcionParameter = new SqlParameter("@Descripcion", norma.Descripcion);
-            var eliminadoParameter = new SqlParameter("@Eliminado", norma.Eliminado);
+            var idParameter = new SqlParameter("@pN_Id", norma.Id);
+            var nombreParameter = new SqlParameter("@pC_Nombre", norma.Nombre);
+            var descripcionParameter = new SqlParameter("@pC_Descripcion", norma.Descripcion);
+            var eliminadoParameter = new SqlParameter("@pB_Eliminado", norma.Eliminado);
 
             int resultado = await _context.Database.ExecuteSqlRawAsync(
-                               "EXEC sp_ActualizarNorma @Id, @Nombre, @Descripcion, @Eliminado",
+                               "EXEC GD.PA_ActualizarNorma @pN_Id, @pC_Nombre, @pC_Descripcion, @pB_Eliminado",
                                               idParameter,
                                               nombreParameter,
                                               descripcionParameter,
@@ -41,11 +41,11 @@ namespace GestorDocumentalOIJ.DA.Acciones
 
         public async Task<bool> CrearNorma(Norma norma)
         {
-            var nombreParameter = new SqlParameter("@Nombre", norma.Nombre);
-            var descripcionParameter = new SqlParameter("@Descripcion", norma.Descripcion);
+            var nombreParameter = new SqlParameter("@pC_Nombre", norma.Nombre);
+            var descripcionParameter = new SqlParameter("@pC_Descripcion", norma.Descripcion);
 
             int resultado = await _context.Database.ExecuteSqlRawAsync(
-                                              "EXEC  sp_InsertarNorma @Nombre, @Descripcion",
+                                              "EXEC  GD.PA_InsertarNorma @pC_Nombre, @pC_Descripcion",
                                               nombreParameter,
                                               descripcionParameter );
 
@@ -57,7 +57,7 @@ namespace GestorDocumentalOIJ.DA.Acciones
         public async Task<bool> EliminarNorma(int id)
         {
             int resultado = await _context.Database.ExecuteSqlRawAsync(
-                          "EXEC sp_EliminarNorma @Id", new SqlParameter("@Id", id));
+                          "EXEC GD.PA_EliminarNorma @pN_Id", new SqlParameter("@pN_Id", id));
 
             return resultado > 0;
 
@@ -67,7 +67,7 @@ namespace GestorDocumentalOIJ.DA.Acciones
         public async Task<IEnumerable<Norma>> ListarNormas()
         {
             var normas = await _context.Normas
-         .FromSqlRaw("EXEC sp_ListarNormas")
+         .FromSqlRaw("EXEC GD.PA_ListarNormas")
          .ToListAsync();
             return normas.Select(n => new Norma
             {
@@ -83,10 +83,10 @@ namespace GestorDocumentalOIJ.DA.Acciones
         {
             try
             {
-                var idParametro = new SqlParameter("@Id", id);
+                var idParametro = new SqlParameter("@pN_Id", id);
 
                 var normas = await _context.Normas
-                    .FromSqlRaw("EXEC sp_ObtenerNormaPorId @Id", idParametro)
+                    .FromSqlRaw("EXEC GD.PA_ObtenerNormaPorId @pN_Id", idParametro)
                     .ToListAsync();
 
                 var normaDA = normas.FirstOrDefault();

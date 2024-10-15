@@ -12,7 +12,8 @@ namespace GestorDocumentalOIJ.DA.Entidades
         public string Nombre { get; set; } = string.Empty;
         public string Descripcion { get; set; } = string.Empty;
         public bool eliminado { get; set; }
-
+        public string color { get; set; }
+        public int EtapaPadreID { get; set; }
         public int normaID { get; set; }
     }
 }

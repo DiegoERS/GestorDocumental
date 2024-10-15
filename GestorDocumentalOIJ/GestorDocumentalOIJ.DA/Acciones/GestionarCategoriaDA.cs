@@ -23,13 +23,13 @@ namespace GestorDocumentalOIJ.DA.Acciones
         }
         public async Task<bool> ActualizarCategoria(Categoria categoria)
         {
-            var idParameter = new SqlParameter("@Id", categoria.Id);
-            var nombreParameter = new SqlParameter("@Nombre", categoria.Nombre);
+            var idParameter = new SqlParameter("@pN_Id", categoria.Id);
+            var nombreParameter = new SqlParameter("@pC_Nombre", categoria.Nombre);
             var descripcionParameter = new SqlParameter("@Descripcion", categoria.Descripcion);
-            var eliminadoParameter = new SqlParameter("@Eliminado", categoria.Eliminado);
+            var eliminadoParameter = new SqlParameter("@pB_Eliminado", categoria.Eliminado);
 
             int resultado = await _context.Database.ExecuteSqlRawAsync(
-                "EXEC sp_ActualizarCategoria @Id, @Nombre, @Descripcion, @Eliminado",
+                "EXEC GD.PA_ActualizarCategoria @pN_Id, @pC_Nombre, @pC_Descripcion, @pB_Eliminado",
                 idParameter,
                 nombreParameter,
                 descripcionParameter,
@@ -41,11 +41,11 @@ namespace GestorDocumentalOIJ.DA.Acciones
 
         public async Task<bool> CrearCategoria(Categoria categoria)
         {
-            var nombreParameter = new SqlParameter("@Nombre", categoria.Nombre);
-            var descripcionParameter = new SqlParameter("@Descripcion", categoria.Descripcion);
+            var nombreParameter = new SqlParameter("@pC_Nombre", categoria.Nombre);
+            var descripcionParameter = new SqlParameter("@pC_Descripcion", categoria.Descripcion);
 
             int resultado=await _context.Database.ExecuteSqlRawAsync(
-                "EXEC  sp_InsertarCategoria @Nombre, @Descripcion",
+                "EXEC  GD.PA_InsertarCategoria @pC_Nombre, @pC_Descripcion",
                 nombreParameter,
                 descripcionParameter
             );
@@ -57,8 +57,8 @@ namespace GestorDocumentalOIJ.DA.Acciones
         public async Task<bool> EliminarCategoria(int id)
         {
             int resultado = await _context.Database.ExecuteSqlRawAsync(
-            "EXEC sp_EliminarCategoria @Id",
-            new SqlParameter("@Id", id)
+            "EXEC GD.PA_EliminarCategoria @pN_Id",
+            new SqlParameter("@pN_Id", id)
         );
 
             return resultado > 0;
@@ -69,7 +69,7 @@ namespace GestorDocumentalOIJ.DA.Acciones
         {
      
             var categorias = await _context.Categorias
-                .FromSqlRaw("EXEC sp_ListarCategorias")
+                .FromSqlRaw("EXEC GD.PA_ListarCategorias")
                 .ToListAsync(); 
             return categorias.Select(c => new Categoria
             {
@@ -84,10 +84,10 @@ namespace GestorDocumentalOIJ.DA.Acciones
         {
             try
             { 
-            var idParametro = new SqlParameter("@Id", id);
+            var idParametro = new SqlParameter("@pN_Id", id);
 
             var categorias = await _context.Categorias
-                .FromSqlRaw("EXEC sp_ObtenerCategoriaPorId @Id", idParametro)
+                .FromSqlRaw("EXEC GD.PA_ObtenerCategoriaPorId @pN_Id", idParametro)
                 .ToListAsync();
 
             var categoriaDA = categorias.FirstOrDefault();
