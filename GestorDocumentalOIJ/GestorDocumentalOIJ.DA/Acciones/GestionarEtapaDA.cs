@@ -48,7 +48,7 @@ namespace GestorDocumentalOIJ.DA.Acciones
             var nombreParameter = new SqlParameter("@pC_Nombre", etapa.Nombre);
             var descripcionParameter = new SqlParameter("@pC_Descripcion", etapa.Descripcion);
             var normaIDParameter = new SqlParameter("@pN_NormaID", etapa.normaID);
-            var etapaPadreIdParameter ¿ new SqlParameter("@pN_EtapaPadreID", etapa.EtapaPadreID);
+            var etapaPadreIdParameter = new SqlParameter("@pN_EtapaPadreID", etapa.EtapaPadreID);
             var colorParameter = new SqlParameter("@pC_Color", etapa.color);
 
             int resultado = await _context.Database.ExecuteSqlRawAsync(
