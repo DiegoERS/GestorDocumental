@@ -8,7 +8,7 @@ namespace GestorDocumentalOIJ.BC.Modelos
 {
     public class Documento
     {
-
+        public int Id { get; set; }
         public string Codigo { get; set; } = string.Empty;
         public string Asunto { get; set; } = string.Empty;
         public string Descripcion { get; set; } = string.Empty;
@@ -19,6 +19,6 @@ namespace GestorDocumentalOIJ.BC.Modelos
         public string Vigencia { get; set; } = string.Empty;
         public int EtapaID { get; set; }
         public int SubClasificacionID { get; set; }
-        public string Doctos { get; set; } = string.Empty;
+        public IEnumerable<RelacionesDoc> doctos { get; set; }
     }
 }

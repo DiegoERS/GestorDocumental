@@ -3,10 +3,12 @@ using GestorDocumentalOIJ.BW.Interfaces.DA;
 using GestorDocumentalOIJ.DA.Contexto;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace GestorDocumentalOIJ.DA.Acciones
@@ -32,7 +34,7 @@ namespace GestorDocumentalOIJ.DA.Acciones
             var vigenciaParameter = new SqlParameter("@pC_Vigencia", documento.Vigencia);
             var etapaIDParameter = new SqlParameter("@pN_EtapaID", documento.EtapaID);
             var subClasificacionIDParameter = new SqlParameter("@pN_SubClasificacionID", documento.SubClasificacionID);
-            var doctosParameter = new SqlParameter("@pC_Doctos", documento.Doctos);
+            var doctosParameter = new SqlParameter("@pC_Doctos", documento.doctos);
 
             int resultado = await _context.Database.ExecuteSqlRawAsync(
                                                              "EXEC GD.PA_ActualizarDocumento @pC_Codigo, @pC_Asunto, @pC_Descripcion, @pC_PalabraClave, @pN_CategoriaID, @pN_TipoDocumento, @pN_OficinaID, @pC_Vigencia, @pN_EtapaID, @pN_SubClasificacionID, @pC_Doctos",
@@ -54,6 +56,7 @@ namespace GestorDocumentalOIJ.DA.Acciones
 
         public async Task<bool> CrearDocumento(Documento documento)
         {
+            var listaSerializada = JsonConvert.SerializeObject(documento.doctos);
             var codigoParameter = new SqlParameter("@pC_Codigo", documento.Codigo);
             var asuntoParameter = new SqlParameter("@pC_Asunto", documento.Asunto);
             var descripcionParameter = new SqlParameter("@pC_Descripcion", documento.Descripcion);
@@ -64,7 +67,7 @@ namespace GestorDocumentalOIJ.DA.Acciones
             var vigenciaParameter = new SqlParameter("@pC_Vigencia", documento.Vigencia);
             var etapaIDParameter = new SqlParameter("@pN_EtapaID", documento.EtapaID);
             var subClasificacionIDParameter = new SqlParameter("@pN_SubClasificacionID", documento.SubClasificacionID);
-            var doctosParameter = new SqlParameter("@pC_Doctos", documento.Doctos);
+            var doctosParameter = new SqlParameter("@pC_Doctos", listaSerializada);
 
             int resultado = await _context.Database.ExecuteSqlRawAsync(
                                                                             "EXEC GD.PA_InsertarDocumento @pC_Codigo, @pC_Asunto, @pC_Descripcion, @pC_PalabraClave, @pN_CategoriaID, @pN_TipoDocumento, @pN_OficinaID, @pC_Vigencia, @pN_EtapaID, @pN_SubClasificacionID, @pC_Doctos",
@@ -110,8 +113,7 @@ namespace GestorDocumentalOIJ.DA.Acciones
                 OficinaID = d.OficinaID,
                 Vigencia = d.Vigencia,
                 EtapaID = d.EtapaID,
-                SubClasificacionID = d.SubClasificacionID,
-                Doctos = d.Doctos
+                SubClasificacionID = d.SubClasificacionID 
             }).ToList();
         }
 
@@ -140,8 +142,7 @@ namespace GestorDocumentalOIJ.DA.Acciones
                         OficinaID = documentoDA.OficinaID,
                         Vigencia = documentoDA.Vigencia,
                         EtapaID = documentoDA.EtapaID,
-                        SubClasificacionID = documentoDA.SubClasificacionID,
-                        Doctos = documentoDA.Doctos
+                        SubClasificacionID = documentoDA.SubClasificacionID
                     };
                 }
 

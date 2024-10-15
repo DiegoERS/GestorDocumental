@@ -1,7 +1,10 @@
-﻿namespace GestorDocumentalOIJ.DTOs
+﻿using GestorDocumentalOIJ.BC.Modelos;
+
+namespace GestorDocumentalOIJ.DTOs
 {
     public class DocumentoDTO
     {
+        public int Id { get; set; }
         public string Codigo { get; set; } = string.Empty;
         public string Asunto { get; set; } = string.Empty;
         public string Descripcion { get; set; } = string.Empty;
@@ -12,6 +15,6 @@
         public string Vigencia { get; set; } = string.Empty;
         public int EtapaID { get; set; }
         public int SubClasificacionID { get; set; }
-        public string Doctos { get; set; } = string.Empty;
+        public IEnumerable<RelacionesDoc> doctos { get; set; }
     }
 }

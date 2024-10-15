@@ -9,6 +9,7 @@ namespace GestorDocumentalOIJ.Utility
         {
             return new DocumentoDTO()
             {
+                Id = documento.Id,
                 Codigo = documento.Codigo,
                 Asunto = documento.Asunto,
                 Descripcion = documento.Descripcion,
@@ -19,7 +20,7 @@ namespace GestorDocumentalOIJ.Utility
                 Vigencia = documento.Vigencia,
                 EtapaID = documento.EtapaID,
                 SubClasificacionID = documento.SubClasificacionID,
-                Doctos = documento.Doctos
+                doctos = documento.doctos
             };
         }
 
@@ -27,6 +28,7 @@ namespace GestorDocumentalOIJ.Utility
         {
             return new Documento()
             {
+                Id = documentoDTO.Id,
                 Codigo = documentoDTO.Codigo,
                 Asunto = documentoDTO.Asunto,
                 Descripcion = documentoDTO.Descripcion,
@@ -37,7 +39,7 @@ namespace GestorDocumentalOIJ.Utility
                 Vigencia = documentoDTO.Vigencia,
                 EtapaID = documentoDTO.EtapaID,
                 SubClasificacionID = documentoDTO.SubClasificacionID,
-                Doctos = documentoDTO.Doctos
+                doctos = documentoDTO.doctos
             };
         }
 
@@ -45,6 +47,8 @@ namespace GestorDocumentalOIJ.Utility
         {
             return documentos.Select(d => new DocumentoDTO()
             {
+
+                Id = d.Id,
                 Codigo = d.Codigo,
                 Asunto = d.Asunto,
                 Descripcion = d.Descripcion,
@@ -55,7 +59,7 @@ namespace GestorDocumentalOIJ.Utility
                 Vigencia = d.Vigencia,
                 EtapaID = d.EtapaID,
                 SubClasificacionID = d.SubClasificacionID,
-                Doctos = d.Doctos
+                doctos = d.doctos
             });
         }
 

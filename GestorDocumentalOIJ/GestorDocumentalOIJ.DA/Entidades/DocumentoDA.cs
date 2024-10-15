@@ -8,6 +8,7 @@ namespace GestorDocumentalOIJ.DA.Entidades
 {
     public class DocumentoDA
     {
+        public int Id { get; set; }
         public string Codigo { get; set; } = string.Empty;
         public string Asunto { get; set; } = string.Empty;
         public string Descripcion { get; set; } = string.Empty;
@@ -18,6 +19,6 @@ namespace GestorDocumentalOIJ.DA.Entidades
         public string Vigencia { get; set; } = string.Empty;
         public int EtapaID { get; set; }
         public int SubClasificacionID { get; set; }
-        public string Doctos { get; set; } = string.Empty;
+        public IEnumerable<RelacionesDocDA> doctos { get; set; }
     }
 }
