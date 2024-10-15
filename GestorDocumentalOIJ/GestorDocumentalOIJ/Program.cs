@@ -33,6 +33,9 @@ builder.Services.AddTransient<IGestionarClasificacionDA, GestionarClasificacionD
 builder.Services.AddTransient<IGestionarSubclasificacionBW, GestionarSubclasificacionBW>();
 builder.Services.AddTransient<IGestionarSubclasificacionDA, GestionarSubclasificacionDA>();
 
+builder.Services.AddTransient<IGestionarDoctoBW, GestionarDoctoBW>();
+builder.Services.AddTransient<IGestionarDoctoDA, GestionarDoctoDA>();
+
 
 
 // Configurar la cadena de conexión a la base de datos
