@@ -22,14 +22,14 @@ namespace GestorDocumentalOIJ.DA.Acciones
 
         public async Task<bool> actualizarSubclasificacion(Subclasificacion subclasificacion)
         {
-            var idParameter = new SqlParameter("@Id", subclasificacion.Id);
-            var nombreParameter = new SqlParameter("@Nombre", subclasificacion.Nombre);
-            var descripcionParameter = new SqlParameter("@Descripcion", subclasificacion.Descripcion);
-            var eliminadoParameter = new SqlParameter("@Eliminado", subclasificacion.Eliminado);
-            var idClasificacionParameter = new SqlParameter("@IdClasificacion", subclasificacion.ClasificacionID);
+            var idParameter = new SqlParameter("@pN_Id", subclasificacion.Id);
+            var nombreParameter = new SqlParameter("@pC_Nombre", subclasificacion.Nombre);
+            var descripcionParameter = new SqlParameter("@pC_Descripcion", subclasificacion.Descripcion);
+            var eliminadoParameter = new SqlParameter("@pB_Eliminado", subclasificacion.Eliminado);
+            var idClasificacionParameter = new SqlParameter("@pN_ClasificacionID", subclasificacion.ClasificacionID);
 
             int resultado = await _context.Database.ExecuteSqlRawAsync(
-                               "EXEC sp_ActualizarSubclasificacion @Id, @Nombre, @Descripcion, @Eliminado, @IdClasificacion",
+                               "EXEC GD.PA_ActualizarSubclasificacion @pN_Id, @pC_Nombre, @pC_Descripcion, @pB_Eliminado, @pN_ClasificacionID",
                                               idParameter,
                                               nombreParameter,
                                               descripcionParameter,
@@ -42,12 +42,12 @@ namespace GestorDocumentalOIJ.DA.Acciones
 
         public async Task<bool> crearSubclasificacion(Subclasificacion subclasificacion)
         {
-            var nombreParameter = new SqlParameter("@Nombre", subclasificacion.Nombre);
-            var descripcionParameter = new SqlParameter("@Descripcion", subclasificacion.Descripcion);
-            var idClasificacionParameter = new SqlParameter("@IdClasificacion", subclasificacion.ClasificacionID);
+            var nombreParameter = new SqlParameter("@pC_Nombre", subclasificacion.Nombre);
+            var descripcionParameter = new SqlParameter("@pC_Descripcion", subclasificacion.Descripcion);
+            var idClasificacionParameter = new SqlParameter("@pN_ClasificacionID", subclasificacion.ClasificacionID);
 
             int resultado = await _context.Database.ExecuteSqlRawAsync(
-                               "EXEC  sp_InsertarSubclasificacion @Nombre, @Descripcion, @IdClasificacion",
+                               "EXEC  GD.PA_InsertarSubclasificacion @pC_Nombre, @pC_Descripcion, @pN_ClasificacionID",
                                               nombreParameter,
                                               descripcionParameter,
                                               idClasificacionParameter);
@@ -60,8 +60,8 @@ namespace GestorDocumentalOIJ.DA.Acciones
         public async Task<bool> eliminarSubclasificacion(int id)
         {
             int resultado = await _context.Database.ExecuteSqlRawAsync(
-                           "EXEC sp_EliminarSubclasificacion @Id",
-                                      new SqlParameter("@Id", id));
+                           "EXEC GD.PA_EliminarSubclasificacion @pN_Id",
+                                      new SqlParameter("@pN_Id", id));
 
             return resultado > 0;
         }
@@ -70,7 +70,7 @@ namespace GestorDocumentalOIJ.DA.Acciones
         public async Task<IEnumerable<Subclasificacion>> obtenerSubclasificaciones()
         {
             var subclasificaciones = await _context.Subclasificaciones
-                .FromSqlRaw("EXEC sp_ListarSubclasificaciones")
+                .FromSqlRaw("EXEC GD.PA_ListarSubclasificaciones")
                 .ToListAsync();
             return subclasificaciones.Select(c => new Subclasificacion
             {
@@ -87,10 +87,10 @@ namespace GestorDocumentalOIJ.DA.Acciones
         {
             try
             {
-                var idParametro = new SqlParameter("@Id", id);
+                var idParametro = new SqlParameter("@pN_Id", id);
 
                 var subclasificaciones = await _context.Subclasificaciones
-                    .FromSqlRaw("EXEC sp_ObtenerSubclasificacionPorId @Id", idParametro)
+                    .FromSqlRaw("EXEC GD.PA_ObtenerSubclasificacionPorId @pN_Id", idParametro)
                     .ToListAsync();
 
                 var subclasificacionDA = subclasificaciones.FirstOrDefault();

@@ -20,20 +20,20 @@ namespace GestorDocumentalOIJ.DA.Acciones
             _context = context;
         }
 
-      
+
         public async Task<bool> ActualizarDocto(Docto docto)
         {
-            var idParameter = new SqlParameter("@Id", docto.Id);
-            var nombreParameter = new SqlParameter("@Nombre", docto.Nombre);
-            var descripcionParameter = new SqlParameter("@Descripcion", docto.Descripcion);
-            var eliminadoParameter = new SqlParameter("@Eliminado", docto.Eliminado);
+            var idParameter = new SqlParameter("@pN_Id", docto.Id);
+            var nombreParameter = new SqlParameter("@pC_Nombre", docto.Nombre);
+            var descripcionParameter = new SqlParameter("@pC_Descripcion", docto.Descripcion);
+            var eliminadoParameter = new SqlParameter("@pB_Eliminado", docto.Eliminado);
 
             int resultado = await _context.Database.ExecuteSqlRawAsync(
-                                              "EXEC sp_ActualizarDocto @Id, @Nombre, @Descripcion, @Eliminado",
-                                                                                           idParameter,
-                                                                                                                                        nombreParameter,
-                                                                                                                                                                                     descripcionParameter,
-                                                                                                                                                                                                                                  eliminadoParameter);
+                                              "EXEC GD.PA_sp_ActualizarDocTo @pN_Id, @pC_Nombre, @pC_Descripcion, @pB_Eliminado",
+                                                                                         idParameter,
+                                                                                         nombreParameter,
+                                                                                         descripcionParameter,
+                                                                                         eliminadoParameter);
 
             // Devuelve true si se afectó al menos una fila
             return resultado > 0;
@@ -42,13 +42,13 @@ namespace GestorDocumentalOIJ.DA.Acciones
 
         public async Task<bool> CrearDocto(Docto docto)
         {
-            var nombreParameter = new SqlParameter("@Nombre", docto.Nombre);
-            var descripcionParameter = new SqlParameter("@Descripcion", docto.Descripcion);
+            var nombreParameter = new SqlParameter("@pC_Nombre", docto.Nombre);
+            var descripcionParameter = new SqlParameter("@pC_Descripcion", docto.Descripcion);
 
             int resultado = await _context.Database.ExecuteSqlRawAsync(
-                                                             "EXEC  sp_InsertarDocto @Nombre, @Descripcion",
-                                                                                                          nombreParameter,
-                                                                                                                                                       descripcionParameter);
+                                                             "EXEC  GD.PA_sp_InsertarDocTo @pC_Nombre, @pC_Descripcion",
+                                                                                    nombreParameter,
+                                                                                    descripcionParameter);
 
             return resultado > 0;
 
@@ -58,7 +58,7 @@ namespace GestorDocumentalOIJ.DA.Acciones
         public async Task<bool> EliminarDocto(int id)
         {
             int resultado = await _context.Database.ExecuteSqlRawAsync(
-                                         "EXEC sp_EliminarDocto @Id", new SqlParameter("@Id", id));
+                                         "EXEC GD.PA_sp_EliminarDocTo @pN_Id", new SqlParameter("@pN_Id", id));
 
             return resultado > 0;
 
@@ -67,7 +67,7 @@ namespace GestorDocumentalOIJ.DA.Acciones
         public async Task<IEnumerable<Docto>> ObtenerDoctos()
         {
             var doctos = await _context.Doctos
-         .FromSqlRaw("EXEC sp_ListarDoctos")
+         .FromSqlRaw("EXEC GD.PA_sp_ListarDocTos")
          .ToListAsync();
             return doctos.Select(d => new Docto
             {
@@ -82,10 +82,10 @@ namespace GestorDocumentalOIJ.DA.Acciones
         {
             try
             {
-                var idParametro = new SqlParameter("@Id", id);
+                var idParametro = new SqlParameter("@pN_Id", id);
 
                 var doctos = await _context.Doctos
-                    .FromSqlRaw("EXEC sp_ObtenerDoctoPorId @Id", idParametro)
+                    .FromSqlRaw("EXEC GD.PA_sp_ObtenerDocToPorId @pN_Id", idParametro)
                     .ToListAsync();
 
                 var doctoDA = doctos.FirstOrDefault();

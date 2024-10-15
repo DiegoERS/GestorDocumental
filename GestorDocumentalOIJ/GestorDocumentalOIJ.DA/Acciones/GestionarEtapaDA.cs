@@ -21,14 +21,14 @@ namespace GestorDocumentalOIJ.DA.Acciones
 
         public async Task<bool> ActualizarEtapa(Etapa etapa)
         {
-            var idParameter = new SqlParameter("@Id", etapa.Id);
-            var nombreParameter = new SqlParameter("@Nombre", etapa.Nombre);
-            var descripcionParameter = new SqlParameter("@Descripcion", etapa.Descripcion);
+            var idParameter = new SqlParameter("@pN_Id", etapa.Id);
+            var nombreParameter = new SqlParameter("@pC_Nombre", etapa.Nombre);
+            var descripcionParameter = new SqlParameter("@pC_Descripcion", etapa.Descripcion);
             var eliminadoParameter = new SqlParameter("@Eliminado", etapa.eliminado);
             var normaIDParameter = new SqlParameter("@NormaID", etapa.normaID);
 
             int resultado = await _context.Database.ExecuteSqlRawAsync(
-                                              "EXEC sp_ActualizarEtapa @Id, @Nombre, @Descripcion, @Eliminado, @NormaID",
+                                              "EXEC GD.PA_ActualizarEtapa @pN_Id, @pC_Nombre, @Descripcion, @Eliminado, @NormaID",
                                                idParameter,
                                                nombreParameter,
                                                descripcionParameter,
