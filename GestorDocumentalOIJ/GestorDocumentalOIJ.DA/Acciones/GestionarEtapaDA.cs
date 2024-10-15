@@ -24,15 +24,19 @@ namespace GestorDocumentalOIJ.DA.Acciones
             var idParameter = new SqlParameter("@pN_Id", etapa.Id);
             var nombreParameter = new SqlParameter("@pC_Nombre", etapa.Nombre);
             var descripcionParameter = new SqlParameter("@pC_Descripcion", etapa.Descripcion);
-            var eliminadoParameter = new SqlParameter("@Eliminado", etapa.eliminado);
-            var normaIDParameter = new SqlParameter("@NormaID", etapa.normaID);
+            var eliminadoParameter = new SqlParameter("@pB_Eliminado", etapa.eliminado);
+            var normaIDParameter = new SqlParameter("@pN_NormaID", etapa.normaID);
+            var etapaIDParameter = new SqlParameter("@pN_EtapaPadreID", etapa.EtapaPadreID);
+            var colorParameter = new SqlParameter("@pC_Color", etapa.color);
 
             int resultado = await _context.Database.ExecuteSqlRawAsync(
-                                              "EXEC GD.PA_ActualizarEtapa @pN_Id, @pC_Nombre, @Descripcion, @Eliminado, @NormaID",
+                                              "EXEC GD.PA_ActualizarEtapa @pN_Id, @pC_Nombre, @pC_Descripcion, @pB_Eliminado, @pN_EtapaPadreID, @pC_Color, @pN_NormaID",
                                                idParameter,
                                                nombreParameter,
                                                descripcionParameter,
                                                eliminadoParameter,
+                                               etapaIDParameter,
+                                               colorParameter,
                                                normaIDParameter);
 
             // Devuelve true si se afectó al menos una fila
@@ -41,14 +45,18 @@ namespace GestorDocumentalOIJ.DA.Acciones
 
         public async Task<bool> CrearEtapa(Etapa etapa)
         {
-            var nombreParameter = new SqlParameter("@Nombre", etapa.Nombre);
-            var descripcionParameter = new SqlParameter("@Descripcion", etapa.Descripcion);
-            var normaIDParameter = new SqlParameter("@NormaID", etapa.normaID);
+            var nombreParameter = new SqlParameter("@pC_Nombre", etapa.Nombre);
+            var descripcionParameter = new SqlParameter("@pC_Descripcion", etapa.Descripcion);
+            var normaIDParameter = new SqlParameter("@pN_NormaID", etapa.normaID);
+            var etapaPadreIdParameter ¿ new SqlParameter("@pN_EtapaPadreID", etapa.EtapaPadreID);
+            var colorParameter = new SqlParameter("@pC_Color", etapa.color);
 
             int resultado = await _context.Database.ExecuteSqlRawAsync(
-                                                             "EXEC  sp_InsertarEtapa @Nombre, @Descripcion, @NormaID",
+                                                             "EXEC  GD.PA_InsertarEtapa @pC_Nombre, @pC_Descripcion, @pN_EtapaPadreID, @pC_Color, @pN_NormaID",
                                                              nombreParameter,
                                                              descripcionParameter,
+                                                             etapaPadreIdParameter,
+                                                             colorParameter,
                                                              normaIDParameter);
             return resultado > 0;
         }
@@ -56,7 +64,7 @@ namespace GestorDocumentalOIJ.DA.Acciones
         public async Task<bool> EliminarEtapa(int id)
         {
             int resultado = await _context.Database.ExecuteSqlRawAsync(
-                                                             "EXEC sp_EliminarEtapa @Id", new SqlParameter("@Id", id));
+                                                             "EXEC GD.PA_EliminarEtapa @pN_Id", new SqlParameter("@pN_Id", id));
 
             return resultado > 0;
         }
@@ -65,7 +73,7 @@ namespace GestorDocumentalOIJ.DA.Acciones
         {
  
             var etapas = await _context.Etapas
-                .FromSqlRaw("EXEC sp_ListarEtapas")
+                .FromSqlRaw("EXEC GD.PA_ListarEtapas")
                 .ToListAsync(); 
 
             return etapas.Select(e => new Etapa
@@ -74,6 +82,8 @@ namespace GestorDocumentalOIJ.DA.Acciones
                 Nombre = e.Nombre,
                 Descripcion = e.Descripcion,
                 eliminado = e.eliminado,
+                color = e.color,
+                EtapaPadreID = e.EtapaPadreID,
                 normaID = e.normaID
             }).ToList(); 
         }
@@ -85,7 +95,7 @@ namespace GestorDocumentalOIJ.DA.Acciones
                 var idParametro = new SqlParameter("@Id", id);
 
                 var etapas = await _context.Etapas
-                    .FromSqlRaw("EXEC sp_ObtenerEtapaPorId @Id", idParametro)
+                    .FromSqlRaw("EXEC GD.PA_ObtenerEtapaPorId @Id", idParametro)
                     .ToListAsync(); 
                 var etapaDA = etapas.FirstOrDefault();
 
@@ -97,6 +107,8 @@ namespace GestorDocumentalOIJ.DA.Acciones
                         Nombre = etapaDA.Nombre,
                         Descripcion = etapaDA.Descripcion,
                         eliminado = etapaDA.eliminado,
+                        color = etapaDA.color,
+                        EtapaPadreID=etapaDA.EtapaPadreID,
                         normaID = etapaDA.normaID
                     };
                 }
