@@ -34,13 +34,15 @@ namespace GestorDocumentalOIJ.Controllers
 
         public async Task<ActionResult<bool>> CrearVersion(VersionDTO versionDTO)
         {
-            return Ok(await _gestionarVersionBW.CrearVersion(VersionDTOMapper.ConvertirDTOAVersion(versionDTO)));
+            string rutaArchivo = await SaveFiles.SaveFile(versionDTO.archivo);
+            return Ok(await _gestionarVersionBW.CrearVersion(VersionDTOMapper.ConvertirDTOAVersion(versionDTO,rutaArchivo)));
         }
 
         [HttpPut]
         public async Task<ActionResult<bool>> ActualizarVersion(VersionDTO versionDTO)
         {
-            return Ok(await _gestionarVersionBW.ActualizarVersion(VersionDTOMapper.ConvertirDTOAVersion(versionDTO)));
+            string rutaArchivo = await SaveFiles.SaveFile(versionDTO.archivo);
+            return Ok(await _gestionarVersionBW.ActualizarVersion(VersionDTOMapper.ConvertirDTOAVersion(versionDTO, rutaArchivo)));
         }
 
         [HttpDelete("{id}")]

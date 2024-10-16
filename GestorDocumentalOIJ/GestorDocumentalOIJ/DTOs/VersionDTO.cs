@@ -9,7 +9,7 @@
 
         public string FechaCreacion { get; set; } = string.Empty;
 
-        public string urlVersion { get; set; } = string.Empty;
+        public IFormFile archivo { get; set; } = null;
 
         public bool eliminado { get; set; }
 

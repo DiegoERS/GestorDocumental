@@ -2,7 +2,7 @@
 {
     public static class SaveFiles
     {
-        public static async Task<bool> SaveFile(IFormFile file)
+        public static async Task<string> SaveFile(IFormFile file)
         {
             // Definir la ruta hacia la carpeta "Archivos"
             var nombreArchivo = Path.GetFileName(file.FileName);
@@ -22,11 +22,11 @@
                 }
 
                 // Guardar la ruta en la base de datos si es necesario...
-                return true;
+                return rutaCompleta;
             }
             catch (Exception)
             {
-                return false;
+                return "";
             }
         }
     }

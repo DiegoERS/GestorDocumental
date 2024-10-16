@@ -14,13 +14,12 @@ namespace GestorDocumentalOIJ.Utility
                 DocumentoID = version.DocumentoID,
                 NumeroVersion = version.NumeroVersion,
                 FechaCreacion = version.FechaCreacion,
-                urlVersion = version.urlVersion,
                 eliminado = version.eliminado,
                 usuarioID = version.usuarioID
             };
         }
 
-        public static BC.Modelos.Version ConvertirDTOAVersion(VersionDTO versionDTO)
+        public static BC.Modelos.Version ConvertirDTOAVersion(VersionDTO versionDTO, string rutaArchivo)
         {
             return new BC.Modelos.Version()
             {
@@ -28,7 +27,7 @@ namespace GestorDocumentalOIJ.Utility
                 DocumentoID = versionDTO.DocumentoID,
                 NumeroVersion = versionDTO.NumeroVersion,
                 FechaCreacion = versionDTO.FechaCreacion,
-                urlVersion = versionDTO.urlVersion,
+                urlVersion = rutaArchivo,
                 eliminado = versionDTO.eliminado,
                 usuarioID = versionDTO.usuarioID
             };
@@ -42,7 +41,6 @@ namespace GestorDocumentalOIJ.Utility
                 DocumentoID = v.DocumentoID,
                 NumeroVersion = v.NumeroVersion,
                 FechaCreacion = v.FechaCreacion,
-                urlVersion = v.urlVersion,
                 eliminado = v.eliminado,
                 usuarioID = v.usuarioID
 
