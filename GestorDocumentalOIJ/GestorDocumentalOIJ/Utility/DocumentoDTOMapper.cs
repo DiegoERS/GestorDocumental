@@ -72,5 +72,32 @@ namespace GestorDocumentalOIJ.Utility
             });
         }
 
+        public static IEnumerable<DocumentoExtendidoDTO> ConvertirListaDeDocumentosExtendidosADTO(IEnumerable<DocumentoExtendido> documentos)
+        {
+            return documentos.Select(d => new DocumentoExtendidoDTO()
+            {
+
+                Id = d.Id,
+                Codigo = d.Codigo,
+                Asunto = d.Asunto,
+                Descripcion = d.Descripcion,
+                PalabraClave = d.PalabraClave,
+                CategoriaID = d.CategoriaID,
+                TipoDocumento = d.TipoDocumento,
+                OficinaID = d.OficinaID,
+                Vigencia = d.Vigencia,
+                EtapaID = d.EtapaID,
+                SubClasificacionID = d.SubClasificacionID,
+                doctos = d.doctos,
+                activo = d.activo,
+                descargable = d.descargable,
+                doctoId = d.doctoId,
+                NormaID = d.NormaID,
+                VersionID = d.VersionID,
+                ClasificacionID = d.ClasificacionID
+
+            });
+        }
+
     }
 }

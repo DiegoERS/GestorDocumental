@@ -20,7 +20,9 @@ namespace GestorDocumentalOIJ.DA.Contexto
         public DbSet<Entidades.ClasificacionDA> Clasificaciones { get; set; }
 
         public DbSet<Entidades.DocumentoDA> Documentos { get; set; }
-        
+
+        public DbSet<Entidades.DocumentoExtendidoDA> DocumentosExtendidos { get; set; }
+
         public DbSet<Entidades.DoctoDA> Doctos { get; set; }
 
         public DbSet<Entidades.OficinaDA> Oficinas { get; set;}

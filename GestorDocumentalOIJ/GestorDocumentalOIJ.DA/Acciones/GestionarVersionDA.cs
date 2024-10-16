@@ -26,22 +26,16 @@ namespace GestorDocumentalOIJ.DA.Acciones
         public async Task<bool> ActualizarVersion(Version version)
         {
             var idParameter = new SqlParameter("@pN_Id", version.Id);
-            var documentoIDParameter = new SqlParameter("@pN_DocumentoID", version.DocumentoID);
             var numeroVersionParameter = new SqlParameter("@pN_NumeroVersion", version.NumeroVersion);
-            var fechaCreacionParameter = new SqlParameter("@pC_FechaCreacion", version.FechaCreacion);
             var urlVersionParameter = new SqlParameter("@pC_UrlVersion", version.urlVersion);
-            var eliminadoParameter = new SqlParameter("@pB_Eliminado", version.eliminado);
             var usuarioIDParameter = new SqlParameter("@pN_UsuarioID", version.usuarioID);
 
 
             int resultado = await _context.Database.ExecuteSqlRawAsync(
-                 "EXEC GD.PA_ActualizarVersion @pN_Id, @pN_DocumentoID, @pN_NumeroVersion, @pC_FechaCreacion, @pC_UrlVersion, @pB_Eliminado, @pN_UsuarioID",
+                 "EXEC GD.PA_ActualizarVersion @pN_Id, @pN_NumeroVersion, @pC_UrlVersion, @pN_UsuarioID",
                                                                     idParameter,
-                                                                    documentoIDParameter,
                                                                     numeroVersionParameter,
-                                                                    fechaCreacionParameter,
                                                                     urlVersionParameter,
-                                                                    eliminadoParameter,
                                                                     usuarioIDParameter);
             return resultado > 0;
         }
@@ -50,18 +44,14 @@ namespace GestorDocumentalOIJ.DA.Acciones
         {
             var documentoIDParameter = new SqlParameter("@pN_DocumentoID", version.DocumentoID);
             var numeroVersionParameter = new SqlParameter("@pN_NumeroVersion", version.NumeroVersion);
-            var fechaCreacionParameter = new SqlParameter("@pC_FechaCreacion", version.FechaCreacion);
             var urlVersionParameter = new SqlParameter("@pC_UrlVersion", version.urlVersion);
-            var eliminadoParameter = new SqlParameter("@pB_Eliminado", version.eliminado);
             var usuarioIDParameter = new SqlParameter("@pN_UsuarioID", version.usuarioID);
 
             int resultado = await _context.Database.ExecuteSqlRawAsync(
-                         "EXEC GD.PA_InsertarVersion @pN_DocumentoID, @pN_NumeroVersion, @pC_FechaCreacion, @pC_UrlVersion, @pB_Eliminado, @pN_UsuarioID",
+                         "EXEC GD.PA_InsertarVersion @pN_DocumentoID, @pN_NumeroVersion, @pC_UrlVersion, @pN_UsuarioID",
                         documentoIDParameter,
                         numeroVersionParameter,
-                        fechaCreacionParameter,
                         urlVersionParameter,
-                         eliminadoParameter,
                          usuarioIDParameter);
             return resultado > 0;
         }

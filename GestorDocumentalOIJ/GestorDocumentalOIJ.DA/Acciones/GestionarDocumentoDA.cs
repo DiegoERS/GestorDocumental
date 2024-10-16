@@ -8,6 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
@@ -113,25 +114,53 @@ namespace GestorDocumentalOIJ.DA.Acciones
         }
 
 
-        public async Task<IEnumerable<Documento>> ObtenerDocumentos()
+        public async Task<IEnumerable<DocumentoExtendido>> ObtenerDocumentos()
         {
-            var documentos = await _context.Documentos
-                .FromSqlRaw("EXEC GD.PA_ListarDocumentos")
-                .ToListAsync();
+            var documentosExtendidos = new List<DocumentoExtendido>();
 
-            return documentos.Select(d => new Documento
+            // Obtiene la conexión del contexto
+            using (var connection = _context.Database.GetDbConnection())
             {
-                Codigo = d.Codigo,
-                Asunto = d.Asunto,
-                Descripcion = d.Descripcion,
-                PalabraClave = d.PalabraClave,
-                CategoriaID = d.CategoriaID,
-                TipoDocumento = d.TipoDocumento,
-                OficinaID = d.OficinaID,
-                Vigencia = d.Vigencia,
-                EtapaID = d.EtapaID,
-                SubClasificacionID = d.SubClasificacionID 
-            }).ToList();
+                await connection.OpenAsync(); // Abre la conexión
+
+                // Define el comando para ejecutar el procedimiento almacenado
+                using (var command = connection.CreateCommand())
+                {
+                    command.CommandText = "GD.PA_ListarDocumentos";
+                    command.CommandType = CommandType.StoredProcedure; // Indica que es un procedimiento almacenado
+
+                    // Ejecuta el comando y obtiene el lector
+                    using (var reader = await command.ExecuteReaderAsync())
+                    {
+                        // Lee los resultados
+                        while (await reader.ReadAsync())
+                        {
+                            // Crea una nueva instancia de DocumentoExtendido y asigna los valores
+                            var documentoExtendido = new DocumentoExtendido
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                                Codigo = reader.GetString(reader.GetOrdinal("Codigo")),
+                                Asunto = reader.GetString(reader.GetOrdinal("Nombre")),
+                                CategoriaID = reader.GetInt32(reader.GetOrdinal("CategoriaID")),
+                                TipoDocumento = reader.GetInt32(reader.GetOrdinal("TipoDocumento")),
+                                OficinaID = reader.GetInt32(reader.GetOrdinal("OficinaID")),
+                                Vigencia = reader.GetString(reader.GetOrdinal("Vigencia")),
+                                EtapaID = reader.GetInt32(reader.GetOrdinal("EtapaID")),
+                                SubClasificacionID = reader.GetInt32(reader.GetOrdinal("SubClasificacionID")),
+                                doctoId = reader.GetInt32(reader.GetOrdinal("DocToID")),
+                                NormaID = reader.GetInt32(reader.GetOrdinal("NormaID")),
+                                VersionID = reader.GetInt32(reader.GetOrdinal("VersionID")),
+                                ClasificacionID = reader.GetInt32(reader.GetOrdinal("ClasificacionID"))
+                            };
+
+                            // Agrega el objeto a la lista
+                            documentosExtendidos.Add(documentoExtendido);
+                        }
+                    }
+                }
+            }
+
+            return documentosExtendidos; // Retorna la lista de documentos extendidos
         }
 
 
@@ -148,7 +177,7 @@ namespace GestorDocumentalOIJ.DA.Acciones
 
                 if (documentoDA != null)
                 {
-                  
+                  Console.WriteLine(documentoDA.ToString());
                     return new Documento()
                     {
                         Codigo = documentoDA.Codigo,

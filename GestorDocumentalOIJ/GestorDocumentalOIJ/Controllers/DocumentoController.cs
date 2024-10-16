@@ -18,9 +18,9 @@ namespace GestorDocumentalOIJ.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<DocumentoDTO>>> ObtenerDocumentos()
+        public async Task<ActionResult<IEnumerable<DocumentoExtendidoDTO>>> ObtenerDocumentos()
         {
-            return Ok(DocumentoDTOMapper.ConvertirListaDeDocumentosADTO(await _gestionarDocumentoBW.ObtenerDocumentos()));
+            return Ok(DocumentoDTOMapper.ConvertirListaDeDocumentosExtendidosADTO(await _gestionarDocumentoBW.ObtenerDocumentos()));
         }
 
         [HttpGet("{id}")]
