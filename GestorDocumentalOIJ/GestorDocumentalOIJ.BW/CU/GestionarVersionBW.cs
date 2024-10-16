@@ -34,7 +34,7 @@ namespace GestorDocumentalOIJ.BW.CU
 
         public async Task<BC.Modelos.Version> ObtenerVersionPorId(int id)
         {
-            return await _gestionarVersionDA.ObtenerVersionPorId(id);
+            return await _gestionarVersionDA.obtenerVersionPorId(id);
         }
 
         public async Task<IEnumerable<BC.Modelos.Version>> ObtenerVersiones()

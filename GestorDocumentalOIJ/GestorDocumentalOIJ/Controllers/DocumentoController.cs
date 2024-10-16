@@ -25,9 +25,9 @@ namespace GestorDocumentalOIJ.Controllers
 
         [HttpGet("{id}")]
 
-        public async Task<ActionResult<DocumentoDTO>> obtenerDocumentoPorId(string codigo)
+        public async Task<ActionResult<DocumentoDTO>> obtenerDocumentoPorId(int id)
         {
-            return Ok(DocumentoDTOMapper.ConvertirDocumentoADTO(await _gestionarDocumentoBW.ObtenerDocumentoPorCodigo(codigo)));
+            return Ok(DocumentoDTOMapper.ConvertirDocumentoADTO(await _gestionarDocumentoBW.obtenerDocumentoPorId(id)));
         }
 
 
@@ -47,9 +47,9 @@ namespace GestorDocumentalOIJ.Controllers
 
         [HttpDelete("{id}")] 
 
-        public async Task<ActionResult<bool>> EliminarDocumento(string codigo)
+        public async Task<ActionResult<bool>> EliminarDocumento(int id)
         {
-            return Ok(await _gestionarDocumentoBW.EliminarDocumento(codigo));
+            return Ok(await _gestionarDocumentoBW.EliminarDocumento(id));
         }
 
     }

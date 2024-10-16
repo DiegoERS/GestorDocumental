@@ -20,7 +20,10 @@ namespace GestorDocumentalOIJ.Utility
                 Vigencia = documento.Vigencia,
                 EtapaID = documento.EtapaID,
                 SubClasificacionID = documento.SubClasificacionID,
-                doctos = documento.doctos
+                doctos = documento.doctos,
+                activo = documento.activo,
+                descargable = documento.descargable,
+                doctoId = documento.doctoId
             };
         }
 
@@ -39,7 +42,10 @@ namespace GestorDocumentalOIJ.Utility
                 Vigencia = documentoDTO.Vigencia,
                 EtapaID = documentoDTO.EtapaID,
                 SubClasificacionID = documentoDTO.SubClasificacionID,
-                doctos = documentoDTO.doctos
+                doctos = documentoDTO.doctos,
+                activo = documentoDTO.activo,
+                descargable = documentoDTO.descargable,
+                doctoId = documentoDTO.doctoId
             };
         }
 
@@ -59,7 +65,10 @@ namespace GestorDocumentalOIJ.Utility
                 Vigencia = d.Vigencia,
                 EtapaID = d.EtapaID,
                 SubClasificacionID = d.SubClasificacionID,
-                doctos = d.doctos
+                doctos = d.doctos,
+                activo = d.activo,
+                descargable = d.descargable,
+                doctoId = d.doctoId
             });
         }
 

@@ -28,14 +28,14 @@ namespace GestorDocumentalOIJ.BW.CU
             return await _gestionarDocumentoDA.CrearDocumento(documento);
         }
 
-        public async Task<bool> EliminarDocumento(string codigo)
+        public async Task<bool> EliminarDocumento(int id)
         {
-            return await _gestionarDocumentoDA.EliminarDocumento(codigo);
+            return await _gestionarDocumentoDA.EliminarDocumento(id);
         }
 
-        public async Task<Documento> ObtenerDocumentoPorCodigo(string codigo)
+        public async Task<Documento> obtenerDocumentoPorId(int id)
         {
-            return await _gestionarDocumentoDA.ObtenerDocumentoPorCodigo(codigo);
+            return await _gestionarDocumentoDA.obtenerDocumentoPorId(id);
         }
 
         public async Task<IEnumerable<Documento>> ObtenerDocumentos()

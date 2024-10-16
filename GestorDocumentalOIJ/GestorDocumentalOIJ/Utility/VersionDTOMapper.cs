@@ -11,9 +11,12 @@ namespace GestorDocumentalOIJ.Utility
             return new VersionDTO()
             {
                 Id = version.Id,
-                Nombre = version.Nombre,
-                Descripcion = version.Descripcion,
-                Eliminado = version.Eliminado
+                DocumentoID = version.DocumentoID,
+                NumeroVersion = version.NumeroVersion,
+                FechaCreacion = version.FechaCreacion,
+                urlVersion = version.urlVersion,
+                eliminado = version.eliminado,
+                usuarioID = version.usuarioID
             };
         }
 
@@ -22,9 +25,12 @@ namespace GestorDocumentalOIJ.Utility
             return new BC.Modelos.Version()
             {
                 Id = versionDTO.Id,
-                Nombre = versionDTO.Nombre,
-                Descripcion = versionDTO.Descripcion,
-                Eliminado = versionDTO.Eliminado
+                DocumentoID = versionDTO.DocumentoID,
+                NumeroVersion = versionDTO.NumeroVersion,
+                FechaCreacion = versionDTO.FechaCreacion,
+                urlVersion = versionDTO.urlVersion,
+                eliminado = versionDTO.eliminado,
+                usuarioID = versionDTO.usuarioID
             };
         }
 
@@ -33,9 +39,13 @@ namespace GestorDocumentalOIJ.Utility
             return versiones.Select(v => new VersionDTO()
             {
                 Id = v.Id,
-                Nombre = v.Nombre,
-                Descripcion = v.Descripcion,
-                Eliminado = v.Eliminado
+                DocumentoID = v.DocumentoID,
+                NumeroVersion = v.NumeroVersion,
+                FechaCreacion = v.FechaCreacion,
+                urlVersion = v.urlVersion,
+                eliminado = v.eliminado,
+                usuarioID = v.usuarioID
+
             });
         }
     }

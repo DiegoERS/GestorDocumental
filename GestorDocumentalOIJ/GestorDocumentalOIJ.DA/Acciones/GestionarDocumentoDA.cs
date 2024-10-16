@@ -1,8 +1,10 @@
 ﻿using GestorDocumentalOIJ.BC.Modelos;
 using GestorDocumentalOIJ.BW.Interfaces.DA;
 using GestorDocumentalOIJ.DA.Contexto;
+using GestorDocumentalOIJ.DA.Entidades;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -24,6 +26,8 @@ namespace GestorDocumentalOIJ.DA.Acciones
 
         public async Task<bool> ActualizarDocumento(Documento documento)
         {
+            var listaSerializada = JsonConvert.SerializeObject(documento.doctos);
+            var idParameter = new SqlParameter("@pN_Id", documento.Id);
             var codigoParameter = new SqlParameter("@pC_Codigo", documento.Codigo);
             var asuntoParameter = new SqlParameter("@pC_Asunto", documento.Asunto);
             var descripcionParameter = new SqlParameter("@pC_Descripcion", documento.Descripcion);
@@ -34,11 +38,15 @@ namespace GestorDocumentalOIJ.DA.Acciones
             var vigenciaParameter = new SqlParameter("@pC_Vigencia", documento.Vigencia);
             var etapaIDParameter = new SqlParameter("@pN_EtapaID", documento.EtapaID);
             var subClasificacionIDParameter = new SqlParameter("@pN_SubClasificacionID", documento.SubClasificacionID);
-            var doctosParameter = new SqlParameter("@pC_Doctos", documento.doctos);
+            var doctosParameter = new SqlParameter("@pC_Doctos", listaSerializada);
+            var activoParameter = new SqlParameter("@pB_Activo", documento.activo);
+            var descargableParameter = new SqlParameter("@pB_Descargable", documento.descargable);
+            var doctoIdParameter = new SqlParameter("@pN_DoctoID", documento.doctoId);
 
             int resultado = await _context.Database.ExecuteSqlRawAsync(
-                                                             "EXEC GD.PA_ActualizarDocumento @pC_Codigo, @pC_Asunto, @pC_Descripcion, @pC_PalabraClave, @pN_CategoriaID, @pN_TipoDocumento, @pN_OficinaID, @pC_Vigencia, @pN_EtapaID, @pN_SubClasificacionID, @pC_Doctos",
-                                                              codigoParameter,
+                                                             "EXEC GD.PA_ActualizarDocumento @pN_Id, @pC_Codigo, @pC_Asunto, @pC_Descripcion, @pC_PalabraClave, @pN_CategoriaID, @pN_TipoDocumento, @pN_OficinaID, @pC_Vigencia, @pN_EtapaID, @pN_DoctoID,@pN_SubClasificacionID, @pB_Activo,@pB_Descargable, @pC_Doctos",
+                                                             idParameter,
+                                                             codigoParameter,
                                                               asuntoParameter,
                                                               descripcionParameter,
                                                               palabraClaveParameter,
@@ -47,7 +55,10 @@ namespace GestorDocumentalOIJ.DA.Acciones
                                                               oficinaIDParameter,
                                                               vigenciaParameter,
                                                               etapaIDParameter,
+                                                              doctoIdParameter,
                                                               subClasificacionIDParameter,
+                                                              activoParameter,
+                                                              descargableParameter,
                                                               doctosParameter);
 
             // Devuelve true si se afectó al menos una fila
@@ -68,9 +79,12 @@ namespace GestorDocumentalOIJ.DA.Acciones
             var etapaIDParameter = new SqlParameter("@pN_EtapaID", documento.EtapaID);
             var subClasificacionIDParameter = new SqlParameter("@pN_SubClasificacionID", documento.SubClasificacionID);
             var doctosParameter = new SqlParameter("@pC_Doctos", listaSerializada);
+            var activoParameter = new SqlParameter("@pB_Activo", documento.activo);
+            var descargableParameter = new SqlParameter("@pB_Descargable", documento.descargable);
+            var doctoIdParameter = new SqlParameter("@pN_DoctoID", documento.doctoId);
 
             int resultado = await _context.Database.ExecuteSqlRawAsync(
-                                                                            "EXEC GD.PA_InsertarDocumento @pC_Codigo, @pC_Asunto, @pC_Descripcion, @pC_PalabraClave, @pN_CategoriaID, @pN_TipoDocumento, @pN_OficinaID, @pC_Vigencia, @pN_EtapaID, @pN_SubClasificacionID, @pC_Doctos",
+                       "EXEC GD.PA_InsertarDocumento @pC_Codigo, @pC_Asunto, @pC_Descripcion, @pC_PalabraClave, @pN_CategoriaID, @pN_TipoDocumento, @pN_OficinaID, @pC_Vigencia, @pN_EtapaID, @pN_SubClasificacionID, @pB_Activo,@pB_Descargable,@pN_DoctoID,@pC_Doctos",
                                                                                         codigoParameter,
                                                                                         asuntoParameter,
                                                                                         descripcionParameter,
@@ -81,16 +95,19 @@ namespace GestorDocumentalOIJ.DA.Acciones
                                                                                        vigenciaParameter,
                                                                                        etapaIDParameter,
                                                                                        subClasificacionIDParameter,
+                                                                                       activoParameter,
+                                                                                       descargableParameter,
+                                                                                       doctoIdParameter,
                                                                                        doctosParameter);
 
             return resultado > 0;
         }
 
 
-        public async Task<bool> EliminarDocumento(string codigo)
+        public async Task<bool> EliminarDocumento(int id)
         {
             int resultado = await _context.Database.ExecuteSqlRawAsync(
-                                                                            "EXEC GD.PA_EliminarDocumento @pC_Codigo", new SqlParameter("@pC_Codigo", codigo));
+                                                                            "EXEC GD.PA_EliminarDocumento @pN_Id", new SqlParameter("@pN_Id", id));
 
             return resultado > 0;
         }
@@ -118,19 +135,20 @@ namespace GestorDocumentalOIJ.DA.Acciones
         }
 
 
-        public async Task<Documento> ObtenerDocumentoPorCodigo(string codigo)
+        public async Task<Documento> obtenerDocumentoPorId(int id)
         {
             try
             {
-                var codigoParametro = new SqlParameter("@Codigo", codigo);
+                var idParametro = new SqlParameter("@pN_Id", id);
 
                 var documentos = await _context.Documentos
-                    .FromSqlRaw("EXEC GD.PA_ObtenerDocumentoPorCodigo @Codigo", codigoParametro)
+                    .FromSqlRaw("EXEC GD.PA_ObtenerDocumentoPorId @pN_Id", idParametro)
                     .ToListAsync();
                 var documentoDA = documentos.FirstOrDefault();
 
                 if (documentoDA != null)
                 {
+                  
                     return new Documento()
                     {
                         Codigo = documentoDA.Codigo,
@@ -142,7 +160,11 @@ namespace GestorDocumentalOIJ.DA.Acciones
                         OficinaID = documentoDA.OficinaID,
                         Vigencia = documentoDA.Vigencia,
                         EtapaID = documentoDA.EtapaID,
-                        SubClasificacionID = documentoDA.SubClasificacionID
+                        SubClasificacionID = documentoDA.SubClasificacionID,
+                        activo = documentoDA.activo,
+                        descargable = documentoDA.descargable,
+                        doctoId = documentoDA.doctoId,
+                        doctos= JsonConvert.DeserializeObject<IEnumerable<RelacionesDoc>>(documentoDA.doctos)
                     };
                 }
 

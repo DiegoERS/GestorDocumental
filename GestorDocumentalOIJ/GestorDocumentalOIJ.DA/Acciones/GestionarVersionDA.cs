@@ -3,15 +3,17 @@ using GestorDocumentalOIJ.BW.Interfaces.DA;
 using GestorDocumentalOIJ.DA.Contexto;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Version = GestorDocumentalOIJ.BC.Modelos.Version;
 
 namespace GestorDocumentalOIJ.DA.Acciones
 {
-    public class GestionarVersionDA:IGestionarVersionDA
+    public class GestionarVersionDA : IGestionarVersionDA
     {
         private readonly GestorDocumentalContext _context;
 
@@ -20,64 +22,77 @@ namespace GestorDocumentalOIJ.DA.Acciones
             _context = context;
         }
 
-        public async Task<bool> ActualizarVersion(BC.Modelos.Version version)
+
+        public async Task<bool> ActualizarVersion(Version version)
         {
             var idParameter = new SqlParameter("@pN_Id", version.Id);
-            var nombreParameter = new SqlParameter("@pC_Nombre", version.Nombre);
-            var descripcionParameter = new SqlParameter(" @pC_Descripcion", version.Descripcion);
-            var eliminadoParameter = new SqlParameter("@pB_Eliminado", version.Eliminado);
+            var documentoIDParameter = new SqlParameter("@pN_DocumentoID", version.DocumentoID);
+            var numeroVersionParameter = new SqlParameter("@pN_NumeroVersion", version.NumeroVersion);
+            var fechaCreacionParameter = new SqlParameter("@pC_FechaCreacion", version.FechaCreacion);
+            var urlVersionParameter = new SqlParameter("@pC_UrlVersion", version.urlVersion);
+            var eliminadoParameter = new SqlParameter("@pB_Eliminado", version.eliminado);
+            var usuarioIDParameter = new SqlParameter("@pN_UsuarioID", version.usuarioID);
+
 
             int resultado = await _context.Database.ExecuteSqlRawAsync(
-                                              "EXEC PA_ActualizarVersion @pN_Id, @pC_Nombre,  @pC_Descripcion, @pB_Eliminado",
-                                                                                          idParameter,
-                                                                                                                                      nombreParameter,
-                                                                                                                                                                                  descripcionParameter,
-                                                                                                                                                                                                                              eliminadoParameter);
-
-            // Devuelve true si se afectó al menos una fila
+                 "EXEC GD.PA_ActualizarVersion @pN_Id, @pN_DocumentoID, @pN_NumeroVersion, @pC_FechaCreacion, @pC_UrlVersion, @pB_Eliminado, @pN_UsuarioID",
+                                                                    idParameter,
+                                                                    documentoIDParameter,
+                                                                    numeroVersionParameter,
+                                                                    fechaCreacionParameter,
+                                                                    urlVersionParameter,
+                                                                    eliminadoParameter,
+                                                                    usuarioIDParameter);
             return resultado > 0;
         }
 
-        public async Task<bool> CrearVersion(BC.Modelos.Version version)
+        public async Task<bool> CrearVersion(Version version)
         {
-            var nombreParameter = new SqlParameter("@pC_Nombre", version.Nombre);
-            var descripcionParameter = new SqlParameter("@pC_Descripcion", version.Descripcion);
+            var documentoIDParameter = new SqlParameter("@pN_DocumentoID", version.DocumentoID);
+            var numeroVersionParameter = new SqlParameter("@pN_NumeroVersion", version.NumeroVersion);
+            var fechaCreacionParameter = new SqlParameter("@pC_FechaCreacion", version.FechaCreacion);
+            var urlVersionParameter = new SqlParameter("@pC_UrlVersion", version.urlVersion);
+            var eliminadoParameter = new SqlParameter("@pB_Eliminado", version.eliminado);
+            var usuarioIDParameter = new SqlParameter("@pN_UsuarioID", version.usuarioID);
 
             int resultado = await _context.Database.ExecuteSqlRawAsync(
-                                                             "EXEC  GD.PA_InsertarVersion @pC_Nombre, @pC_Descripcion",
-                                                                                                                                                      nombreParameter,
-                                                                                                                                                                                                                                                                                                                                       descripcionParameter);
-
+                         "EXEC GD.PA_InsertarVersion @pN_DocumentoID, @pN_NumeroVersion, @pC_FechaCreacion, @pC_UrlVersion, @pB_Eliminado, @pN_UsuarioID",
+                        documentoIDParameter,
+                        numeroVersionParameter,
+                        fechaCreacionParameter,
+                        urlVersionParameter,
+                         eliminadoParameter,
+                         usuarioIDParameter);
             return resultado > 0;
-
         }
 
         public async Task<bool> EliminarVersion(int id)
         {
             int resultado = await _context.Database.ExecuteSqlRawAsync(
-                                                                             "EXEC GD.PA_EliminarVersion @pN_Id", new SqlParameter("@pN_Id", id));
+                            "EXEC GD.PA_EliminarVersion @pN_Id", new SqlParameter("@pN_Id", id));
 
             return resultado > 0;
-
         }
 
-        public async Task<IEnumerable<BC.Modelos.Version>> ObtenerVersiones()
+        public async Task<IEnumerable<Version>> ObtenerVersiones()
         {
             var versiones = await _context.Versiones
-          .FromSqlRaw("EXEC GD.PA_ListarVersiones")
-          .ToListAsync();
+                .FromSqlRaw("EXEC GD.PA_ListarVersiones")
+                .ToListAsync();
 
-            return versiones.Select(v => new BC.Modelos.Version
+            return versiones.Select(v => new Version
             {
                 Id = v.Id,
-                Nombre = v.Nombre,
-                Descripcion = v.Descripcion,
-                Eliminado = v.Eliminado
+                DocumentoID = v.DocumentoID,
+                NumeroVersion = v.NumeroVersion,
+                FechaCreacion = v.FechaCreacion,
+                urlVersion = v.urlVersion,
+                eliminado = v.eliminado,
+                usuarioID = v.usuarioID
             }).ToList();
         }
 
-
-        public async Task<BC.Modelos.Version> ObtenerVersionPorId(int id)
+        public async Task<Version> obtenerVersionPorId(int id)
         {
             try
             {
@@ -90,21 +105,25 @@ namespace GestorDocumentalOIJ.DA.Acciones
 
                 if (versionDA != null)
                 {
-                    return new BC.Modelos.Version()
+                    return new Version()
                     {
                         Id = versionDA.Id,
-                        Nombre = versionDA.Nombre,
-                        Descripcion = versionDA.Descripcion,
-                        Eliminado = versionDA.Eliminado
+                        DocumentoID = versionDA.DocumentoID,
+                        NumeroVersion = versionDA.NumeroVersion,
+                        FechaCreacion = versionDA.FechaCreacion,
+                        urlVersion = versionDA.urlVersion,
+                        eliminado = versionDA.eliminado,
+                        usuarioID = versionDA.usuarioID
                     };
                 }
 
-                return new BC.Modelos.Version();
+                return new Version();
             }
             catch (SqlException)
             {
-                return new BC.Modelos.Version();
+                return new Version();
             }
         }
+
     }
 }

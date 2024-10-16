@@ -10,10 +10,10 @@ namespace GestorDocumentalOIJ.BW.Interfaces.BW
     public interface IGestionarDocumentoBW
     {
         Task<IEnumerable<Documento>> ObtenerDocumentos();
-        Task<Documento> ObtenerDocumentoPorCodigo(string codigo);
+        Task<Documento> obtenerDocumentoPorId(int id);
         Task<bool> CrearDocumento(Documento documento);
         Task<bool> ActualizarDocumento(Documento documento);
-        Task<bool> EliminarDocumento(string codigo);
+        Task<bool> EliminarDocumento(int id);
 
 
     }

@@ -19,6 +19,12 @@ namespace GestorDocumentalOIJ.BC.Modelos
         public string Vigencia { get; set; } = string.Empty;
         public int EtapaID { get; set; }
         public int SubClasificacionID { get; set; }
-        public IEnumerable<RelacionesDoc> doctos { get; set; }
+        public IEnumerable<RelacionesDoc> doctos { get; set; }= new List<RelacionesDoc>();
+
+        public bool activo { get; set; }
+
+        public bool descargable { get; set; }
+
+        public int doctoId { get; set; }
     }
 }

@@ -19,6 +19,12 @@ namespace GestorDocumentalOIJ.DA.Entidades
         public string Vigencia { get; set; } = string.Empty;
         public int EtapaID { get; set; }
         public int SubClasificacionID { get; set; }
-        public IEnumerable<RelacionesDocDA> doctos { get; set; }
+        public string doctos { get; set; } =string.Empty;
+
+        public bool activo { get; set; }
+
+        public bool descargable { get; set; }
+
+        public int doctoId { get; set; }
     }
 }
