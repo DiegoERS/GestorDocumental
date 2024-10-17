@@ -193,7 +193,9 @@ namespace GestorDocumentalOIJ.DA.Acciones
                         activo = documentoDA.activo,
                         descargable = documentoDA.descargable,
                         doctoId = documentoDA.doctoId,
-                        doctos= JsonConvert.DeserializeObject<IEnumerable<RelacionesDoc>>(documentoDA.doctos)
+                        doctos= JsonConvert.DeserializeObject<IEnumerable<RelacionesDoc>>(documentoDA.doctos),
+                        ClasificacionID = documentoDA.ClasificacionID,
+                        NormaID = documentoDA.NormaID
                     };
                 }
 

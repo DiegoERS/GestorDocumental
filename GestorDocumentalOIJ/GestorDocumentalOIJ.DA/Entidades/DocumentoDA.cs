@@ -26,5 +26,8 @@ namespace GestorDocumentalOIJ.DA.Entidades
         public bool descargable { get; set; }
 
         public int doctoId { get; set; }
+
+        public int ClasificacionID { get; set; }
+        public int NormaID { get; set; }
     }
 }

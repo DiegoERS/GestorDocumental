@@ -1,5 +1,6 @@
 ﻿using GestorDocumentalOIJ.BC.Modelos;
 using GestorDocumentalOIJ.DTOs;
+using System;
 
 namespace GestorDocumentalOIJ.Utility
 {
@@ -15,7 +16,11 @@ namespace GestorDocumentalOIJ.Utility
                 NumeroVersion = version.NumeroVersion,
                 FechaCreacion = version.FechaCreacion,
                 eliminado = version.eliminado,
-                usuarioID = version.usuarioID
+                usuarioID = version.usuarioID,
+                DocDinamico = version.DocDinamico,
+                Obsoleto = version.Obsoleto,
+                NumeroSCD = version.NumeroSCD,
+                justificacion = version.justificacion
             };
         }
 
@@ -29,7 +34,11 @@ namespace GestorDocumentalOIJ.Utility
                 FechaCreacion = versionDTO.FechaCreacion,
                 urlVersion = rutaArchivo,
                 eliminado = versionDTO.eliminado,
-                usuarioID = versionDTO.usuarioID
+                usuarioID = versionDTO.usuarioID,
+                DocDinamico = versionDTO.DocDinamico,
+                Obsoleto = versionDTO.Obsoleto,
+                NumeroSCD = versionDTO.NumeroSCD,
+                justificacion = versionDTO.justificacion
             };
         }
 
@@ -42,7 +51,11 @@ namespace GestorDocumentalOIJ.Utility
                 NumeroVersion = v.NumeroVersion,
                 FechaCreacion = v.FechaCreacion,
                 eliminado = v.eliminado,
-                usuarioID = v.usuarioID
+                usuarioID = v.usuarioID,
+                DocDinamico = v.DocDinamico,
+                Obsoleto = v.Obsoleto,
+                NumeroSCD = v.NumeroSCD,
+                justificacion = v.justificacion
 
             });
         }

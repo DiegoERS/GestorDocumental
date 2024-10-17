@@ -30,6 +30,15 @@ namespace GestorDocumentalOIJ.Controllers
             return Ok(VersionDTOMapper.ConvertirVersionADTO(await _gestionarVersionBW.ObtenerVersionPorId(id)));
         }
 
+        [HttpGet]
+        [Route("buscarDocumentoPorID/{DocumentoID}")]
+        
+
+        public async Task<ActionResult<VersionDTO>> obtenerVersionPorDocumentoId(int DocumentoID)
+        {
+            return Ok(VersionDTOMapper.ConvertirVersionADTO(await _gestionarVersionBW.obtenerVersionPorDocumentoId(DocumentoID)));
+        }
+
         [HttpPost]
 
         public async Task<ActionResult<bool>> CrearVersion(VersionDTO versionDTO)

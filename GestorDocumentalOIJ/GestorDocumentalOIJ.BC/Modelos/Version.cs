@@ -20,5 +20,13 @@ namespace GestorDocumentalOIJ.BC.Modelos
         public bool eliminado { get; set; }
 
         public int usuarioID { get; set; }
+
+        public bool DocDinamico { get; set; }
+
+        public bool Obsoleto { get; set; }
+
+        public string NumeroSCD { get; set; } = string.Empty;
+
+        public string justificacion { get; set; } = string.Empty;
     }
 }

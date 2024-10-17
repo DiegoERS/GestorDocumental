@@ -23,7 +23,9 @@ namespace GestorDocumentalOIJ.Utility
                 doctos = documento.doctos,
                 activo = documento.activo,
                 descargable = documento.descargable,
-                doctoId = documento.doctoId
+                doctoId = documento.doctoId,
+                ClasificacionID = documento.ClasificacionID,
+                NormaID = documento.NormaID
             };
         }
 
