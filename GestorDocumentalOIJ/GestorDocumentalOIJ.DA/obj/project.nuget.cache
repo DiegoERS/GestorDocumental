@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "W2sOIbg7Q/aDAxf36BMIcSCBoqSYkEorJd52DvE81kRR32Pppz3QW6ZR3VcThiBLs+gXddEhSsDV1SewhbSWvA==",
+  "dgSpecHash": "YMTDUfRoOsfnyB1l0TmMpbT+WUr7fvgW40Fp/4AZVYLKWNfBFtKsycRqBQftdMBwlbbJmh4be9fY/H83Z+ZiqQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Diego\\Source\\Repos\\NewRepo\\GestorDocumentalOIJ\\GestorDocumentalOIJ.DA\\GestorDocumentalOIJ.DA.csproj",
+  "projectFilePath": "C:\\Users\\Diego\\source\\repos\\NewRepo\\GestorDocumentalOIJ\\GestorDocumentalOIJ.DA\\GestorDocumentalOIJ.DA.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Diego\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\Diego\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

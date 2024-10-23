@@ -42,7 +42,7 @@ namespace GestorDocumentalOIJ.BW.CU
             return await _gestionarVersionDA.ObtenerVersiones();
         }
 
-        public async Task<BC.Modelos.Version> obtenerVersionPorDocumentoId(int documentoID)
+        public async Task<IEnumerable<BC.Modelos.Version>> obtenerVersionPorDocumentoId(int documentoID)
         {
             return await _gestionarVersionDA.obtenerVersionPorDocumentoId(documentoID);
         }

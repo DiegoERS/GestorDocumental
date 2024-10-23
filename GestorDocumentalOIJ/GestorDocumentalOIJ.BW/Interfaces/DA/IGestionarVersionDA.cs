@@ -14,6 +14,6 @@ namespace GestorDocumentalOIJ.BW.Interfaces.DA
         Task<bool> ActualizarVersion(BC.Modelos.Version version);
         Task<bool> EliminarVersion(int id);
 
-        Task<BC.Modelos.Version> obtenerVersionPorDocumentoId(int documentoID);
+        Task<IEnumerable<BC.Modelos.Version>> obtenerVersionPorDocumentoId(int documentoID);
     }
 }

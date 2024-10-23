@@ -50,9 +50,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Diego\\Source\\Repos\\NewRepo\\GestorDocumentalOIJ\\GestorDocumentalOIJ.SG\\GestorDocumentalOIJ.SG.csproj",
+      "projectUniqueName": "C:\\Users\\Diego\\source\\repos\\NewRepo\\GestorDocumentalOIJ\\GestorDocumentalOIJ.SG\\GestorDocumentalOIJ.SG.csproj",
       "projectName": "GestorDocumentalOIJ.SG",
-      "projectPath": "C:\\Users\\Diego\\Source\\Repos\\NewRepo\\GestorDocumentalOIJ\\GestorDocumentalOIJ.SG\\GestorDocumentalOIJ.SG.csproj",
+      "projectPath": "C:\\Users\\Diego\\source\\repos\\NewRepo\\GestorDocumentalOIJ\\GestorDocumentalOIJ.SG\\GestorDocumentalOIJ.SG.csproj",
       "packagesPath": "C:\\Users\\Diego\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Diego\\Source\\Repos\\NewRepo\\GestorDocumentalOIJ\\GestorDocumentalOIJ.SG\\obj\\",
       "projectStyle": "PackageReference",
@@ -71,8 +71,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\Diego\\Source\\Repos\\NewRepo\\GestorDocumentalOIJ\\GestorDocumentalOIJ.BW\\GestorDocumentalOIJ.BW.csproj": {
-              "projectPath": "C:\\Users\\Diego\\Source\\Repos\\NewRepo\\GestorDocumentalOIJ\\GestorDocumentalOIJ.BW\\GestorDocumentalOIJ.BW.csproj"
+            "C:\\Users\\Diego\\source\\repos\\NewRepo\\GestorDocumentalOIJ\\GestorDocumentalOIJ.BW\\GestorDocumentalOIJ.BW.csproj": {
+              "projectPath": "C:\\Users\\Diego\\source\\repos\\NewRepo\\GestorDocumentalOIJ\\GestorDocumentalOIJ.BW\\GestorDocumentalOIJ.BW.csproj"
             }
           }
         }

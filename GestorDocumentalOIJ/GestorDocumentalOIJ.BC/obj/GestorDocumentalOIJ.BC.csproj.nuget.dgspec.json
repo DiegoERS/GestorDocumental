@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Diego\\Source\\Repos\\NewRepo\\GestorDocumentalOIJ\\GestorDocumentalOIJ.BC\\GestorDocumentalOIJ.BC.csproj": {}
+    "C:\\Users\\Diego\\source\\repos\\NewRepo\\GestorDocumentalOIJ\\GestorDocumentalOIJ.BC\\GestorDocumentalOIJ.BC.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Diego\\Source\\Repos\\NewRepo\\GestorDocumentalOIJ\\GestorDocumentalOIJ.BC\\GestorDocumentalOIJ.BC.csproj": {
+    "C:\\Users\\Diego\\source\\repos\\NewRepo\\GestorDocumentalOIJ\\GestorDocumentalOIJ.BC\\GestorDocumentalOIJ.BC.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Diego\\Source\\Repos\\NewRepo\\GestorDocumentalOIJ\\GestorDocumentalOIJ.BC\\GestorDocumentalOIJ.BC.csproj",
+        "projectUniqueName": "C:\\Users\\Diego\\source\\repos\\NewRepo\\GestorDocumentalOIJ\\GestorDocumentalOIJ.BC\\GestorDocumentalOIJ.BC.csproj",
         "projectName": "GestorDocumentalOIJ.BC",
-        "projectPath": "C:\\Users\\Diego\\Source\\Repos\\NewRepo\\GestorDocumentalOIJ\\GestorDocumentalOIJ.BC\\GestorDocumentalOIJ.BC.csproj",
+        "projectPath": "C:\\Users\\Diego\\source\\repos\\NewRepo\\GestorDocumentalOIJ\\GestorDocumentalOIJ.BC\\GestorDocumentalOIJ.BC.csproj",
         "packagesPath": "C:\\Users\\Diego\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\Diego\\Source\\Repos\\NewRepo\\GestorDocumentalOIJ\\GestorDocumentalOIJ.BC\\obj\\",
         "projectStyle": "PackageReference",

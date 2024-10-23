@@ -139,42 +139,29 @@ namespace GestorDocumentalOIJ.DA.Acciones
             }
         }
 
-        public async Task<Version> obtenerVersionPorDocumentoId(int documentoID)
+        public async Task<IEnumerable<BC.Modelos.Version>> obtenerVersionPorDocumentoId(int documentoID)
         {
-            try
-            {
+         
                 var idParametro = new SqlParameter("@pN_DocumentoID", documentoID);
 
                 var versiones = await _context.Versiones
                     .FromSqlRaw("EXEC GD.PA_ListarVersionPorDocumentoID @pN_DocumentoID", idParametro)
                     .ToListAsync();
-                var versionDA = versiones.FirstOrDefault();
 
-                if (versionDA != null)
+                return versiones.Select(v => new Version
                 {
-                    return new Version()
-                    {
-                        Id = versionDA.Id,
-                        DocumentoID = versionDA.DocumentoID,
-                        NumeroVersion = versionDA.NumeroVersion,
-                        FechaCreacion = versionDA.FechaCreacion.ToString(),
-                        urlVersion = versionDA.urlVersion,
-                        eliminado = versionDA.eliminado,
-                        usuarioID = versionDA.usuarioID,
-                        DocDinamico = versionDA.DocDinamico,
-                        Obsoleto = versionDA.Obsoleto,
-                        NumeroSCD = versionDA.NumeroSCD,
-                        justificacion = versionDA.justificacion
-
-                    };
-                }
-
-                return new Version();
-            }
-            catch (SqlException)
-            {
-                return new Version();
-            }
+                    Id = v.Id,
+                    DocumentoID = v.DocumentoID,
+                    NumeroVersion = v.NumeroVersion,
+                    FechaCreacion = v.FechaCreacion.ToString(),
+                    urlVersion = v.urlVersion,
+                    eliminado = v.eliminado,
+                    usuarioID = v.usuarioID,
+                    DocDinamico = v.DocDinamico,
+                    Obsoleto = v.Obsoleto,
+                    NumeroSCD = v.NumeroSCD,
+                    justificacion = v.justificacion
+                }).ToList();
         }
 
     }

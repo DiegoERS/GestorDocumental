@@ -34,9 +34,9 @@ namespace GestorDocumentalOIJ.Controllers
         [Route("buscarDocumentoPorID/{DocumentoID}")]
         
 
-        public async Task<ActionResult<VersionDTO>> obtenerVersionPorDocumentoId(int DocumentoID)
+        public async Task<ActionResult<IEnumerable<VersionDTO>>> obtenerVersionPorDocumentoId(int DocumentoID)
         {
-            return Ok(VersionDTOMapper.ConvertirVersionADTO(await _gestionarVersionBW.obtenerVersionPorDocumentoId(DocumentoID)));
+            return Ok(VersionDTOMapper.ConvertirListaDeVersionesADTO(await _gestionarVersionBW.obtenerVersionPorDocumentoId(DocumentoID)));
         }
 
         [HttpPost]
