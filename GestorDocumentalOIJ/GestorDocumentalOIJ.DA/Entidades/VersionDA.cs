@@ -13,7 +13,7 @@ namespace GestorDocumentalOIJ.DA.Entidades
 
         public int NumeroVersion { get; set; }
 
-        public string FechaCreacion { get; set; } = string.Empty;
+        public DateTime FechaCreacion { get; set; }
 
         public string urlVersion { get; set; } = string.Empty;
 
