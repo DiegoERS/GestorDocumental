@@ -2,6 +2,6 @@
 {
     public class DocumentoExtendidoDTO : DocumentoDTO
     {
-        public int VersionID { get; set; }
+       public IFormFile Archivo { get; set; }
     }
 }

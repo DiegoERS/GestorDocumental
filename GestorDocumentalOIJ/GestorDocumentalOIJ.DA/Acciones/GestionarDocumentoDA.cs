@@ -114,9 +114,9 @@ namespace GestorDocumentalOIJ.DA.Acciones
         }
 
 
-        public async Task<IEnumerable<DocumentoExtendido>> ObtenerDocumentos()
+        public async Task<IEnumerable<Documento>> ObtenerDocumentos()
         {
-            var documentosExtendidos = new List<DocumentoExtendido>();
+            var documentosExtendidos = new List<Documento>();
 
             // Obtiene la conexión del contexto
             using (var connection = _context.Database.GetDbConnection())
@@ -136,7 +136,7 @@ namespace GestorDocumentalOIJ.DA.Acciones
                         while (await reader.ReadAsync())
                         {
                             // Crea una nueva instancia de DocumentoExtendido y asigna los valores
-                            var documentoExtendido = new DocumentoExtendido
+                            var documentoExtendido = new Documento
                             {
                                 Id = reader.GetInt32(reader.GetOrdinal("Id")),
                                 Codigo = reader.GetString(reader.GetOrdinal("Codigo")),
@@ -162,6 +162,62 @@ namespace GestorDocumentalOIJ.DA.Acciones
 
             return documentosExtendidos; // Retorna la lista de documentos extendidos
         }
+
+
+        public async Task<IEnumerable<DocumentoExtendido>> ObtenerConsultaDocumentos()
+        {
+            var documentosExtendidos = new List<DocumentoExtendido>();
+
+            // Obtiene la conexión del contexto
+            using (var connection = _context.Database.GetDbConnection())
+            {
+                await connection.OpenAsync(); // Abre la conexión
+
+                // Define el comando para ejecutar el procedimiento almacenado
+                using (var command = connection.CreateCommand())
+                {
+                    command.CommandText = "GD.PA_ListarDocumentosConsulta";
+                    command.CommandType = CommandType.StoredProcedure; // Indica que es un procedimiento almacenado
+
+                    // Ejecuta el comando y obtiene el lector
+                    using (var reader = await command.ExecuteReaderAsync())
+                    {
+                        // Lee los resultados
+                        while (await reader.ReadAsync())
+                        {
+                            // Crea una nueva instancia de DocumentoExtendido y asigna los valores
+                            var documentoExtendido = new DocumentoExtendido
+                            {
+                                Id = reader.IsDBNull(reader.GetOrdinal("Id")) ? 0 : reader.GetInt32(reader.GetOrdinal("Id")),
+                                Codigo = reader.IsDBNull(reader.GetOrdinal("Codigo")) ? string.Empty : reader.GetString(reader.GetOrdinal("Codigo")),
+                                Asunto = reader.IsDBNull(reader.GetOrdinal("Nombre")) ? string.Empty : reader.GetString(reader.GetOrdinal("Nombre")),
+                                Descripcion = reader.IsDBNull(reader.GetOrdinal("Descripcion")) ? string.Empty : reader.GetString(reader.GetOrdinal("Descripcion")),
+                                CategoriaID = reader.IsDBNull(reader.GetOrdinal("CategoriaID")) ? 0 : reader.GetInt32(reader.GetOrdinal("CategoriaID")),
+                                TipoDocumento = reader.IsDBNull(reader.GetOrdinal("TipoDocumento")) ? 0 : reader.GetInt32(reader.GetOrdinal("TipoDocumento")),
+                                PalabraClave = reader.IsDBNull(reader.GetOrdinal("PalabraClave")) ? string.Empty : reader.GetString(reader.GetOrdinal("PalabraClave")),
+                                OficinaID = reader.IsDBNull(reader.GetOrdinal("OficinaID")) ? 0 : reader.GetInt32(reader.GetOrdinal("OficinaID")),
+                                Vigencia = reader.IsDBNull(reader.GetOrdinal("Vigencia")) ? string.Empty : reader.GetString(reader.GetOrdinal("Vigencia")),
+                                EtapaID = reader.IsDBNull(reader.GetOrdinal("EtapaID")) ? 0 : reader.GetInt32(reader.GetOrdinal("EtapaID")),
+                                SubClasificacionID = reader.IsDBNull(reader.GetOrdinal("SubClasificacionID")) ? 0 : reader.GetInt32(reader.GetOrdinal("SubClasificacionID")),
+                                doctoId = reader.IsDBNull(reader.GetOrdinal("DocToID")) ? 0 : reader.GetInt32(reader.GetOrdinal("DocToID")),
+                                NormaID = reader.IsDBNull(reader.GetOrdinal("NormaID")) ? 0 : reader.GetInt32(reader.GetOrdinal("NormaID")),
+                                VersionID = reader.IsDBNull(reader.GetOrdinal("VersionID")) ? 0 : reader.GetInt32(reader.GetOrdinal("VersionID")),
+                                ClasificacionID = reader.IsDBNull(reader.GetOrdinal("ClasificacionID")) ? 0 : reader.GetInt32(reader.GetOrdinal("ClasificacionID")),
+                                descargable = !reader.IsDBNull(reader.GetOrdinal("descargable")) && reader.GetBoolean(reader.GetOrdinal("descargable")),
+                                urlVersion = reader.IsDBNull(reader.GetOrdinal("urlVersion")) ? string.Empty : reader.GetString(reader.GetOrdinal("urlVersion")),
+                            };
+
+                            // Agrega el objeto a la lista
+                            documentosExtendidos.Add(documentoExtendido);
+                        }
+                    }
+                }
+            }
+
+            return documentosExtendidos; // Retorna la lista de documentos extendidos
+        }
+
+
 
 
         public async Task<Documento> obtenerDocumentoPorId(int id)
@@ -195,7 +251,8 @@ namespace GestorDocumentalOIJ.DA.Acciones
                         doctoId = documentoDA.doctoId,
                         doctos= JsonConvert.DeserializeObject<IEnumerable<RelacionesDoc>>(documentoDA.doctos),
                         ClasificacionID = documentoDA.ClasificacionID,
-                        NormaID = documentoDA.NormaID
+                        NormaID = documentoDA.NormaID,
+                        VersionID = documentoDA.VersionID
                     };
                 }
 

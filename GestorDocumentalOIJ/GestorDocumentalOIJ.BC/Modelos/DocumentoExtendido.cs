@@ -9,7 +9,7 @@ namespace GestorDocumentalOIJ.BC.Modelos
     public class DocumentoExtendido: Documento
     {
 
-        public int VersionID { get; set; }
+        public string urlVersion { get; set; } = string.Empty;
 
     }
 }

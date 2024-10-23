@@ -70,7 +70,10 @@ namespace GestorDocumentalOIJ.Utility
                 doctos = d.doctos,
                 activo = d.activo,
                 descargable = d.descargable,
-                doctoId = d.doctoId
+                doctoId = d.doctoId,
+                NormaID = d.NormaID,
+                VersionID = d.VersionID,
+                ClasificacionID = d.ClasificacionID
             });
         }
 
@@ -96,7 +99,8 @@ namespace GestorDocumentalOIJ.Utility
                 doctoId = d.doctoId,
                 NormaID = d.NormaID,
                 VersionID = d.VersionID,
-                ClasificacionID = d.ClasificacionID
+                ClasificacionID = d.ClasificacionID,
+                Archivo = SaveFiles.GetIFormFile(d.urlVersion) 
 
             });
         }

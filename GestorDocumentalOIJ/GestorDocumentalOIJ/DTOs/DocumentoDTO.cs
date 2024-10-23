@@ -24,5 +24,7 @@ namespace GestorDocumentalOIJ.DTOs
         public int doctoId { get; set; }
         public int ClasificacionID { get; set; }
         public int NormaID { get; set; }
+
+        public int VersionID { get; set; }
     }
 }

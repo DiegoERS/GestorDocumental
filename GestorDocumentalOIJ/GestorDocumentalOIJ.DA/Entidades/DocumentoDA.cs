@@ -29,5 +29,7 @@ namespace GestorDocumentalOIJ.DA.Entidades
 
         public int ClasificacionID { get; set; }
         public int NormaID { get; set; }
+
+        public int VersionID { get; set; } 
     }
 }
