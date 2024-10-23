@@ -20,7 +20,8 @@ namespace GestorDocumentalOIJ.Utility
                 DocDinamico = version.DocDinamico,
                 Obsoleto = version.Obsoleto,
                 NumeroSCD = version.NumeroSCD,
-                justificacion = version.justificacion
+                justificacion = version.justificacion,
+                archivo = SaveFiles.GetIFormFile(version.urlVersion)
             };
         }
 

@@ -29,5 +29,57 @@
                 return "";
             }
         }
+
+
+        public static IFormFile GetIFormFile(string rutaArchivo)
+        {
+            try
+            {
+                // Verificar si el archivo existe
+                if (System.IO.File.Exists(rutaArchivo))
+                {
+                    // Abrir un stream del archivo
+                    var stream = new FileStream(rutaArchivo, FileMode.Open, FileAccess.Read);
+
+                    // Crear un FormFile desde el archivo en disco
+                    var formFile = new FormFile(stream, 0, stream.Length, null, Path.GetFileName(rutaArchivo))
+                    {
+                        Headers = new HeaderDictionary(),
+                        ContentType = GetMimeType(rutaArchivo)
+                    };
+
+                    return formFile;
+                }
+                else
+                {
+                    return null; // Si el archivo no existe
+                }
+            }
+            catch (Exception)
+            {
+                return null; // En caso de error
+            }
+        }
+
+        // Método auxiliar para obtener el tipo MIME en función de la extensión del archivo
+        private static string GetMimeType(string filePath)
+        {
+            var ext = Path.GetExtension(filePath).ToLowerInvariant();
+            return ext switch
+            {
+                ".txt" => "text/plain",
+                ".pdf" => "application/pdf",
+                ".doc" => "application/vnd.ms-word",
+                ".docx" => "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                ".xls" => "application/vnd.ms-excel",
+                ".xlsx" => "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                ".png" => "image/png",
+                ".jpg" => "image/jpeg",
+                ".jpeg" => "image/jpeg",
+                ".gif" => "image/gif",
+                ".csv" => "text/csv",
+                _ => "application/octet-stream", // Por defecto
+            };
+        }
     }
 }
