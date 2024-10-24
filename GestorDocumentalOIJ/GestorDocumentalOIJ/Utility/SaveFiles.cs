@@ -31,18 +31,25 @@
         }
 
 
-        public static IFormFile GetIFormFile(string rutaArchivo)
+        public static  IFormFile GetIFormFile(string rutaArchivo)
         {
             try
             {
                 // Verificar si el archivo existe
                 if (System.IO.File.Exists(rutaArchivo))
                 {
-                    // Abrir un stream del archivo
-                    var stream = new FileStream(rutaArchivo, FileMode.Open, FileAccess.Read);
+                    // Leer todo el archivo en un MemoryStream
+                    var memoryStream = new MemoryStream();
+                    using (var stream = new FileStream(rutaArchivo, FileMode.Open, FileAccess.Read))
+                    {
+                         stream.CopyToAsync(memoryStream);
+                    }
 
-                    // Crear un FormFile desde el archivo en disco
-                    var formFile = new FormFile(stream, 0, stream.Length, null, Path.GetFileName(rutaArchivo))
+                    // Reiniciar la posición del MemoryStream a 0 para leerlo desde el principio
+                    memoryStream.Position = 0;
+
+                    // Crear un FormFile desde el MemoryStream
+                    var formFile = new FormFile(memoryStream, 0, memoryStream.Length, null, Path.GetFileName(rutaArchivo))
                     {
                         Headers = new HeaderDictionary(),
                         ContentType = GetMimeType(rutaArchivo)

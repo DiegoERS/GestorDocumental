@@ -100,7 +100,8 @@ namespace GestorDocumentalOIJ.Utility
                 NormaID = d.NormaID,
                 VersionID = d.VersionID,
                 ClasificacionID = d.ClasificacionID,
-                Archivo = SaveFiles.GetIFormFile(d.urlVersion) 
+                Archivo = SaveFiles.GetIFormFile(d.urlVersion),
+                urlArchivo = d.urlVersion
 
             });
         }
