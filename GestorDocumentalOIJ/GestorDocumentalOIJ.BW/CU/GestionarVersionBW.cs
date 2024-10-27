@@ -1,4 +1,5 @@
-﻿using GestorDocumentalOIJ.BW.Interfaces.BW;
+﻿using GestorDocumentalOIJ.BC.Modelos;
+using GestorDocumentalOIJ.BW.Interfaces.BW;
 using GestorDocumentalOIJ.BW.Interfaces.DA;
 using System;
 using System.Collections.Generic;
@@ -27,9 +28,9 @@ namespace GestorDocumentalOIJ.BW.CU
             return await _gestionarVersionDA.CrearVersion(version);
         }
 
-        public async Task<bool> EliminarVersion(int id)
+        public async Task<bool> EliminarVersion(EliminarRequest eliminarRequest)
         {
-            return await _gestionarVersionDA.EliminarVersion(id);
+            return await _gestionarVersionDA.EliminarVersion(eliminarRequest);
         }
 
         public async Task<BC.Modelos.Version> ObtenerVersionPorId(int id)

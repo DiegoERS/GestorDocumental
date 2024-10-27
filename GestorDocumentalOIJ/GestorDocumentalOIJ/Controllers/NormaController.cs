@@ -41,10 +41,10 @@ namespace GestorDocumentalOIJ.Controllers
             return Ok(await _gestionarNormaBW.ActualizarNorma(NormaDTOMapper.ConvertirDTOANorma(normaDTO)));
         }
 
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<bool>> eliminarNorma(int id)
+        [HttpDelete]
+        public async Task<ActionResult<bool>> eliminarNorma(EliminarRequestDTO eliminarRequestDTO)
         {
-            return Ok(await _gestionarNormaBW.EliminarNorma(id));
+            return Ok(await _gestionarNormaBW.EliminarNorma(EliminarRequestDTOMapper.ConvertirDTOAEliminarRequest(eliminarRequestDTO)));
         }
 
     }

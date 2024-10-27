@@ -53,11 +53,11 @@ namespace GestorDocumentalOIJ.Controllers
             return Ok(await _gestionarDocumentoBW.ActualizarDocumento(DocumentoDTOMapper.ConvertirDTOADocumento(documentoDTO)));
         }
 
-        [HttpDelete("{id}")] 
+        [HttpDelete] 
 
-        public async Task<ActionResult<bool>> EliminarDocumento(int id)
+        public async Task<ActionResult<bool>> EliminarDocumento(EliminarRequestDTO eliminarRequestDTO)
         {
-            return Ok(await _gestionarDocumentoBW.EliminarDocumento(id));
+            return Ok(await _gestionarDocumentoBW.EliminarDocumento(EliminarRequestDTOMapper.ConvertirDTOAEliminarRequest(eliminarRequestDTO)));
         }
 
     }

@@ -69,10 +69,17 @@ namespace GestorDocumentalOIJ.DA.Acciones
             return resultado > 0;
         }
 
-        public async Task<bool> EliminarEtapa(int id)
+        public async Task<bool> EliminarEtapa(EliminarRequest eliminarRequest)
         {
+            var idParametro = new SqlParameter("@pN_Id", eliminarRequest.ObjetoID);
+            var usuarioIDParametro = new SqlParameter("@pN_UsuarioID", eliminarRequest.UsuarioID);
+            var oficinaIDParametro = new SqlParameter("@pN_OficinaID", eliminarRequest.OficinaID);
+
             int resultado = await _context.Database.ExecuteSqlRawAsync(
-                                                             "EXEC GD.PA_EliminarEtapa @pN_Id", new SqlParameter("@pN_Id", id));
+                                                             "EXEC GD.PA_EliminarEtapa @pN_Id, @pN_UsuarioID, @pN_OficinaID", 
+                                                             idParametro,
+                                                             usuarioIDParametro,
+                                                             oficinaIDParametro);
 
             return resultado > 0;
         }

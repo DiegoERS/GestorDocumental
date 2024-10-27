@@ -28,9 +28,9 @@ namespace GestorDocumentalOIJ.BW.CU
             return await _gestionarSubclasificacionDA.crearSubclasificacion(subclasificacion);
         }
 
-        public async Task<bool> eliminarSubclasificacion(int id)
+        public async Task<bool> eliminarSubclasificacion(EliminarRequest eliminarRequest)
         {
-            return await _gestionarSubclasificacionDA.eliminarSubclasificacion(id);
+            return await _gestionarSubclasificacionDA.eliminarSubclasificacion(eliminarRequest);
         }
 
         public async Task<IEnumerable<Subclasificacion>> obtenerSubclasificaciones()

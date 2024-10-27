@@ -56,7 +56,7 @@ namespace GestorDocumentalOIJ.DA.Acciones
                                               correoParameter,
                                               passwordParameter);
 
-            return resultado > 0;
+            return resultado == 0;
         }
 
         public async Task<bool> CrearUsuario(Usuario usuario)

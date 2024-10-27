@@ -28,9 +28,9 @@ namespace GestorDocumentalOIJ.BW.CU
             return await _gestionarNormaDA.CrearNorma(norma);
         }
 
-        public async Task<bool> EliminarNorma(int id)
+        public async Task<bool> EliminarNorma(EliminarRequest eliminarRequest)
         {
-            return await _gestionarNormaDA.EliminarNorma(id);
+            return await _gestionarNormaDA.EliminarNorma(eliminarRequest);
         }
 
         public async Task<IEnumerable<Norma>> ListarNormas()

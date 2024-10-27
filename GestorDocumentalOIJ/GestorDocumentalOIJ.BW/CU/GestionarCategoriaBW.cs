@@ -28,9 +28,9 @@ namespace GestorDocumentalOIJ.BW.CU
             return await _gestionarCategoriaDA.CrearCategoria(categoria);
         }
 
-        public async Task<bool> EliminarCategoria(int id)
+        public async Task<bool> EliminarCategoria(EliminarRequest eliminarRequest)
         {
-            return await _gestionarCategoriaDA.EliminarCategoria(id);
+            return await _gestionarCategoriaDA.EliminarCategoria(eliminarRequest);
         }
 
         public async Task<Categoria> ObtenerCategoria(int id)

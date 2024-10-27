@@ -28,9 +28,9 @@ namespace GestorDocumentalOIJ.BW.CU
             return await _gestionarDocumentoDA.CrearDocumento(documento);
         }
 
-        public async Task<bool> EliminarDocumento(int id)
+        public async Task<bool> EliminarDocumento(EliminarRequest eliminarRequest)
         {
-            return await _gestionarDocumentoDA.EliminarDocumento(id);
+            return await _gestionarDocumentoDA.EliminarDocumento(eliminarRequest);
         }
 
         public async Task<Documento> obtenerDocumentoPorId(int id)

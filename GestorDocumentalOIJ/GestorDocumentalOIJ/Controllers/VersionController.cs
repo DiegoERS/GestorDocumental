@@ -54,11 +54,11 @@ namespace GestorDocumentalOIJ.Controllers
             return Ok(await _gestionarVersionBW.ActualizarVersion(VersionDTOMapper.ConvertirDTOAVersion(versionDTO, rutaArchivo)));
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete]
 
-        public async Task<ActionResult<bool>> EliminarVersion(int id)
+        public async Task<ActionResult<bool>> EliminarVersion(EliminarRequestDTO eliminarRequestDTO)
         {
-            return Ok(await _gestionarVersionBW.EliminarVersion(id));
+            return Ok(await _gestionarVersionBW.EliminarVersion(EliminarRequestDTOMapper.ConvertirDTOAEliminarRequest(eliminarRequestDTO)));
         }
     }
 }

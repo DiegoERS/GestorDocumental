@@ -14,7 +14,7 @@ namespace GestorDocumentalOIJ.BW.Interfaces.BW
         Task<Documento> obtenerDocumentoPorId(int id);
         Task<bool> CrearDocumento(Documento documento);
         Task<bool> ActualizarDocumento(Documento documento);
-        Task<bool> EliminarDocumento(int id);
+        Task<bool> EliminarDocumento(EliminarRequest eliminarRequest);
 
 
     }

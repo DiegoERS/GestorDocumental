@@ -13,6 +13,6 @@ namespace GestorDocumentalOIJ.BW.Interfaces.DA
         Task<Docto> ObtenerDocto(int id);
         Task<bool> CrearDocto(Docto docto);
         Task<bool> ActualizarDocto(Docto docto);
-        Task<bool> EliminarDocto(int id);
+        Task<bool> EliminarDocto(EliminarRequest eliminarRequest);
     }
 }

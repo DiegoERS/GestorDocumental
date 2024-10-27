@@ -43,10 +43,10 @@ namespace GestorDocumentalOIJ.Controllers
             return Ok(await _gestionarCategoriaBW.ActualizarCategoria(CategoriaDTOMapper.ConvertirDTOACategoria(categoriaDTO)));    
         }
 
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<bool>> EliminarCategoria(int id)
+        [HttpDelete]
+        public async Task<ActionResult<bool>> EliminarCategoria(EliminarRequestDTO eliminarRequestDTO)
         {
-            return Ok(await _gestionarCategoriaBW.EliminarCategoria(id));
+            return Ok(await _gestionarCategoriaBW.EliminarCategoria(EliminarRequestDTOMapper.ConvertirDTOAEliminarRequest(eliminarRequestDTO)));
         }
 
     }

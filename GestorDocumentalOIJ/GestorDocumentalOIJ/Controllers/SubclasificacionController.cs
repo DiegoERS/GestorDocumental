@@ -43,11 +43,11 @@ namespace GestorDocumentalOIJ.Controllers
             return Ok(await _gestionarSubclasificacionBW.actualizarSubclasificacion(SubclasificacionDTOMapper.ConvertirDTOASubclasificacion(subclasificacionDTO)));
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete]
 
-        public async Task<ActionResult<bool>> EliminarSubclasificacion(int id)
+        public async Task<ActionResult<bool>> EliminarSubclasificacion(EliminarRequestDTO eliminarRequestDTO)
         {
-            return Ok(await _gestionarSubclasificacionBW.eliminarSubclasificacion(id));
+            return Ok(await _gestionarSubclasificacionBW.eliminarSubclasificacion(EliminarRequestDTOMapper.ConvertirDTOAEliminarRequest(eliminarRequestDTO)));
         }
     }
 }

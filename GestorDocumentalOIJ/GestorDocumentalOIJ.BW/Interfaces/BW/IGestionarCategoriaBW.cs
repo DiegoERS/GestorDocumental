@@ -13,6 +13,6 @@ namespace GestorDocumentalOIJ.BW.Interfaces.BW
         Task<Categoria> ObtenerCategoria(int id);
         Task<bool> CrearCategoria(Categoria categoria);
         Task<bool> ActualizarCategoria(Categoria categoria);
-        Task<bool> EliminarCategoria(int id);
+        Task<bool> EliminarCategoria(EliminarRequest eliminarRequest);
     }
 }

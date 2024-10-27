@@ -35,12 +35,11 @@ namespace GestorDocumentalOIJ.Controllers
             return Ok(await _gestionarClasificacionBW.ActualizarClasificacion(ClasificacionDTOMapper.ConvertirDTOAClasificacion(clasificacionDTO)));
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete]
 
-        public async Task<ActionResult> EliminarClasificacion(int id)
+        public async Task<ActionResult> EliminarClasificacion(EliminarRequestDTO eliminarRequestDTO)
         {
-            await _gestionarClasificacionBW.EliminarClasificacion(id);
-            return Ok();
+            return Ok(await _gestionarClasificacionBW.EliminarClasificacion(EliminarRequestDTOMapper.ConvertirDTOAEliminarRequest(eliminarRequestDTO)));
         }
 
         [HttpGet("{id}")]

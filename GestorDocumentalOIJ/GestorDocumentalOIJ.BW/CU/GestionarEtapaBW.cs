@@ -27,9 +27,9 @@ namespace GestorDocumentalOIJ.BW.CU
             return await gestionarEtapaDA.CrearEtapa(etapa);
         }
 
-        public async Task<bool> EliminarEtapa(int id)
+        public async Task<bool> EliminarEtapa(EliminarRequest eliminarRequest)
         {
-            return await gestionarEtapaDA.EliminarEtapa(id);
+            return await gestionarEtapaDA.EliminarEtapa(eliminarRequest);
         }
 
         public async Task<Etapa> ObtenerEtapaPorId(int idEtapa)
