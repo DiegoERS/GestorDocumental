@@ -15,5 +15,10 @@ namespace GestorDocumentalOIJ.BW.Interfaces.DA
         Task<bool> EliminarPermiso(int id);
 
         Task<Permiso> obtenerPermisoPorID(int id);
+
+        Task<bool> AsignarPermisoARol(int permisoID, int rolID);
+        Task<bool> RemoverPermisoARol(int permisoID, int rolID);
+        Task<bool> AsignarPermisoAOficina(int permisoID, int oficinaID);
+        Task<bool> RemoverPermisoAOficina(int permisoID, int oficinaID);
     }
 }

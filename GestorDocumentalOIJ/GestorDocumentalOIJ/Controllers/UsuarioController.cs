@@ -1,4 +1,5 @@
-﻿using GestorDocumentalOIJ.BW.Interfaces.BW;
+﻿using GestorDocumentalOIJ.BW.CU;
+using GestorDocumentalOIJ.BW.Interfaces.BW;
 using GestorDocumentalOIJ.DTOs;
 using GestorDocumentalOIJ.Utility;
 using Microsoft.AspNetCore.Http;
@@ -57,6 +58,19 @@ namespace GestorDocumentalOIJ.Controllers
         public async Task<ActionResult<bool>> Autenticar(string Correo, string Password)
         {
             return Ok(await _gestionarUsuarioBW.Autenticar(Correo, Password));
+        }
+
+
+        [HttpPost("AsignarUsuarioAOficina")]
+        public async Task<ActionResult<bool>> AsignarUsuarioAOficina(int usuarioID, int oficinaID)
+        {
+            return Ok(await _gestionarUsuarioBW.AsignarUsuarioAOficina(usuarioID, oficinaID));
+        }
+
+        [HttpPost("RemoverUsuarioAOficina")]
+        public async Task<ActionResult<bool>> RemoverUsuarioAOficina(int usuarioID, int oficinaID)
+        {
+            return Ok(await _gestionarUsuarioBW.RemoverUsuarioAOficina(usuarioID, oficinaID));
         }
     }
 }

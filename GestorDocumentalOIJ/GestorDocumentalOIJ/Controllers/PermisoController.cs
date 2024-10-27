@@ -47,5 +47,30 @@ namespace GestorDocumentalOIJ.Controllers
         {
             return Ok(PermisoDTOMapper.ConvertirPermisoADTO(await _gestionarPermisoBW.obtenerPermisoPorID(id)));
         }
+
+        [HttpPost("AsignarPermisoARol")]
+        public async Task<ActionResult<bool>> AsignarPermisoARol(int permisoID, int rolID)
+        {
+            return Ok(await _gestionarPermisoBW.AsignarPermisoARol(permisoID, rolID));
+        }
+
+        [HttpPost("RemoverPermisoARol")]
+        public async Task<ActionResult<bool>> RemoverPermisoARol(int permisoID, int rolID)
+        {
+            return Ok(await _gestionarPermisoBW.RemoverPermisoARol(permisoID, rolID));
+        }
+
+        [HttpPost("AsignarPermisoAOficina")]
+        public async Task<ActionResult<bool>> AsignarPermisoAOficina(int permisoID, int oficinaID)
+        {
+            return Ok(await _gestionarPermisoBW.AsignarPermisoAOficina(permisoID, oficinaID));
+        }
+
+        [HttpPost("RemoverPermisoAOficina")]
+        public async Task<ActionResult<bool>> RemoverPermisoAOficina(int permisoID, int oficinaID)
+        {
+            return Ok(await _gestionarPermisoBW.RemoverPermisoAOficina(permisoID, oficinaID));
+        }
+
     }
 }

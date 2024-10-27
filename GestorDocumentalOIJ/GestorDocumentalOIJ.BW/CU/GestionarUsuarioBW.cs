@@ -49,5 +49,15 @@ namespace GestorDocumentalOIJ.BW.CU
         {
             return await _gestionarUsuarioDA.ObtenerUsuarios();
         }
+
+        public async Task<bool> AsignarUsuarioAOficina(int usuarioID, int oficinaID)
+        {
+            return await _gestionarUsuarioDA.AsignarUsuarioAOficina(usuarioID, oficinaID);
+        }
+
+        public async Task<bool> RemoverUsuarioAOficina(int usuarioID, int oficinaID)
+        {
+            return await _gestionarUsuarioDA.RemoverUsuarioAOficina(usuarioID, oficinaID);
+        }
     }
 }

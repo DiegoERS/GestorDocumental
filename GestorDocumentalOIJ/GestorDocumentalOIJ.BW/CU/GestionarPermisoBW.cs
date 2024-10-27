@@ -43,5 +43,27 @@ namespace GestorDocumentalOIJ.BW.CU
             return await _gestionarPermisoDA.obtenerPermisoPorID(id);
         }
 
+        public async Task<bool> AsignarPermisoARol(int permisoID, int rolID)
+        {
+            return await _gestionarPermisoDA.AsignarPermisoARol(permisoID, rolID);
+        }
+
+        public async Task<bool> RemoverPermisoARol(int permisoID, int rolID)
+        {
+            return await _gestionarPermisoDA.RemoverPermisoARol(permisoID, rolID);
+        }
+
+        public async Task<bool> AsignarPermisoAOficina(int permisoID, int oficinaID)
+        {
+            return await _gestionarPermisoDA.AsignarPermisoAOficina(permisoID, oficinaID);
+        }
+
+        public async Task<bool> RemoverPermisoAOficina(int permisoID, int oficinaID)
+        {
+            return await _gestionarPermisoDA.RemoverPermisoAOficina(permisoID, oficinaID);
+        }
+
+
+
     }
 }
