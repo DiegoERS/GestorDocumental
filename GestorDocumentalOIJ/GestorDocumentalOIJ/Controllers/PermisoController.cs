@@ -41,5 +41,11 @@ namespace GestorDocumentalOIJ.Controllers
         {
             return Ok(await _gestionarPermisoBW.EliminarPermiso(id));
         }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<PermisoDTO>> obtenerPermisoPorID(int id)
+        {
+            return Ok(PermisoDTOMapper.ConvertirPermisoADTO(await _gestionarPermisoBW.obtenerPermisoPorID(id)));
+        }
     }
 }

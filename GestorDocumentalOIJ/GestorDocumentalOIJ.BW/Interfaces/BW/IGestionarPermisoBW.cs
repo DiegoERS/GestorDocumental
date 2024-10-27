@@ -13,5 +13,6 @@ namespace GestorDocumentalOIJ.BW.Interfaces.BW
         Task<bool> CrearPermiso(Permiso permiso);
         Task<bool> ActualizarPermiso(Permiso permiso);
         Task<bool> EliminarPermiso(int id);
+        Task<Permiso> obtenerPermisoPorID(int id);
     }
 }

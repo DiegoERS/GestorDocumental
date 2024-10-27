@@ -21,7 +21,9 @@ namespace GestorDocumentalOIJ.Utility
                 Obsoleto = version.Obsoleto,
                 NumeroSCD = version.NumeroSCD,
                 justificacion = version.justificacion,
-                archivo = SaveFiles.GetIFormFile(version.urlVersion)
+                archivo = SaveFiles.GetIFormFile(version.urlVersion),
+                UsuarioLogID = version.UsuarioLogID,
+                OficinaID = version.OficinaID
             };
         }
 
@@ -39,7 +41,9 @@ namespace GestorDocumentalOIJ.Utility
                 DocDinamico = versionDTO.DocDinamico,
                 Obsoleto = versionDTO.Obsoleto,
                 NumeroSCD = versionDTO.NumeroSCD,
-                justificacion = versionDTO.justificacion
+                justificacion = versionDTO.justificacion,
+                UsuarioLogID = versionDTO.UsuarioLogID,
+                OficinaID = versionDTO.OficinaID
             };
         }
 
@@ -57,7 +61,9 @@ namespace GestorDocumentalOIJ.Utility
                 Obsoleto = v.Obsoleto,
                 NumeroSCD = v.NumeroSCD,
                 justificacion = v.justificacion,
-                archivo = SaveFiles.GetIFormFile(v.urlVersion)
+                archivo = SaveFiles.GetIFormFile(v.urlVersion),
+                UsuarioLogID = v.UsuarioLogID,
+                OficinaID = v.OficinaID
 
             });
         }

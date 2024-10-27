@@ -12,7 +12,9 @@ namespace GestorDocumentalOIJ.Utility
                 Id = categoria.Id,
                 Nombre = categoria.Nombre,
                 Descripcion = categoria.Descripcion,
-                Eliminado = categoria.Eliminado
+                Eliminado = categoria.Eliminado,
+                UsuarioID = categoria.UsuarioID,
+                OficinaID = categoria.OficinaID
             };
         }
 
@@ -23,7 +25,9 @@ namespace GestorDocumentalOIJ.Utility
                 Id = categoriaDTO.Id,
                 Nombre = categoriaDTO.Nombre,
                 Descripcion = categoriaDTO.Descripcion,
-                Eliminado = categoriaDTO.Eliminado
+                Eliminado = categoriaDTO.Eliminado,
+                UsuarioID = categoriaDTO.UsuarioID,
+                OficinaID = categoriaDTO.OficinaID
             };
         }
 
@@ -34,7 +38,9 @@ namespace GestorDocumentalOIJ.Utility
                 Id = c.Id,
                 Nombre = c.Nombre,
                 Descripcion = c.Descripcion,
-                Eliminado = c.Eliminado
+                Eliminado = c.Eliminado,
+                UsuarioID = c.UsuarioID,
+                OficinaID = c.OficinaID
             });
         }
     }

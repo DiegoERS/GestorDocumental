@@ -27,13 +27,17 @@ namespace GestorDocumentalOIJ.DA.Acciones
             var nombreParameter = new SqlParameter("@pC_Nombre", norma.Nombre);
             var descripcionParameter = new SqlParameter("@pC_Descripcion", norma.Descripcion);
             var eliminadoParameter = new SqlParameter("@pB_Eliminado", norma.Eliminado);
+            var usuarioIDParameter = new SqlParameter("@pN_UsuarioID", norma.UsuarioID);
+            var oficinaIDParameter = new SqlParameter("@pN_OficinaID", norma.OficinaID);
 
             int resultado = await _context.Database.ExecuteSqlRawAsync(
-                               "EXEC GD.PA_ActualizarNorma @pN_Id, @pC_Nombre, @pC_Descripcion, @pB_Eliminado",
+                               "EXEC GD.PA_ActualizarNorma @pN_Id, @pC_Nombre, @pC_Descripcion, @pB_Eliminado, @pN_UsuarioID, @pN_OficinaID",
                                               idParameter,
                                               nombreParameter,
                                               descripcionParameter,
-                                              eliminadoParameter );
+                                              eliminadoParameter,
+                                              usuarioIDParameter,
+                                              oficinaIDParameter);
 
             // Devuelve true si se afectó al menos una fila
             return resultado > 0;
@@ -43,11 +47,15 @@ namespace GestorDocumentalOIJ.DA.Acciones
         {
             var nombreParameter = new SqlParameter("@pC_Nombre", norma.Nombre);
             var descripcionParameter = new SqlParameter("@pC_Descripcion", norma.Descripcion);
+            var usuarioIDParameter = new SqlParameter("@pN_UsuarioID", norma.UsuarioID);
+            var oficinaIDParameter = new SqlParameter("@pN_OficinaID", norma.OficinaID);
 
             int resultado = await _context.Database.ExecuteSqlRawAsync(
-                                              "EXEC  GD.PA_InsertarNorma @pC_Nombre, @pC_Descripcion",
+                                              "EXEC  GD.PA_InsertarNorma @pC_Nombre, @pC_Descripcion, @pN_UsuarioID, @pN_OficinaID",
                                               nombreParameter,
-                                              descripcionParameter );
+                                              descripcionParameter,
+                                              usuarioIDParameter,
+                                              oficinaIDParameter);
 
             return resultado > 0;
 

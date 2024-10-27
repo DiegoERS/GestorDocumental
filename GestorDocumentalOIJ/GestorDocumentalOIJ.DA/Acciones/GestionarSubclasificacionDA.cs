@@ -27,14 +27,18 @@ namespace GestorDocumentalOIJ.DA.Acciones
             var descripcionParameter = new SqlParameter("@pC_Descripcion", subclasificacion.Descripcion);
             var eliminadoParameter = new SqlParameter("@pB_Eliminado", subclasificacion.Eliminado);
             var idClasificacionParameter = new SqlParameter("@pN_ClasificacionID", subclasificacion.ClasificacionID);
+            var usuarioIDParameter = new SqlParameter("@pN_UsuarioID", subclasificacion.UsuarioID);
+            var oficinaIDParameter = new SqlParameter("@pN_OficinaID", subclasificacion.OficinaID);
 
             int resultado = await _context.Database.ExecuteSqlRawAsync(
-                               "EXEC GD.PA_ActualizarSubclasificacion @pN_Id, @pC_Nombre, @pC_Descripcion, @pB_Eliminado, @pN_ClasificacionID",
+                               "EXEC GD.PA_ActualizarSubclasificacion @pN_Id, @pC_Nombre, @pC_Descripcion, @pB_Eliminado, @pN_ClasificacionID, @pN_UsuarioID, @pN_OficinaID",
                                               idParameter,
                                               nombreParameter,
                                               descripcionParameter,
                                               eliminadoParameter,
-                                              idClasificacionParameter);
+                                              idClasificacionParameter,
+                                              usuarioIDParameter,
+                                              oficinaIDParameter);
 
             return resultado > 0;
         }
@@ -45,12 +49,16 @@ namespace GestorDocumentalOIJ.DA.Acciones
             var nombreParameter = new SqlParameter("@pC_Nombre", subclasificacion.Nombre);
             var descripcionParameter = new SqlParameter("@pC_Descripcion", subclasificacion.Descripcion);
             var idClasificacionParameter = new SqlParameter("@pN_ClasificacionID", subclasificacion.ClasificacionID);
+            var usuarioIDParameter = new SqlParameter("@pN_UsuarioID", subclasificacion.UsuarioID);
+            var oficinaIDParameter = new SqlParameter("@pN_OficinaID", subclasificacion.OficinaID);
 
             int resultado = await _context.Database.ExecuteSqlRawAsync(
-                               "EXEC  GD.PA_InsertarSubclasificacion @pC_Nombre, @pC_Descripcion, @pN_ClasificacionID",
+                               "EXEC  GD.PA_InsertarSubclasificacion @pC_Nombre, @pC_Descripcion, @pN_ClasificacionID, @pN_UsuarioID, @pN_OficinaID",
                                               nombreParameter,
                                               descripcionParameter,
-                                              idClasificacionParameter);
+                                              idClasificacionParameter,
+                                              usuarioIDParameter,
+                                              oficinaIDParameter);
 
             return resultado > 0;
 

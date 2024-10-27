@@ -38,6 +38,10 @@ namespace GestorDocumentalOIJ.BW.CU
             return await _gestionarPermisoDA.ObtenerPermisos();
         }
 
+        public async Task<Permiso> obtenerPermisoPorID(int id)
+        {
+            return await _gestionarPermisoDA.obtenerPermisoPorID(id);
+        }
 
     }
 }

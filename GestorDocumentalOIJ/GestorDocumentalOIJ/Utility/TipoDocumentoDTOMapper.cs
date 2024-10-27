@@ -13,7 +13,9 @@ namespace GestorDocumentalOIJ.Utility
                 Id = tipoDocumento.Id,
                 Nombre = tipoDocumento.Nombre,
                 Descripcion = tipoDocumento.Descripcion,
-                Eliminado = tipoDocumento.Eliminado
+                Eliminado = tipoDocumento.Eliminado,
+                UsuarioID = tipoDocumento.UsuarioID,
+                OficinaID = tipoDocumento.OficinaID
             };
         }
 
@@ -24,7 +26,9 @@ namespace GestorDocumentalOIJ.Utility
                 Id = tipoDocumentoDTO.Id,
                 Nombre = tipoDocumentoDTO.Nombre,
                 Descripcion = tipoDocumentoDTO.Descripcion,
-                Eliminado = tipoDocumentoDTO.Eliminado
+                Eliminado = tipoDocumentoDTO.Eliminado,
+                UsuarioID = tipoDocumentoDTO.UsuarioID,
+                OficinaID = tipoDocumentoDTO.OficinaID
             };
         }
 
@@ -35,7 +39,9 @@ namespace GestorDocumentalOIJ.Utility
                 Id = td.Id,
                 Nombre = td.Nombre,
                 Descripcion = td.Descripcion,
-                Eliminado = td.Eliminado
+                Eliminado = td.Eliminado,
+                UsuarioID = td.UsuarioID,
+                OficinaID = td.OficinaID
             });
         }
     }

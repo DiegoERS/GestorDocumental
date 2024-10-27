@@ -74,5 +74,36 @@ namespace GestorDocumentalOIJ.DA.Acciones
                 Activo = p.Activo
             }).ToList();
         }
+
+        public async Task<Permiso> obtenerPermisoPorID(int id)
+        {
+            try
+            {
+                var idParametro = new SqlParameter("@pN_Id", id);
+
+                var permisos = await _context.Permisos
+                    .FromSqlRaw("EXEC SC.PA_ListarPermisoPorID @pN_Id", idParametro)
+                    .ToListAsync();
+
+                var permisoDA = permisos.FirstOrDefault();
+
+                if (permisoDA != null)
+                {
+                    return new Permiso()
+                    {
+                        Id = permisoDA.Id,
+                        Nombre = permisoDA.Nombre,
+                        Descripcion = permisoDA.Descripcion,
+                        Activo = permisoDA.Activo
+                    };
+
+                }
+                return new Permiso();
+            }
+            catch (SqlException)
+            {
+                return new Permiso();
+            }
+        }
     }
 }

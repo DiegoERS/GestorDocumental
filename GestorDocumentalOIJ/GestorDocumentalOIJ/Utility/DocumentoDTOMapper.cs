@@ -25,7 +25,9 @@ namespace GestorDocumentalOIJ.Utility
                 descargable = documento.descargable,
                 doctoId = documento.doctoId,
                 ClasificacionID = documento.ClasificacionID,
-                NormaID = documento.NormaID
+                NormaID = documento.NormaID,
+                UsuarioID = documento.UsuarioID,
+                OficinaUsuarioID = documento.OficinaUsuarioID
             };
         }
 
@@ -47,7 +49,9 @@ namespace GestorDocumentalOIJ.Utility
                 doctos = documentoDTO.doctos,
                 activo = documentoDTO.activo,
                 descargable = documentoDTO.descargable,
-                doctoId = documentoDTO.doctoId
+                doctoId = documentoDTO.doctoId,
+                UsuarioID=documentoDTO.UsuarioID,
+                OficinaUsuarioID = documentoDTO.OficinaUsuarioID
             };
         }
 
@@ -73,7 +77,9 @@ namespace GestorDocumentalOIJ.Utility
                 doctoId = d.doctoId,
                 NormaID = d.NormaID,
                 VersionID = d.VersionID,
-                ClasificacionID = d.ClasificacionID
+                ClasificacionID = d.ClasificacionID,
+                UsuarioID = d.UsuarioID,
+                OficinaUsuarioID = d.OficinaUsuarioID
             });
         }
 
@@ -101,7 +107,9 @@ namespace GestorDocumentalOIJ.Utility
                 VersionID = d.VersionID,
                 ClasificacionID = d.ClasificacionID,
                 Archivo = SaveFiles.GetIFormFile(d.urlVersion),
-                urlArchivo = d.urlVersion
+                urlArchivo = d.urlVersion,
+                UsuarioID = d.UsuarioID,
+                OficinaUsuarioID = d.OficinaUsuarioID
 
             });
         }

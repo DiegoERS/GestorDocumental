@@ -28,5 +28,8 @@ namespace GestorDocumentalOIJ.BC.Modelos
         public string NumeroSCD { get; set; } = string.Empty;
 
         public string justificacion { get; set; } = string.Empty;
+
+        public int UsuarioLogID { get; set; }
+        public int OficinaID { get; set; }
     }
 }

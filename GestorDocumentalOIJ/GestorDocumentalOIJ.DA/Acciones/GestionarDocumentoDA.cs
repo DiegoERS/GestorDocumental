@@ -43,9 +43,11 @@ namespace GestorDocumentalOIJ.DA.Acciones
             var activoParameter = new SqlParameter("@pB_Activo", documento.activo);
             var descargableParameter = new SqlParameter("@pB_Descargable", documento.descargable);
             var doctoIdParameter = new SqlParameter("@pN_DoctoID", documento.doctoId);
+            var usuarioIDParameter = new SqlParameter("@pN_UsuarioID", documento.UsuarioID);
+            var oficinaUsuarioIDParameter = new SqlParameter("@pN_OficinaBitacoraID", documento.OficinaUsuarioID);
 
             int resultado = await _context.Database.ExecuteSqlRawAsync(
-                                                             "EXEC GD.PA_ActualizarDocumento @pN_Id, @pC_Codigo, @pC_Asunto, @pC_Descripcion, @pC_PalabraClave, @pN_CategoriaID, @pN_TipoDocumento, @pN_OficinaID, @pC_Vigencia, @pN_EtapaID, @pN_DoctoID,@pN_SubClasificacionID, @pB_Activo,@pB_Descargable, @pC_Doctos",
+                                                             "EXEC GD.PA_ActualizarDocumento @pN_Id, @pC_Codigo, @pC_Asunto, @pC_Descripcion, @pC_PalabraClave, @pN_CategoriaID, @pN_TipoDocumento, @pN_OficinaID, @pC_Vigencia, @pN_EtapaID, @pN_DoctoID,@pN_SubClasificacionID, @pB_Activo,@pB_Descargable, pN_UsuarioID, pN_OficinaBitacoraID, @pC_Doctos",
                                                              idParameter,
                                                              codigoParameter,
                                                               asuntoParameter,
@@ -60,6 +62,8 @@ namespace GestorDocumentalOIJ.DA.Acciones
                                                               subClasificacionIDParameter,
                                                               activoParameter,
                                                               descargableParameter,
+                                                              usuarioIDParameter,
+                                                              oficinaUsuarioIDParameter,
                                                               doctosParameter);
 
             // Devuelve true si se afectó al menos una fila
@@ -83,9 +87,11 @@ namespace GestorDocumentalOIJ.DA.Acciones
             var activoParameter = new SqlParameter("@pB_Activo", documento.activo);
             var descargableParameter = new SqlParameter("@pB_Descargable", documento.descargable);
             var doctoIdParameter = new SqlParameter("@pN_DoctoID", documento.doctoId);
+            var usuarioIDParameter = new SqlParameter("@pN_UsuarioID", documento.UsuarioID);
+            var oficinaUsuarioIDParameter = new SqlParameter("@pN_OficinaBitacoraID", documento.OficinaUsuarioID);
 
             int resultado = await _context.Database.ExecuteSqlRawAsync(
-                       "EXEC GD.PA_InsertarDocumento @pC_Codigo, @pC_Asunto, @pC_Descripcion, @pC_PalabraClave, @pN_CategoriaID, @pN_TipoDocumento, @pN_OficinaID, @pC_Vigencia, @pN_EtapaID, @pN_SubClasificacionID, @pB_Activo,@pB_Descargable,@pN_DoctoID,@pC_Doctos",
+                       "EXEC GD.PA_InsertarDocumento @pC_Codigo, @pC_Asunto, @pC_Descripcion, @pC_PalabraClave, @pN_CategoriaID, @pN_TipoDocumento, @pN_OficinaID, @pC_Vigencia, @pN_EtapaID, @pN_SubClasificacionID, @pB_Activo,@pB_Descargable,@pN_DoctoID, pN_UsuarioID, pN_OficinaBitacoraID, @pC_Doctos",
                                                                                         codigoParameter,
                                                                                         asuntoParameter,
                                                                                         descripcionParameter,
@@ -99,6 +105,8 @@ namespace GestorDocumentalOIJ.DA.Acciones
                                                                                        activoParameter,
                                                                                        descargableParameter,
                                                                                        doctoIdParameter,
+                                                                                       usuarioIDParameter,
+                                                                                       oficinaUsuarioIDParameter,
                                                                                        doctosParameter);
 
             return resultado > 0;
@@ -107,8 +115,7 @@ namespace GestorDocumentalOIJ.DA.Acciones
 
         public async Task<bool> EliminarDocumento(int id)
         {
-            int resultado = await _context.Database.ExecuteSqlRawAsync(
-                                                                            "EXEC GD.PA_EliminarDocumento @pN_Id", new SqlParameter("@pN_Id", id));
+            int resultado = await _context.Database.ExecuteSqlRawAsync("EXEC GD.PA_EliminarDocumento @pN_Id", new SqlParameter("@pN_Id", id));
 
             return resultado > 0;
         }

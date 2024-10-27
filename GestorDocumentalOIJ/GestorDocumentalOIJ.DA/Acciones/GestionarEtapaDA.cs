@@ -28,16 +28,20 @@ namespace GestorDocumentalOIJ.DA.Acciones
             var normaIDParameter = new SqlParameter("@pN_NormaID", etapa.normaID);
             var etapaIDParameter = new SqlParameter("@pN_EtapaPadreID", etapa.EtapaPadreID);
             var colorParameter = new SqlParameter("@pC_Color", etapa.color);
+            var usuarioIDParameter = new SqlParameter("@pN_UsuarioID", etapa.UsuarioID);
+            var oficinaIDParameter = new SqlParameter("@pN_OficinaID", etapa.OficinaID);
 
             int resultado = await _context.Database.ExecuteSqlRawAsync(
-                                              "EXEC GD.PA_ActualizarEtapa @pN_Id, @pC_Nombre, @pC_Descripcion, @pB_Eliminado, @pN_EtapaPadreID, @pC_Color, @pN_NormaID",
+                                              "EXEC GD.PA_ActualizarEtapa @pN_Id, @pC_Nombre, @pC_Descripcion, @pB_Eliminado, @pN_EtapaPadreID, @pC_Color, @pN_NormaID, @pN_UsuarioID, @pN_OficinaID",
                                                idParameter,
                                                nombreParameter,
                                                descripcionParameter,
                                                eliminadoParameter,
                                                etapaIDParameter,
                                                colorParameter,
-                                               normaIDParameter);
+                                               normaIDParameter,
+                                               usuarioIDParameter,
+                                               oficinaIDParameter);
 
             // Devuelve true si se afectó al menos una fila
             return resultado > 0;
@@ -50,14 +54,18 @@ namespace GestorDocumentalOIJ.DA.Acciones
             var normaIDParameter = new SqlParameter("@pN_NormaID", etapa.normaID);
             var etapaPadreIdParameter = new SqlParameter("@pN_EtapaPadreID", etapa.EtapaPadreID);
             var colorParameter = new SqlParameter("@pC_Color", etapa.color);
+            var usuarioIDParameter = new SqlParameter("@pN_UsuarioID", etapa.UsuarioID);
+            var oficinaIDParameter = new SqlParameter("@pN_OficinaID", etapa.OficinaID);
 
             int resultado = await _context.Database.ExecuteSqlRawAsync(
-                                                             "EXEC  GD.PA_InsertarEtapa @pC_Nombre, @pC_Descripcion, @pN_EtapaPadreID, @pC_Color, @pN_NormaID",
+                                                             "EXEC  GD.PA_InsertarEtapa @pC_Nombre, @pC_Descripcion, @pN_EtapaPadreID, @pC_Color, @pN_NormaID, @pN_UsuarioID, @pN_OficinaID",
                                                              nombreParameter,
                                                              descripcionParameter,
                                                              etapaPadreIdParameter,
                                                              colorParameter,
-                                                             normaIDParameter);
+                                                             normaIDParameter,
+                                                             usuarioIDParameter,
+                                                             oficinaIDParameter);
             return resultado > 0;
         }
 

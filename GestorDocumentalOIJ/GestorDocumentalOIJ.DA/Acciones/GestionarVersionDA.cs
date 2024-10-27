@@ -1,6 +1,7 @@
 ﻿using GestorDocumentalOIJ.BC.Modelos;
 using GestorDocumentalOIJ.BW.Interfaces.DA;
 using GestorDocumentalOIJ.DA.Contexto;
+using GestorDocumentalOIJ.DA.Entidades;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -33,9 +34,11 @@ namespace GestorDocumentalOIJ.DA.Acciones
             var justificacionParameter = new SqlParameter("@pC_Justificacion", version.justificacion);
             var DocDinamicoParameter = new SqlParameter("@pB_DocDinamico", version.DocDinamico);
             var obsoletoParameter = new SqlParameter("@pB_Obsoleto", version.Obsoleto);
+            var usuarioLogIDParameter = new SqlParameter("@pN_UsuarioBitacoraID", version.UsuarioLogID);
+            var oficinaIDParameter = new SqlParameter("@pN_OficinaID", version.OficinaID);
 
             int resultado = await _context.Database.ExecuteSqlRawAsync(
-                 "EXEC GD.PA_ActualizarVersion @pN_Id, @pN_NumeroVersion, @pC_UrlVersion, @pC_NumeroSCD,@pC_Justificacion,@pN_UsuarioID, @pB_DocDinamico,@pB_Obsoleto",
+                 "EXEC GD.PA_ActualizarVersion @pN_Id, @pN_NumeroVersion, @pC_UrlVersion, @pC_NumeroSCD,@pC_Justificacion,@pN_UsuarioID, @pB_DocDinamico,@pB_Obsoleto, @pN_UsuarioBitacoraID, @pN_OficinaID",
                                                                     idParameter,
                                                                     numeroVersionParameter,
                                                                     urlVersionParameter,
@@ -43,7 +46,9 @@ namespace GestorDocumentalOIJ.DA.Acciones
                                                                     justificacionParameter,
                                                                     usuarioIDParameter,
                                                                     DocDinamicoParameter,
-                                                                    obsoletoParameter);
+                                                                    obsoletoParameter,
+                                                                    usuarioLogIDParameter,
+                                                                    oficinaIDParameter);
             return resultado > 0;
         }
 
@@ -57,9 +62,11 @@ namespace GestorDocumentalOIJ.DA.Acciones
             var justificacionParameter = new SqlParameter("@pC_Justificacion", version.justificacion);
             var DocDinamicoParameter = new SqlParameter("@pB_DocDinamico", version.DocDinamico);
             var obsoletoParameter = new SqlParameter("@pB_Obsoleto", version.Obsoleto);
+            var usuarioLogIDParameter = new SqlParameter("@pN_UsuarioBitacoraID", version.UsuarioLogID);
+            var oficinaIDParameter = new SqlParameter("@pN_OficinaID", version.OficinaID);
 
             int resultado = await _context.Database.ExecuteSqlRawAsync(
-                         "EXEC GD.PA_InsertarVersion @pN_DocumentoID, @pN_NumeroVersion, @pC_UrlVersion, @pC_NumeroSCD, @pC_Justificacion,@pN_UsuarioID,@pB_DocDinamico,@pB_Obsoleto",
+                         "EXEC GD.PA_InsertarVersion @pN_DocumentoID, @pN_NumeroVersion, @pC_UrlVersion, @pC_NumeroSCD, @pC_Justificacion,@pN_UsuarioID,@pB_DocDinamico,@pB_Obsoleto, @pN_UsuarioBitacoraID, @pN_OficinaID",
                         documentoIDParameter,
                         numeroVersionParameter,
                         urlVersionParameter,
@@ -67,7 +74,9 @@ namespace GestorDocumentalOIJ.DA.Acciones
                         justificacionParameter,
                          usuarioIDParameter,
                          DocDinamicoParameter,
-                         obsoletoParameter);
+                         obsoletoParameter,
+                         usuarioLogIDParameter,
+                         oficinaIDParameter);
             return resultado > 0;
         }
 
