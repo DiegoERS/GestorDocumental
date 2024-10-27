@@ -1,4 +1,5 @@
-﻿using GestorDocumentalOIJ.DTOs;
+﻿using GestorDocumentalOIJ.BC.Modelos;
+using GestorDocumentalOIJ.DTOs;
 
 namespace GestorDocumentalOIJ.Utility
 {
