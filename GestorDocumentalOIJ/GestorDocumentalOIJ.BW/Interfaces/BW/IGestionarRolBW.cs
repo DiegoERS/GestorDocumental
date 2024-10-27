@@ -19,5 +19,7 @@ namespace GestorDocumentalOIJ.BW.Interfaces.BW
         Task<bool> EliminarRol(int id);
 
 
+
+
     }
 }

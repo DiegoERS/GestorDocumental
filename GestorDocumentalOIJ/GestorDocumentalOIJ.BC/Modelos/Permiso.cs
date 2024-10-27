@@ -4,14 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GestorDocumentalOIJ.DA.Entidades
+namespace GestorDocumentalOIJ.BC.Modelos
 {
-    public class OficinaDA
+    public class Permiso
     {
         public int Id { get; set; }
         public string Nombre { get; set; } = string.Empty;
-        public string CodigoOficina { get; set; } = string.Empty;
-        public bool Gestor { get; set; }
-        public bool Eliminado { get; set; }
+        public string Descripcion { get; set; } = string.Empty;
+        public bool Activo { get; set; }
     }
 }

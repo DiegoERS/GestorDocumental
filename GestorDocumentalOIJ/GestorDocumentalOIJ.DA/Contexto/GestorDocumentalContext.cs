@@ -35,6 +35,8 @@ namespace GestorDocumentalOIJ.DA.Contexto
 
         public DbSet<Entidades.RolDA> Roles { get; set; }
 
+        public DbSet<Entidades.PermisoDA> Permisos { get; set; }
+
 
 
     }

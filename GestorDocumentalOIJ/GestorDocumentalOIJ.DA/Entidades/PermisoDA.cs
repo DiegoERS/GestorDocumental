@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace GestorDocumentalOIJ.DA.Entidades
 {
-    public class OficinaDA
+    public class PermisoDA
     {
         public int Id { get; set; }
         public string Nombre { get; set; } = string.Empty;
-        public string CodigoOficina { get; set; } = string.Empty;
-        public bool Gestor { get; set; }
-        public bool Eliminado { get; set; }
+        public string Descripcion { get; set; } = string.Empty;
+        public bool Activo { get; set; }
     }
 }
