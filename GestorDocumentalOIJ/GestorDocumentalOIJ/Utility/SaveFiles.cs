@@ -1,4 +1,6 @@
-﻿namespace GestorDocumentalOIJ.Utility
+﻿using Microsoft.AspNetCore.Mvc;
+
+namespace GestorDocumentalOIJ.Utility
 {
     public static class SaveFiles
     {
@@ -31,7 +33,7 @@
         }
 
 
-        public static  IFormFile GetIFormFile(string rutaArchivo)
+        public static IFormFile GetIFormFile(string rutaArchivo)
         {
             try
             {
@@ -42,7 +44,7 @@
                     var memoryStream = new MemoryStream();
                     using (var stream = new FileStream(rutaArchivo, FileMode.Open, FileAccess.Read))
                     {
-                         stream.CopyToAsync(memoryStream);
+                        stream.CopyTo(memoryStream);
                     }
 
                     // Reiniciar la posición del MemoryStream a 0 para leerlo desde el principio
@@ -87,6 +89,38 @@
                 ".csv" => "text/csv",
                 _ => "application/octet-stream", // Por defecto
             };
+        }
+
+
+        public static FileContentResult DownloadFile(string rutaArchivo)
+        {
+            try
+            {
+                // Verificar si el archivo existe
+                if (System.IO.File.Exists(rutaArchivo))
+                {
+                    // Obtener el nombre del archivo y el tipo MIME
+                    string fileName = Path.GetFileName(rutaArchivo);
+                    string mimeType = GetMimeType(rutaArchivo);
+
+                    // Leer el archivo en un byte array
+                    byte[] fileBytes = System.IO.File.ReadAllBytes(rutaArchivo);
+
+                    // Retornar el archivo para descargar
+                    return new FileContentResult(fileBytes, mimeType)
+                    {
+                        FileDownloadName = fileName
+                    };
+                }
+                else
+                {
+                    return null; // Si el archivo no existe
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
     }
 }

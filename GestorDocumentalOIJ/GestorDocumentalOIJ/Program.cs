@@ -42,6 +42,12 @@ builder.Services.AddTransient<IGestionarDocumentoDA, GestionarDocumentoDA>();
 builder.Services.AddTransient<IGestionarVersionBW, GestionarVersionBW>();
 builder.Services.AddTransient<IGestionarVersionDA, GestionarVersionDA>();
 
+builder.Services.AddTransient<IGestionarUsuarioBW, GestionarUsuarioBW>();
+builder.Services.AddTransient<IGestionarUsuarioDA, GestionarUsuarioDA>();
+
+builder.Services.AddTransient<IGestionarRolBW, GestionarRolBW>();
+builder.Services.AddTransient<IGestionarRolDA, GestionarRolDA>();
+
 
 
 // Configurar la cadena de conexión a la base de datos

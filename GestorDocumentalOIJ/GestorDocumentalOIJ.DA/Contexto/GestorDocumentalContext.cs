@@ -33,6 +33,8 @@ namespace GestorDocumentalOIJ.DA.Contexto
 
         public DbSet<Entidades.VersionDA> Versiones { get; set; }
 
+        public DbSet<Entidades.RolDA> Roles { get; set; }
+
 
 
     }
