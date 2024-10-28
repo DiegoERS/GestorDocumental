@@ -30,23 +30,21 @@ namespace GestorDocumentalOIJ.DA.Acciones
             var passwordParameter = new SqlParameter("@pC_Password", usuario.Password);
             var rolParameter = new SqlParameter("@pN_RolID", usuario.RolID);
             var activoParameter = new SqlParameter("@pB_Activo", usuario.Activo);
-            var eliminadoParameter = new SqlParameter("@pB_Eliminado", usuario.Eliminado);
 
             int resultado = await _context.Database.ExecuteSqlRawAsync(
-                                              "EXEC SC.PA_ActualizarUsuario @pN_Id, @pC_Nombre, @pC_Apellido, @pC_Correo, @pC_Password, @pN_RolID, @pB_Activo, @pB_Eliminado",
+                                              "EXEC SC.PA_ActualizarUsuario @pN_Id, @pC_Correo, @pC_Nombre, @pC_Password, @pC_Apellido, @pN_RolID, @pB_Activo",
                                               idParameter,
-                                              nombreParameter,
-                                              apellidoParameter,
                                               correoParameter,
+                                              nombreParameter,
                                               passwordParameter,
+                                              apellidoParameter,
                                               rolParameter,
-                                              activoParameter,
-                                              eliminadoParameter);
+                                              activoParameter);
 
             return resultado > 0;
         }
 
-        public async Task<bool> Autenticar(string correo, string password)
+        public async Task<bool> Autenticar(string correo, string password)  // cambiar a un sp normal para controlar devoluciones
         {
             var correoParameter = new SqlParameter("@pC_Correo", correo);
             var passwordParameter = new SqlParameter("@pC_Password", password);
@@ -69,11 +67,11 @@ namespace GestorDocumentalOIJ.DA.Acciones
             var activoParameter = new SqlParameter("@pB_Activo", usuario.Activo);
 
             int resultado = await _context.Database.ExecuteSqlRawAsync(
-                                              "EXEC SC.PA_InsertarUsuario @pC_Nombre, @pC_Apellido, @pC_Correo, @pC_Password, @pN_RolID, @pB_Activo",
-                                                      nombreParameter,
-                                                      apellidoParameter,
+                                              "EXEC SC.PA_InsertarUsuario @pC_Correo, @pC_Nombre, @pC_Password, @pC_Apellido, @pN_RolID, @pB_Activo",
                                                       correoParameter,
+                                                      nombreParameter,
                                                       passwordParameter,
+                                                      apellidoParameter,
                                                       rolParameter,
                                                       activoParameter);
 

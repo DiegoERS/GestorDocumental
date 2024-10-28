@@ -47,7 +47,7 @@ namespace GestorDocumentalOIJ.DA.Acciones
             var oficinaUsuarioIDParameter = new SqlParameter("@pN_OficinaBitacoraID", documento.OficinaUsuarioID);
 
             int resultado = await _context.Database.ExecuteSqlRawAsync(
-                                                             "EXEC GD.PA_ActualizarDocumento @pN_Id, @pC_Codigo, @pC_Asunto, @pC_Descripcion, @pC_PalabraClave, @pN_CategoriaID, @pN_TipoDocumento, @pN_OficinaID, @pC_Vigencia, @pN_EtapaID, @pN_DoctoID,@pN_SubClasificacionID, @pB_Activo,@pB_Descargable, pN_UsuarioID, pN_OficinaBitacoraID, @pC_Doctos",
+                                                             "EXEC GD.PA_ActualizarDocumento @pN_Id, @pC_Codigo, @pC_Asunto, @pC_Descripcion, @pC_PalabraClave, @pN_CategoriaID, @pN_TipoDocumento, @pN_OficinaID, @pC_Vigencia, @pN_EtapaID, @pN_DoctoID,@pN_SubClasificacionID, @pB_Activo,@pB_Descargable, @pN_UsuarioID, @pN_OficinaBitacoraID, @pC_Doctos",
                                                              idParameter,
                                                              codigoParameter,
                                                               asuntoParameter,

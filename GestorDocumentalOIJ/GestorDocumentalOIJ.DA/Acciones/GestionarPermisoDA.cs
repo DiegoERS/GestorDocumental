@@ -41,13 +41,12 @@ namespace GestorDocumentalOIJ.DA.Acciones
         {
             var nombreParameter = new SqlParameter("@pC_Nombre", permiso.Nombre);
             var descripcionParameter = new SqlParameter("@pC_Descripcion", permiso.Descripcion);
-            var activoParameter = new SqlParameter("@pB_Activo", permiso.Activo);
+           
 
             int resultado = await _context.Database.ExecuteSqlRawAsync(
-                                                                    "EXEC SC.PA_InsertarPermiso @pC_Nombre, @pC_Descripcion, @pB_Activo",
+                                                                    "EXEC SC.PA_InsertarPermiso @pC_Nombre, @pC_Descripcion",
                                                                        nombreParameter,
-                                                                       descripcionParameter,
-                                                                       activoParameter);
+                                                                       descripcionParameter);
 
             return resultado > 0;
         }
