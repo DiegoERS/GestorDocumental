@@ -86,28 +86,29 @@ namespace GestorDocumentalOIJ.DA.Acciones
             var doctosParameter = new SqlParameter("@pC_Doctos", listaSerializada);
             var activoParameter = new SqlParameter("@pB_Activo", documento.activo);
             var descargableParameter = new SqlParameter("@pB_Descargable", documento.descargable);
-            var doctoIdParameter = new SqlParameter("@pN_DoctoID", documento.doctoId);
+            var doctoIdParameter = new SqlParameter("@pN_DocToID", documento.doctoId);
             var usuarioIDParameter = new SqlParameter("@pN_UsuarioID", documento.UsuarioID);
             var oficinaUsuarioIDParameter = new SqlParameter("@pN_OficinaBitacoraID", documento.OficinaUsuarioID);
 
             int resultado = await _context.Database.ExecuteSqlRawAsync(
-                       "EXEC GD.PA_InsertarDocumento @pC_Codigo, @pC_Asunto, @pC_Descripcion, @pC_PalabraClave, @pN_CategoriaID, @pN_TipoDocumento, @pN_OficinaID, @pC_Vigencia, @pN_EtapaID, @pN_SubClasificacionID, @pB_Activo,@pB_Descargable,@pN_DoctoID, pN_UsuarioID, pN_OficinaBitacoraID, @pC_Doctos",
-                                                                                        codigoParameter,
-                                                                                        asuntoParameter,
-                                                                                        descripcionParameter,
-                                                                                       palabraClaveParameter,
-                                                                                       categoriaIDParameter,
-                                                                                       tipoDocumentoParameter,
-                                                                                       oficinaIDParameter,
-                                                                                       vigenciaParameter,
-                                                                                       etapaIDParameter,
-                                                                                       subClasificacionIDParameter,
-                                                                                       activoParameter,
-                                                                                       descargableParameter,
-                                                                                       doctoIdParameter,
-                                                                                       usuarioIDParameter,
-                                                                                       oficinaUsuarioIDParameter,
-                                                                                       doctosParameter);
+                                                                        "EXEC GD.PA_InsertarDocumento @pC_Codigo, @pC_Asunto, @pC_Descripcion, @pC_PalabraClave, @pN_CategoriaID, @pN_TipoDocumento, @pN_OficinaID, @pC_Vigencia, @pN_EtapaID, @pN_SubClasificacionID, @pB_Activo, @pB_Descargable, @pN_DocToID, @pN_UsuarioID, @pN_OficinaBitacoraID, @pC_Doctos",
+                                                                        codigoParameter,
+                                                                        asuntoParameter,
+                                                                        descripcionParameter,
+                                                                        palabraClaveParameter,
+                                                                        categoriaIDParameter,
+                                                                        tipoDocumentoParameter,
+                                                                        oficinaIDParameter,
+                                                                        vigenciaParameter,
+                                                                        etapaIDParameter,
+                                                                        subClasificacionIDParameter,
+                                                                        activoParameter,
+                                                                        descargableParameter,
+                                                                        doctoIdParameter, 
+                                                                        usuarioIDParameter,
+                                                                        oficinaUsuarioIDParameter,
+                                                                        doctosParameter);
+
 
             return resultado > 0;
         }

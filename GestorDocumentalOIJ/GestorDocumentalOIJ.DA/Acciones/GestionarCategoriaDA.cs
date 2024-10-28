@@ -25,7 +25,7 @@ namespace GestorDocumentalOIJ.DA.Acciones
         {
             var idParameter = new SqlParameter("@pN_Id", categoria.Id);
             var nombreParameter = new SqlParameter("@pC_Nombre", categoria.Nombre);
-            var descripcionParameter = new SqlParameter("@Descripcion", categoria.Descripcion);
+            var descripcionParameter = new SqlParameter("@pC_Descripcion", categoria.Descripcion);
             var eliminadoParameter = new SqlParameter("@pB_Eliminado", categoria.Eliminado);
             var usuarioIDParameter = new SqlParameter("@pN_UsuarioID", categoria.UsuarioID);
             var oficinaIDParameter = new SqlParameter("@pN_OficinaID", categoria.OficinaID);

@@ -23,13 +23,13 @@ namespace GestorDocumentalOIJ.DA.Acciones
         {
             var idParameter = new SqlParameter("@pN_Id", tipoDocumento.Id);
             var nombreParameter = new SqlParameter("@pC_Nombre", tipoDocumento.Nombre);
-            var descripcionParameter = new SqlParameter(" @pC_Descripcion", tipoDocumento.Descripcion);
+            var descripcionParameter = new SqlParameter("@pC_Descripcion", tipoDocumento.Descripcion);
             var eliminadoParameter = new SqlParameter("@pB_Eliminado", tipoDocumento.Eliminado);
             var usuarioIDParameter = new SqlParameter("@pN_UsuarioID", tipoDocumento.UsuarioID);
             var oficinaIDParameter = new SqlParameter("@pN_OficinaID", tipoDocumento.OficinaID);
 
             int resultado = await _context.Database.ExecuteSqlRawAsync(
-                               "EXEC PA_ActualizarTipoDocumento @pN_Id, @pC_Nombre,  @pC_Descripcion, @pB_Eliminado, @pN_UsuarioID, @pN_OficinaID",
+                               "EXEC GD.PA_ActualizarTipoDocumento @pN_Id, @pC_Nombre, @pC_Descripcion, @pB_Eliminado, @pN_UsuarioID, @pN_OficinaID",
                                              idParameter,
                                              nombreParameter,
                                              descripcionParameter,
