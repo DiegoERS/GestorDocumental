@@ -5,6 +5,7 @@ using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,15 +47,36 @@ namespace GestorDocumentalOIJ.DA.Acciones
 
         public async Task<bool> Autenticar(string correo, string password)  // cambiar a un sp normal para controlar devoluciones
         {
-            var correoParameter = new SqlParameter("@pC_Correo", correo);
-            var passwordParameter = new SqlParameter("@pC_Password", password);
+            // Obtener la cadena de conexión desde el DbContext
+            var connectionString = _context.Database.GetDbConnection().ConnectionString;
 
-            var resultado = await _context.Database.ExecuteSqlRawAsync(
-                               "EXEC SC.PA_ValidarLoginUsuario @pC_Correo, @pC_Password",
-                                              correoParameter,
-                                              passwordParameter);
+            using (var connection = new SqlConnection(connectionString))
+            {
+                await connection.OpenAsync();
 
-            return resultado == 0;
+                using (var command = new SqlCommand("SC.PA_ValidarLoginUsuario", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    // Agregar parámetros de entrada
+                    command.Parameters.AddWithValue("@pC_Correo", correo);
+                    command.Parameters.AddWithValue("@pC_Password", password);
+
+                    // Configurar el parámetro de retorno
+                    var returnParameter = command.Parameters.Add("@ReturnVal", SqlDbType.Int);
+                    returnParameter.Direction = ParameterDirection.ReturnValue;
+
+                    // Ejecutar el procedimiento almacenado
+                    await command.ExecuteNonQueryAsync();
+
+                    // Obtener el valor de retorno
+                    int result = (int)returnParameter.Value;
+
+                    // Retornar verdadero si el resultado es 0 (usuario válido), falso en caso contrario
+                    return result == 0;
+                }
+            }
+
         }
 
         public async Task<bool> CrearUsuario(Usuario usuario)
