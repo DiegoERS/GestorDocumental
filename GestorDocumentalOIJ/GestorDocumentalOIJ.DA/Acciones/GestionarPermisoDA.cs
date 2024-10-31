@@ -104,53 +104,5 @@ namespace GestorDocumentalOIJ.DA.Acciones
                 return new Permiso();
             }
         }
-
-        public async Task<bool> AsignarPermisoARol(int permisoID, int rolID)
-        {
-            var permisoParameter = new SqlParameter("@pN_PermisoID", permisoID);
-            var rolParameter = new SqlParameter("@pN_RolID", rolID);
-
-            int resultado = await _context.Database.ExecuteSqlRawAsync("EXEC SC.PA_InsertarPermisoRol @pN_PermisoID, @pN_RolID",
-                                                                        permisoParameter,
-                                                                        rolParameter);
-
-            return resultado > 0;
-        }
-        public async Task<bool> RemoverPermisoARol(int permisoID, int rolID)
-        {
-            var permisoParameter = new SqlParameter("@pN_PermisoID", permisoID);
-            var rolParameter = new SqlParameter("@pN_RolID", rolID);
-
-            int resultado = await _context.Database.ExecuteSqlRawAsync("EXEC SC.PA_EliminarPermisoRol @pN_PermisoID, @pN_RolID",
-                                                                         permisoParameter,
-                                                                         rolParameter);
-
-            return resultado > 0;
-        }
-
-        public async Task<bool> AsignarPermisoAOficina(int permisoID, int oficinaID)
-        {
-            var permisoParameter = new SqlParameter("@pN_PermisoID", permisoID);
-            var oficinaParameter = new SqlParameter("@pN_OficinaID", oficinaID);
-
-            int resultado = await _context.Database.ExecuteSqlRawAsync("EXEC SC.PA_InsertarPermisoOficina @pN_PermisoID, @pN_OficinaID",
-                                                                        permisoParameter,
-                                                                        oficinaParameter);
-
-            return resultado > 0;
-        }
-
-
-        public async Task<bool> RemoverPermisoAOficina(int permisoID, int oficinaID)
-        {
-            var permisoParameter = new SqlParameter("@pN_PermisoID", permisoID);
-            var oficinaParameter = new SqlParameter("@pN_OficinaID", oficinaID);
-
-            int resultado = await _context.Database.ExecuteSqlRawAsync("EXEC SC.PA_EliminarPermisoOficina @pN_PermisoID, @pN_OficinaID",
-                                                                         permisoParameter,
-                                                                         oficinaParameter);
-
-            return resultado > 0;
-        }
     }
 }

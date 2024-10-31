@@ -37,6 +37,20 @@ namespace GestorDocumentalOIJ.DA.Contexto
 
         public DbSet<Entidades.PermisoDA> Permisos { get; set; }
 
+        public DbSet<Entidades.PermisoRolDA> PermisosRoles { get; set; }
+
+        public DbSet<Entidades.PermisoOficinaDA> PermisosOficinas { get; set; }
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Entidades.PermisoOficinaDA>().HasNoKey();
+            modelBuilder.Entity<Entidades.PermisoRolDA>().HasNoKey();
+
+            // Si tienes otras configuraciones para otras entidades, colócalas aquí también
+            base.OnModelCreating(modelBuilder);
+
+        }
 
 
     }
