@@ -15,9 +15,5 @@ namespace GestorDocumentalOIJ.BW.Interfaces.DA
         Task<bool> CrearOficina(Oficina oficina);
         Task<bool> ActualizarOficina(Oficina oficina);
         Task<bool> EliminarOficina(int id);
-
-        Task<bool> AsignarOficinaAGestor(int gestorID, int oficinaID);
-
-        Task<bool> RemoverOficinaAGestor(int gestorID, int oficinaID);
     }
 }

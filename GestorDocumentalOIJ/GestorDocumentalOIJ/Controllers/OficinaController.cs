@@ -56,17 +56,5 @@ namespace GestorDocumentalOIJ.Controllers
             return Ok(await _gestionarOficinaBW.EliminarOficina(id));
         }
 
-        [HttpPost("AsignarOficinaGestor")]
-        public async Task<ActionResult<bool>> AsignarOficinaAGestor(int gestorID, int oficinaID)
-        {
-            return Ok(await _gestionarOficinaBW.AsignarOficinaAGestor(gestorID, oficinaID));
-        }
-
-        [HttpPost("RemoverOficinaGestor")]
-        public async Task<ActionResult<bool>> RemoverOficinaAGestor(int gestorID, int oficinaID)
-        {
-            return Ok(await _gestionarOficinaBW.RemoverOficinaAGestor(gestorID, oficinaID));
-        }
-
     }
 }

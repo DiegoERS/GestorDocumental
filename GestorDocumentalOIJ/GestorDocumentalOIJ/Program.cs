@@ -60,6 +60,9 @@ builder.Services.AddTransient<IGestionarPermisoRolDA, GestionarPermisoRolDA>();
 builder.Services.AddTransient<IGestionarPermisoOficinaBW, GestionarPermisoOficinaBW>();
 builder.Services.AddTransient<IGestionarPermisoOficinaDA, GestionarPermisoOficinaDA>();
 
+builder.Services.AddTransient<IGestionarOficinaGestorDA, GestionarOficinaGestorDA>();
+builder.Services.AddTransient<IGestionarOficinaGestorBW, GestionarOficinaGestorBW>();
+
 
 
 // Configurar la cadena de conexión a la base de datos

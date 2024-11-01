@@ -126,26 +126,6 @@ namespace GestorDocumentalOIJ.DA.Acciones
             }).ToList();
         }
 
-        public async Task<bool> AsignarOficinaAGestor(int gestorID, int oficinaID)
-        {
-            var gestorParameter = new SqlParameter("@pN_GestorID", gestorID);
-            var oficinaParameter = new SqlParameter("@pN_OficinaID", oficinaID);
-
-            int resultado = await _context.Database.ExecuteSqlRawAsync("EXEC SC.PA_InsertarOficinaGestor @pN_GestorID, @pN_OficinaID", gestorParameter, oficinaParameter);
-
-            return resultado > 0;
-        }
-
-        public async Task<bool> RemoverOficinaAGestor(int gestorID, int oficinaID)
-        {
-            var gestorParameter = new SqlParameter("@pN_GestorID", gestorID);
-            var oficinaParameter = new SqlParameter("@pN_OficinaID", oficinaID);
-
-            int resultado = await _context.Database.ExecuteSqlRawAsync("EXEC SC.PA_EliminarOficinaGestor @pN_GestorID, @pN_OficinaID", gestorParameter, oficinaParameter);
-
-            return resultado > 0;
-        }
-
     }
 
 }

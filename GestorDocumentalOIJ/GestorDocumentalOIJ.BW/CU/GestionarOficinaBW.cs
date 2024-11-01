@@ -23,11 +23,6 @@ namespace GestorDocumentalOIJ.BW.CU
             return await _gestionarOficinaDA.ActualizarOficina(oficina);
         }
 
-        public async Task<bool> AsignarOficinaAGestor(int gestorID, int oficinaID)
-        {
-            return await _gestionarOficinaDA.AsignarOficinaAGestor(gestorID, oficinaID);
-        }
-
         public async Task<bool> CrearOficina(Oficina oficina)
         {
             return await _gestionarOficinaDA.CrearOficina(oficina);
@@ -54,12 +49,6 @@ namespace GestorDocumentalOIJ.BW.CU
         {
             return await _gestionarOficinaDA.ObtenerOficinasGestor();
         }
-
-        public async Task<bool> RemoverOficinaAGestor(int gestorID, int oficinaID)
-        {
-            return await _gestionarOficinaDA.RemoverOficinaAGestor(gestorID, oficinaID);
-        }
-
 
 
 

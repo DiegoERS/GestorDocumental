@@ -22,7 +22,7 @@ namespace GestorDocumentalOIJ.DA.Acciones
         }
         public async Task<IEnumerable<PermisoOficina>> ObtenerPermisosOficina()
         {
-            var permisosOficina = await _context.Set<PermisoOficinaDA>()
+            var permisosOficina = await _context.PermisosOficinas
                 .FromSqlRaw("EXEC SC.PA_ListarPermisoOficina")
                 .ToListAsync();
             return permisosOficina.Select(po => new PermisoOficina

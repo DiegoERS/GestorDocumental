@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GestorDocumentalOIJ.DA.Contexto
 {
-    public class GestorDocumentalContext:DbContext
+    public class GestorDocumentalContext : DbContext
     {
         public GestorDocumentalContext(DbContextOptions<GestorDocumentalContext> options) : base(options)
         {
@@ -25,11 +25,11 @@ namespace GestorDocumentalOIJ.DA.Contexto
 
         public DbSet<Entidades.DoctoDA> Doctos { get; set; }
 
-        public DbSet<Entidades.OficinaDA> Oficinas { get; set;}
+        public DbSet<Entidades.OficinaDA> Oficinas { get; set; }
 
         public DbSet<Entidades.UsuarioDA> Usuarios { get; set; }
 
-        public DbSet<Entidades.SubclasificacionDA > Subclasificaciones { get; set; }
+        public DbSet<Entidades.SubclasificacionDA> Subclasificaciones { get; set; }
 
         public DbSet<Entidades.VersionDA> Versiones { get; set; }
 
@@ -41,11 +41,14 @@ namespace GestorDocumentalOIJ.DA.Contexto
 
         public DbSet<Entidades.PermisoOficinaDA> PermisosOficinas { get; set; }
 
+        public DbSet<Entidades.OficinaGestorDA> OficinasGestores { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Entidades.PermisoOficinaDA>().HasNoKey();
             modelBuilder.Entity<Entidades.PermisoRolDA>().HasNoKey();
+            modelBuilder.Entity<Entidades.OficinaGestorDA>().HasNoKey();
 
             // Si tienes otras configuraciones para otras entidades, colócalas aquí también
             base.OnModelCreating(modelBuilder);
