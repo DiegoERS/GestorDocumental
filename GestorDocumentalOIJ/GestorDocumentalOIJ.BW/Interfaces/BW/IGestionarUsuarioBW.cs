@@ -9,7 +9,7 @@ namespace GestorDocumentalOIJ.BW.Interfaces.BW
 {
     public interface IGestionarUsuarioBW
     {
-
+        Task<IEnumerable<Usuario>> ObtenerUsuariosPorOficinaID(int oficinaID);
         Task<Usuario> ObtenerUsuarioPorId(int idUsuario);
 
         Task<IEnumerable<Usuario>> ObtenerUsuarios();
@@ -21,9 +21,5 @@ namespace GestorDocumentalOIJ.BW.Interfaces.BW
         Task<bool> EliminarUsuario(int idUsuario);
 
         Task<bool> Autenticar(string correo, string password);
-
-        Task<bool> AsignarUsuarioAOficina(int usuarioID, int oficinaID);
-        
-        Task<bool> RemoverUsuarioAOficina(int usuarioID, int oficinaID);
     }
 }

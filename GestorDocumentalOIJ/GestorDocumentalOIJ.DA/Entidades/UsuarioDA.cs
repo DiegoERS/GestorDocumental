@@ -15,6 +15,6 @@ namespace GestorDocumentalOIJ.DA.Entidades
         public string Password { get; set; } = string.Empty;
         public int RolID { get; set; }
         public bool Activo { get; set; }
-        public bool Eliminado { get; set; }
+        public bool Eliminado { get; set; } 
     }
 }

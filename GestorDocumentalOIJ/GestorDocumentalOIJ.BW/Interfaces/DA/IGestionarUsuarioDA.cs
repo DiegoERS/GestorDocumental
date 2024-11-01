@@ -19,10 +19,8 @@ namespace GestorDocumentalOIJ.BW.Interfaces.DA
 
         Task<bool> EliminarUsuario(int idUsuario);
 
+        Task<IEnumerable<Usuario>> ObtenerUsuariosPorOficinaID(int oficinaID);
+
         Task<bool> Autenticar(string correo, string password);
-
-        Task<bool> AsignarUsuarioAOficina(int usuarioID, int oficinaID);
-
-        Task<bool> RemoverUsuarioAOficina(int usuarioID, int oficinaID);
     }
 }
