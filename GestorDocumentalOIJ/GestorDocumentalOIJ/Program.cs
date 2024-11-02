@@ -36,6 +36,39 @@ builder.Services.AddTransient<IGestionarSubclasificacionDA, GestionarSubclasific
 builder.Services.AddTransient<IGestionarDoctoBW, GestionarDoctoBW>();
 builder.Services.AddTransient<IGestionarDoctoDA, GestionarDoctoDA>();
 
+builder.Services.AddTransient<IGestionarDocumentoBW, GestionarDocumentoBW>();
+builder.Services.AddTransient<IGestionarDocumentoDA, GestionarDocumentoDA>();
+
+builder.Services.AddTransient<IGestionarVersionBW, GestionarVersionBW>();
+builder.Services.AddTransient<IGestionarVersionDA, GestionarVersionDA>();
+
+builder.Services.AddTransient<IGestionarUsuarioBW, GestionarUsuarioBW>();
+builder.Services.AddTransient<IGestionarUsuarioDA, GestionarUsuarioDA>();
+
+builder.Services.AddTransient<IGestionarRolBW, GestionarRolBW>();
+builder.Services.AddTransient<IGestionarRolDA, GestionarRolDA>();
+
+builder.Services.AddTransient<IGestionarOficinaBW, GestionarOficinaBW>();
+builder.Services.AddTransient<IGestionarOficinaDA, GestionarOficinaDA>();
+
+builder.Services.AddTransient<IGestionarPermisoBW, GestionarPermisoBW>();
+builder.Services.AddTransient<IGestionarPermisoDA, GestionarPermisoDA>();
+
+builder.Services.AddTransient<IGestionarPermisoRolBW, GestionarPermisoRolBW>();
+builder.Services.AddTransient<IGestionarPermisoRolDA, GestionarPermisoRolDA>();
+
+builder.Services.AddTransient<IGestionarPermisoOficinaBW, GestionarPermisoOficinaBW>();
+builder.Services.AddTransient<IGestionarPermisoOficinaDA, GestionarPermisoOficinaDA>();
+
+builder.Services.AddTransient<IGestionarOficinaGestorDA, GestionarOficinaGestorDA>();
+builder.Services.AddTransient<IGestionarOficinaGestorBW, GestionarOficinaGestorBW>();
+
+builder.Services.AddTransient<IGestionarOficinaGestorDA, GestionarOficinaGestorDA>();
+builder.Services.AddTransient<IGestionarOficinaGestorBW, GestionarOficinaGestorBW>();
+
+builder.Services.AddTransient<IGestionarNormaUsuarioBW, GestionarNormaUsuarioBW>();
+builder.Services.AddTransient<IGestionarNormaUsuarioDA, GestionarNormaUsuarioDA>();
+
 
 
 // Configurar la cadena de conexión a la base de datos

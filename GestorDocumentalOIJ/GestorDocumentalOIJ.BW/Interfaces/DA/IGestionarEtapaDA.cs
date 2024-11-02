@@ -13,6 +13,6 @@ namespace GestorDocumentalOIJ.BW.Interfaces.DA
         Task<Etapa> ObtenerEtapaPorId(int id);
         Task<bool> CrearEtapa(Etapa etapa);
         Task<bool> ActualizarEtapa(Etapa etapa);
-        Task<bool> EliminarEtapa(int id);
+        Task<bool> EliminarEtapa(EliminarRequest eliminarRequest);
     }
 }

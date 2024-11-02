@@ -13,6 +13,6 @@ namespace GestorDocumentalOIJ.BW.Interfaces.BW
         Task<TipoDocumento> ObtenerTipoDocumentoPorId(int id);
         Task<bool> CrearTipoDocumento(TipoDocumento tipoDocumento);
         Task<bool> ActualizarTipoDocumento(TipoDocumento tipoDocumento);
-        Task<bool> EliminarTipoDocumento(int id);
+        Task<bool> EliminarTipoDocumento(EliminarRequest eliminarRequest);
     }
 }

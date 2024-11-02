@@ -41,10 +41,10 @@ namespace GestorDocumentalOIJ.Controllers
             return Ok(await _gestionarTipoDocumentoBW.ActualizarTipoDocumento(TipoDocumentoDTOMapper.ConvertirDTOATipoDocumento(tipoDocumentoDTO)));
         }
 
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<bool>> eliminarTipoDocumento(int id)
+        [HttpDelete]
+        public async Task<ActionResult<bool>> eliminarTipoDocumento(EliminarRequestDTO eliminarRequestDTO)
         {
-            return Ok(await _gestionarTipoDocumentoBW.EliminarTipoDocumento(id));
+            return Ok(await _gestionarTipoDocumentoBW.EliminarTipoDocumento(EliminarRequestDTOMapper.ConvertirDTOAEliminarRequest(eliminarRequestDTO)));
         }
     }
 }

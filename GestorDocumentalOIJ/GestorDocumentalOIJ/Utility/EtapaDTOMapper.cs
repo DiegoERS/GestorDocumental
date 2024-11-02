@@ -15,7 +15,9 @@ namespace GestorDocumentalOIJ.Utility
                 Eliminado = etapa.eliminado,
                 normaID = etapa.normaID,
                 EtapaPadreID = etapa.EtapaPadreID,
-                color = etapa.color
+                color = etapa.color,
+                UsuarioID = etapa.UsuarioID,
+                OficinaID = etapa.OficinaID
             };
         }
 
@@ -29,7 +31,9 @@ namespace GestorDocumentalOIJ.Utility
                 eliminado = etapaDTO.Eliminado,
                 normaID = etapaDTO.normaID,
                 EtapaPadreID = etapaDTO.EtapaPadreID,
-                color = etapaDTO.color
+                color = etapaDTO.color,
+                UsuarioID = etapaDTO.UsuarioID,
+                OficinaID = etapaDTO.OficinaID
             };
         }
 
@@ -43,7 +47,9 @@ namespace GestorDocumentalOIJ.Utility
                 Eliminado = e.eliminado,
                 normaID = e.normaID,
                 EtapaPadreID= e.EtapaPadreID,
-                color = e.color
+                color = e.color,
+                UsuarioID = e.UsuarioID,
+                OficinaID = e.OficinaID
             });
         }
     }

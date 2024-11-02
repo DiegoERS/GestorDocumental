@@ -17,6 +17,6 @@ namespace GestorDocumentalOIJ.BW.Interfaces.BW
 
         Task<bool> actualizarSubclasificacion(Subclasificacion subclasificacion);
 
-        Task<bool> eliminarSubclasificacion(int id);
+        Task<bool> eliminarSubclasificacion(EliminarRequest eliminarRequest);
     }
 }

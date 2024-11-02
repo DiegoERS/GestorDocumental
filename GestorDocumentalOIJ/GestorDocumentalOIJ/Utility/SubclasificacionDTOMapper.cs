@@ -13,7 +13,9 @@ namespace GestorDocumentalOIJ.Utility
                 Nombre = subclasificacion.Nombre,
                 Descripcion = subclasificacion.Descripcion,
                 Eliminado = subclasificacion.Eliminado,
-                ClasificacionID = subclasificacion.ClasificacionID
+                ClasificacionID = subclasificacion.ClasificacionID,
+                UsuarioID = subclasificacion.UsuarioID,
+                OficinaID = subclasificacion.OficinaID
             };
         }
 
@@ -25,7 +27,9 @@ namespace GestorDocumentalOIJ.Utility
                 Nombre = subclasificacionDTO.Nombre,
                 Descripcion = subclasificacionDTO.Descripcion,
                 Eliminado = subclasificacionDTO.Eliminado,
-                ClasificacionID = subclasificacionDTO.ClasificacionID
+                ClasificacionID = subclasificacionDTO.ClasificacionID,
+                UsuarioID = subclasificacionDTO.UsuarioID,
+                OficinaID = subclasificacionDTO.OficinaID
             };
         }
 
@@ -37,7 +41,9 @@ namespace GestorDocumentalOIJ.Utility
                 Nombre = s.Nombre,
                 Descripcion = s.Descripcion,
                 Eliminado = s.Eliminado,
-                ClasificacionID = s.ClasificacionID
+                ClasificacionID = s.ClasificacionID,
+                UsuarioID = s.UsuarioID,
+                OficinaID = s.OficinaID
             });
         }
     }

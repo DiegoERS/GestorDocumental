@@ -13,6 +13,6 @@ namespace GestorDocumentalOIJ.BW.Interfaces.BW
         Task<Norma> ObtenerNorma(int id);
         Task<bool> CrearNorma(Norma norma);
         Task<bool> ActualizarNorma(Norma norma);
-        Task<bool> EliminarNorma(int id);
+        Task<bool> EliminarNorma(EliminarRequest eliminarRequest);
     }
 }

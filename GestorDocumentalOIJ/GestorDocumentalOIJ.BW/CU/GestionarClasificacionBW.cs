@@ -28,9 +28,9 @@ namespace GestorDocumentalOIJ.BW.CU
             return await _gestionarClasificacionDA.CrearClasificacion(clasificacion);
         }
 
-        public async Task<bool> EliminarClasificacion(int id)
+        public async Task<bool> EliminarClasificacion(EliminarRequest eliminarRequest)
         {
-            return await _gestionarClasificacionDA.EliminarClasificacion(id);
+            return await _gestionarClasificacionDA.EliminarClasificacion(eliminarRequest);
         }
 
         public async Task<IEnumerable<Clasificacion>> ObtenerClasificaciones()

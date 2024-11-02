@@ -43,9 +43,9 @@ namespace GestorDocumentalOIJ.Controllers
         }
 
         [HttpDelete]
-        public async Task<ActionResult<bool>> eliminarEtapa(int id)
+        public async Task<ActionResult<bool>> eliminarEtapa(EliminarRequestDTO eliminarRequestDTO)
         {
-            return Ok(await gestionarEtapaBW.EliminarEtapa(id));
+            return Ok(await gestionarEtapaBW.EliminarEtapa(EliminarRequestDTOMapper.ConvertirDTOAEliminarRequest(eliminarRequestDTO)));
         }
     }
 }

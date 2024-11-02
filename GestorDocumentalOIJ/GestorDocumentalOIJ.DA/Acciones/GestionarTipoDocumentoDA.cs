@@ -1,6 +1,7 @@
 ﻿using GestorDocumentalOIJ.BC.Modelos;
 using GestorDocumentalOIJ.BW.Interfaces.DA;
 using GestorDocumentalOIJ.DA.Contexto;
+using GestorDocumentalOIJ.DA.Entidades;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -22,15 +23,19 @@ namespace GestorDocumentalOIJ.DA.Acciones
         {
             var idParameter = new SqlParameter("@pN_Id", tipoDocumento.Id);
             var nombreParameter = new SqlParameter("@pC_Nombre", tipoDocumento.Nombre);
-            var descripcionParameter = new SqlParameter(" @pC_Descripcion", tipoDocumento.Descripcion);
+            var descripcionParameter = new SqlParameter("@pC_Descripcion", tipoDocumento.Descripcion);
             var eliminadoParameter = new SqlParameter("@pB_Eliminado", tipoDocumento.Eliminado);
+            var usuarioIDParameter = new SqlParameter("@pN_UsuarioID", tipoDocumento.UsuarioID);
+            var oficinaIDParameter = new SqlParameter("@pN_OficinaID", tipoDocumento.OficinaID);
 
             int resultado = await _context.Database.ExecuteSqlRawAsync(
-                               "EXEC PA_ActualizarTipoDocumento @pN_Id, @pC_Nombre,  @pC_Descripcion, @pB_Eliminado",
+                               "EXEC GD.PA_ActualizarTipoDocumento @pN_Id, @pC_Nombre, @pC_Descripcion, @pB_Eliminado, @pN_UsuarioID, @pN_OficinaID",
                                              idParameter,
                                              nombreParameter,
                                              descripcionParameter,
-                                             eliminadoParameter);
+                                             eliminadoParameter,
+                                             usuarioIDParameter,
+                                             oficinaIDParameter);
 
             // Devuelve true si se afectó al menos una fila
             return resultado > 0;
@@ -40,20 +45,30 @@ namespace GestorDocumentalOIJ.DA.Acciones
         {
             var nombreParameter = new SqlParameter("@pC_Nombre", tipoDocumento.Nombre);
             var descripcionParameter = new SqlParameter("@pC_Descripcion", tipoDocumento.Descripcion);
+            var usuarioIDParameter = new SqlParameter("@pN_UsuarioID", tipoDocumento.UsuarioID);
+            var oficinaIDParameter = new SqlParameter("@pN_OficinaID", tipoDocumento.OficinaID);
 
             int resultado = await _context.Database.ExecuteSqlRawAsync(
-                               "EXEC  GD.PA_InsertarTipoDocumento @pC_Nombre, @pC_Descripcion",
+                               "EXEC  GD.PA_InsertarTipoDocumento @pC_Nombre, @pC_Descripcion, @pN_UsuarioID, @pN_OficinaID",
                                               nombreParameter,
-                                              descripcionParameter);
+                                              descripcionParameter,
+                                              usuarioIDParameter,
+                                              oficinaIDParameter);
 
             return resultado > 0;
 
         }
 
-        public async Task<bool> EliminarTipoDocumento(int id)
+        public async Task<bool> EliminarTipoDocumento(EliminarRequest eliminarRequest)
         {
-            int resultado = await _context.Database.ExecuteSqlRawAsync(
-                                              "EXEC GD.PA_EliminarTipoDocumento @pN_Id", new SqlParameter("@pN_Id", id));
+            var idParametro = new SqlParameter("@pN_Id", eliminarRequest.ObjetoID);
+            var usuarioIDParametro = new SqlParameter("@pN_UsuarioID", eliminarRequest.UsuarioID);
+            var oficinaIDParametro = new SqlParameter("@pN_OficinaID", eliminarRequest.OficinaID);
+
+            int resultado = await _context.Database.ExecuteSqlRawAsync("EXEC GD.PA_EliminarTipoDocumento @pN_Id, @pN_UsuarioID, @pN_OficinaID", 
+                                                                       idParametro,
+                                                                       usuarioIDParametro,
+                                                                       oficinaIDParametro);
 
             return resultado > 0;
 

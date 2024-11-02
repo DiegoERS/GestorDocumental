@@ -25,15 +25,19 @@ namespace GestorDocumentalOIJ.DA.Acciones
         {
             var idParameter = new SqlParameter("@pN_Id", categoria.Id);
             var nombreParameter = new SqlParameter("@pC_Nombre", categoria.Nombre);
-            var descripcionParameter = new SqlParameter("@Descripcion", categoria.Descripcion);
+            var descripcionParameter = new SqlParameter("@pC_Descripcion", categoria.Descripcion);
             var eliminadoParameter = new SqlParameter("@pB_Eliminado", categoria.Eliminado);
+            var usuarioIDParameter = new SqlParameter("@pN_UsuarioID", categoria.UsuarioID);
+            var oficinaIDParameter = new SqlParameter("@pN_OficinaID", categoria.OficinaID);
 
             int resultado = await _context.Database.ExecuteSqlRawAsync(
-                "EXEC GD.PA_ActualizarCategoria @pN_Id, @pC_Nombre, @pC_Descripcion, @pB_Eliminado",
+                "EXEC GD.PA_ActualizarCategoria @pN_Id, @pC_Nombre, @pC_Descripcion, @pB_Eliminado,@pN_UsuarioID,@pN_OficinaID",
                 idParameter,
                 nombreParameter,
                 descripcionParameter,
-                eliminadoParameter
+                eliminadoParameter,
+                usuarioIDParameter,
+                oficinaIDParameter
             );
 
             return resultado > 0;
@@ -43,23 +47,31 @@ namespace GestorDocumentalOIJ.DA.Acciones
         {
             var nombreParameter = new SqlParameter("@pC_Nombre", categoria.Nombre);
             var descripcionParameter = new SqlParameter("@pC_Descripcion", categoria.Descripcion);
+            var usuarioIDParameter = new SqlParameter("@pN_UsuarioID", categoria.UsuarioID);
+            var oficinaIDParameter = new SqlParameter("@pN_OficinaID", categoria.OficinaID);
 
             int resultado=await _context.Database.ExecuteSqlRawAsync(
-                "EXEC  GD.PA_InsertarCategoria @pC_Nombre, @pC_Descripcion",
+                "EXEC  GD.PA_InsertarCategoria @pC_Nombre, @pC_Descripcion,@pN_UsuarioID,@pN_OficinaID",
                 nombreParameter,
-                descripcionParameter
+                descripcionParameter,
+                usuarioIDParameter,
+                oficinaIDParameter
             );
 
             return resultado > 0;
 
         }
 
-        public async Task<bool> EliminarCategoria(int id)
+        public async Task<bool> EliminarCategoria(EliminarRequest eliminarRequest)
         {
-            int resultado = await _context.Database.ExecuteSqlRawAsync(
-            "EXEC GD.PA_EliminarCategoria @pN_Id",
-            new SqlParameter("@pN_Id", id)
-        );
+            var idParametro = new SqlParameter("@pN_Id", eliminarRequest.ObjetoID);
+            var usuarioIDParametro = new SqlParameter("@pN_UsuarioID", eliminarRequest.UsuarioID);
+            var oficinaIDParametro = new SqlParameter("@pN_OficinaID", eliminarRequest.OficinaID);
+
+            int resultado = await _context.Database.ExecuteSqlRawAsync("EXEC GD.PA_EliminarCategoria @pN_Id, @pN_UsuarioID, @pN_OficinaID",
+                                                                        idParametro,
+                                                                        usuarioIDParametro,
+                                                                        oficinaIDParametro);
 
             return resultado > 0;
 

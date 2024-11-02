@@ -13,7 +13,9 @@ namespace GestorDocumentalOIJ.Utility
                 Id = docto.Id,
                 Nombre = docto.Nombre,
                 Descripcion = docto.Descripcion,
-                Eliminado = docto.Eliminado
+                Eliminado = docto.Eliminado,
+                UsuarioID = docto.UsuarioID,
+                OficinaID = docto.OficinaID
             };
         }
 
@@ -24,7 +26,9 @@ namespace GestorDocumentalOIJ.Utility
                 Id = doctoDTO.Id,
                 Nombre = doctoDTO.Nombre,
                 Descripcion = doctoDTO.Descripcion,
-                Eliminado = doctoDTO.Eliminado
+                Eliminado = doctoDTO.Eliminado,
+                UsuarioID = doctoDTO.UsuarioID,
+                OficinaID = doctoDTO.OficinaID
             };
         }
 
@@ -35,7 +39,9 @@ namespace GestorDocumentalOIJ.Utility
                 Id = d.Id,
                 Nombre = d.Nombre,
                 Descripcion = d.Descripcion,
-                Eliminado = d.Eliminado
+                Eliminado = d.Eliminado,
+                UsuarioID = d.UsuarioID,
+                OficinaID = d.OficinaID
             });
         }
     }

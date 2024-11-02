@@ -39,9 +39,9 @@ namespace GestorDocumentalOIJ.BW.CU
             return await _gestionarDoctoDA.ActualizarDocto(docto);
         }
 
-        public async Task<bool> EliminarDocto(int id)
+        public async Task<bool> EliminarDocto(EliminarRequest eliminarRequest)
         {
-            return await _gestionarDoctoDA.EliminarDocto(id);
+            return await _gestionarDoctoDA.EliminarDocto(eliminarRequest);
         }
 
     }

@@ -11,7 +11,7 @@ namespace GestorDocumentalOIJ.BW.Interfaces.DA
     {
         Task<bool> CrearClasificacion(Clasificacion clasificacion);
         Task<bool> ActualizarClasificacion(Clasificacion clasificacion);
-        Task<bool> EliminarClasificacion(int id);
+        Task<bool> EliminarClasificacion(EliminarRequest eliminarRequest);
         Task<IEnumerable<Clasificacion>> ObtenerClasificaciones();
 
         Task<Clasificacion> ObtenerClasificacionPorId(int id);

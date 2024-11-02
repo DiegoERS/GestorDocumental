@@ -26,13 +26,17 @@ namespace GestorDocumentalOIJ.DA.Acciones
             var nombreParameter = new SqlParameter("@pC_Nombre", clasificacion.Nombre);
             var descripcionParameter = new SqlParameter("@pC_Descripcion", clasificacion.Descripcion);
             var eliminadoParameter = new SqlParameter("@pB_Eliminado", clasificacion.Eliminado);
+            var usuarioIDParameter = new SqlParameter("@pN_UsuarioID", clasificacion.UsuarioID);
+            var oficinaIDParameter = new SqlParameter("@pN_OficinaID", clasificacion.OficinaID);
 
             int resultado = await _context.Database.ExecuteSqlRawAsync(
-                               "EXEC GD.PA_ActualizarClasificacion @pN_Id, @pC_Nombre, @pC_Descripcion, @pB_Eliminado",
+                               "EXEC GD.PA_ActualizarClasificacion @pN_Id, @pC_Nombre, @pC_Descripcion, @pB_Eliminado,@pN_UsuarioID,@pN_OficinaID",
                                               idParameter,
                                               nombreParameter,
                                               descripcionParameter,
-                                              eliminadoParameter );
+                                              eliminadoParameter,
+                                              usuarioIDParameter,
+                                              oficinaIDParameter);
 
             return resultado > 0;
         }
@@ -41,22 +45,30 @@ namespace GestorDocumentalOIJ.DA.Acciones
         {
             var nombreParameter = new SqlParameter("@pC_Nombre", clasificacion.Nombre);
             var descripcionParameter = new SqlParameter("@pC_Descripcion", clasificacion.Descripcion);
+            var usuarioIDParameter = new SqlParameter("@pN_UsuarioID", clasificacion.UsuarioID);
+            var oficinaIDParameter = new SqlParameter("@pN_OficinaID", clasificacion.OficinaID);
 
             int resultado = await _context.Database.ExecuteSqlRawAsync(
-                               "EXEC  GD.PA_InsertarClasificacion @pC_Nombre, @pC_Descripcion",
+                               "EXEC  GD.PA_InsertarClasificacion @pC_Nombre, @pC_Descripcion,@pN_UsuarioID,@pN_OficinaID",
                                               nombreParameter,
-                                              descripcionParameter );
+                                              descripcionParameter,
+                                              usuarioIDParameter,
+                                              oficinaIDParameter);
 
             return resultado > 0;
 
         }
 
-        public async Task<bool> EliminarClasificacion(int id)
+        public async Task<bool> EliminarClasificacion(EliminarRequest eliminarRequest)
         {
-            int resultado = await _context.Database.ExecuteSqlRawAsync(
-                                              "EXEC GD.PA_EliminarClasificacion @pN_Id",
-                                              new SqlParameter("@pN_Id", id)
-                                                                                                                                                                  );
+            var idParametro = new SqlParameter("@pN_Id", eliminarRequest.ObjetoID);
+            var usuarioIDParametro = new SqlParameter("@pN_UsuarioID", eliminarRequest.UsuarioID);
+            var oficinaIDParametro = new SqlParameter("@pN_OficinaID", eliminarRequest.OficinaID);
+
+            int resultado = await _context.Database.ExecuteSqlRawAsync( "EXEC GD.PA_EliminarClasificacion @pN_Id, @pN_UsuarioID, @pN_OficinaID",
+                                                                         idParametro,
+                                                                         usuarioIDParametro,
+                                                                         oficinaIDParametro);
 
             return resultado > 0;
 
