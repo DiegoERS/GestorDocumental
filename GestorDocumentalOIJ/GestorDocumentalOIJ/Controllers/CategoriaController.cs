@@ -24,11 +24,11 @@ namespace GestorDocumentalOIJ.Controllers
         //    return Ok(CategoriaDTOMapper.ConvertirListaDeCategoriasADTO (await _gestionarCategoriaBW.ListarCategorias()));
         //}
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<CategoriaDTO>> ObtenerCategoria(int id)
-        {
-            return Ok(CategoriaDTOMapper.ConvertirCategoriaADTO(await _gestionarCategoriaBW.ObtenerCategoria(id)));
-        }
+        //[HttpGet("{id}")]
+        //public async Task<ActionResult<CategoriaDTO>> ObtenerCategoria(int id)
+        //{
+        //    return Ok(CategoriaDTOMapper.ConvertirCategoriaADTO(await _gestionarCategoriaBW.ObtenerCategoria(id)));
+        //}
 
         [HttpPost]
         public async Task<ActionResult<bool>> CrearCategoria(CategoriaDTO categoriaDTO)
