@@ -18,17 +18,17 @@ namespace GestorDocumentalOIJ.Controllers
             _gestionarCategoriaBW = gestionarCategoriaBW;
         }
 
-        //[HttpGet]
-        //public async Task<ActionResult<IEnumerable<CategoriaDTO>>> ListarCategorias()
-        //{
-        //    return Ok(CategoriaDTOMapper.ConvertirListaDeCategoriasADTO (await _gestionarCategoriaBW.ListarCategorias()));
-        //}
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<CategoriaDTO>>> ListarCategorias()
+        {
+            return Ok(CategoriaDTOMapper.ConvertirListaDeCategoriasADTO(await _gestionarCategoriaBW.ListarCategorias()));
+        }
 
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<CategoriaDTO>> ObtenerCategoria(int id)
-        //{
-        //    return Ok(CategoriaDTOMapper.ConvertirCategoriaADTO(await _gestionarCategoriaBW.ObtenerCategoria(id)));
-        //}
+        [HttpGet("{id}")]
+        public async Task<ActionResult<CategoriaDTO>> ObtenerCategoria(int id)
+        {
+            return Ok(CategoriaDTOMapper.ConvertirCategoriaADTO(await _gestionarCategoriaBW.ObtenerCategoria(id)));
+        }
 
         [HttpPost]
         public async Task<ActionResult<bool>> CrearCategoria(CategoriaDTO categoriaDTO)
