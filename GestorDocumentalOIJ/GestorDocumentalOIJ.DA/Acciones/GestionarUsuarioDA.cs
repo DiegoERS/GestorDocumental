@@ -163,25 +163,30 @@ namespace GestorDocumentalOIJ.DA.Acciones
             }).ToList();
         }
 
-        public async Task<IEnumerable<Usuario>> ObtenerUsuariosPorOficinaID(int oficinaID)
+        public async Task<bool> AsignarUsuarioAOficina(int usuarioID, int oficinaID)
         {
+            var usuarioIDParameter = new SqlParameter("@pN_UsuarioID", usuarioID);
             var oficinaIDParameter = new SqlParameter("@pN_OficinaID", oficinaID);
 
-            var usuarios = await _context.Usuarios
-                .FromSqlRaw("EXEC SC.PA_ListarUsuariosPorOficina @pN_OficinaID", oficinaIDParameter)
-                .ToListAsync();
+            int resultado = await _context.Database.ExecuteSqlRawAsync(
+                                                             "EXEC SC.PA_InsertarOficinaUsuario @pN_OficinaID, @pN_UsuarioID",
+                                                                  usuarioIDParameter,
+                                                                  oficinaIDParameter);
 
-            return usuarios.Select(u => new Usuario
-            {
-                Id = u.Id,
-                Nombre = u.Nombre,
-                Apellido = u.Apellido,
-                Correo = u.Correo,
-                Password = u.Password,
-                RolID = u.RolID,
-                Activo = u.Activo,
-                Eliminado = u.Eliminado
-            }).ToList();
+            return resultado > 0;
+        }
+
+        public async Task<bool> RemoverUsuarioAOficina(int usuarioID, int oficinaID)
+        {
+            var usuarioIDParameter = new SqlParameter("@pN_UsuarioID", usuarioID);
+            var oficinaIDParameter = new SqlParameter("@pN_OficinaID", oficinaID);
+
+            int resultado = await _context.Database.ExecuteSqlRawAsync(
+                                                                  "EXEC SC.PA_EliminarOficinaUsuario @pN_OficinaID, @pN_UsuarioID",
+                                                                        usuarioIDParameter,
+                                                                        oficinaIDParameter);
+
+            return resultado > 0;
         }
     }
 }

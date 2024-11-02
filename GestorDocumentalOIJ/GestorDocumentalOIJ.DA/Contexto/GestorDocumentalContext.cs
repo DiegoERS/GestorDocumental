@@ -43,15 +43,12 @@ namespace GestorDocumentalOIJ.DA.Contexto
 
         public DbSet<Entidades.OficinaGestorDA> OficinasGestores { get; set; }
 
-        public DbSet<Entidades.UsuarioOficinaDA> UsuariosOficinas { get; set; }
-
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Entidades.PermisoOficinaDA>().HasNoKey();
             modelBuilder.Entity<Entidades.PermisoRolDA>().HasNoKey();
             modelBuilder.Entity<Entidades.OficinaGestorDA>().HasNoKey();
-            modelBuilder.Entity<Entidades.UsuarioOficinaDA>().HasNoKey();
 
             // Si tienes otras configuraciones para otras entidades, colócalas aquí también
             base.OnModelCreating(modelBuilder);

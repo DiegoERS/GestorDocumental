@@ -25,13 +25,6 @@ namespace GestorDocumentalOIJ.Controllers
             return Ok(UsuarioDTOMapper.ConvertirListaDeUsuariosADTO(await _gestionarUsuarioBW.ObtenerUsuarios()));
         }
 
-        [HttpGet]
-        [Route("ObtenerUsuariosPorOficinaID/{oficinaID}")]
-        public async Task<ActionResult<IEnumerable<UsuarioDTO>>> ObtenerUsuariosPorOficinaID(int oficinaID)
-        {
-            return Ok(UsuarioDTOMapper.ConvertirListaDeUsuariosADTO(await _gestionarUsuarioBW.ObtenerUsuariosPorOficinaID(oficinaID)));
-        }
-
 
         [HttpGet("{id}")]
 
@@ -67,5 +60,17 @@ namespace GestorDocumentalOIJ.Controllers
             return Ok(await _gestionarUsuarioBW.Autenticar(Correo, Password));
         }
 
+
+        [HttpPost("AsignarUsuarioAOficina")]
+        public async Task<ActionResult<bool>> AsignarUsuarioAOficina(int usuarioID, int oficinaID)
+        {
+            return Ok(await _gestionarUsuarioBW.AsignarUsuarioAOficina(usuarioID, oficinaID));
+        }
+
+        [HttpPost("RemoverUsuarioAOficina")]
+        public async Task<ActionResult<bool>> RemoverUsuarioAOficina(int usuarioID, int oficinaID)
+        {
+            return Ok(await _gestionarUsuarioBW.RemoverUsuarioAOficina(usuarioID, oficinaID));
+        }
     }
 }

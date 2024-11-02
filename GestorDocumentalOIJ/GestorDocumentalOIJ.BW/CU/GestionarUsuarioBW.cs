@@ -18,10 +18,6 @@ namespace GestorDocumentalOIJ.BW.CU
             _gestionarUsuarioDA = gestionarUsuarioDA;
         }
 
-        public async Task<IEnumerable<Usuario>> ObtenerUsuariosPorOficinaID(int oficinaID)
-        {
-            return await _gestionarUsuarioDA.ObtenerUsuariosPorOficinaID(oficinaID);
-        }
         public async Task<bool> ActualizarUsuario(Usuario usuario)
         {
             return await _gestionarUsuarioDA.ActualizarUsuario(usuario);
@@ -52,6 +48,16 @@ namespace GestorDocumentalOIJ.BW.CU
         public async Task<IEnumerable<Usuario>> ObtenerUsuarios()
         {
             return await _gestionarUsuarioDA.ObtenerUsuarios();
+        }
+
+        public async Task<bool> AsignarUsuarioAOficina(int usuarioID, int oficinaID)
+        {
+            return await _gestionarUsuarioDA.AsignarUsuarioAOficina(usuarioID, oficinaID);
+        }
+
+        public async Task<bool> RemoverUsuarioAOficina(int usuarioID, int oficinaID)
+        {
+            return await _gestionarUsuarioDA.RemoverUsuarioAOficina(usuarioID, oficinaID);
         }
     }
 }
