@@ -1,4 +1,5 @@
 ﻿using GestorDocumentalOIJ.BC.Modelos;
+using GestorDocumentalOIJ.BC.ReglasDelNegocio;
 using GestorDocumentalOIJ.BW.Interfaces.BW;
 using GestorDocumentalOIJ.BW.Interfaces.DA;
 using System;
@@ -20,11 +21,20 @@ namespace GestorDocumentalOIJ.BW.CU
 
         public async Task<bool> ActualizarRol(Rol rol)
         {
+            (bool esValido, string mensaje) validacion = RolRN.ElRolEsValido(rol);
+
+            if (!validacion.esValido)
+                return false;
+
             return await _gestionarRolDA.ActualizarRol(rol);
         }
 
         public async Task<bool> CrearRol(Rol rol)
         {
+            (bool esValido, string mensaje) validacion = RolRN.ElRolEsValido(rol);
+            if (!validacion.esValido)
+                return false;
+
             return await _gestionarRolDA.CrearRol(rol);
         }
 

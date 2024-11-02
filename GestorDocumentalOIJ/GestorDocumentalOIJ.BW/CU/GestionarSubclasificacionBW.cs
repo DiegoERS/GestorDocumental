@@ -1,4 +1,5 @@
 ﻿using GestorDocumentalOIJ.BC.Modelos;
+using GestorDocumentalOIJ.BC.ReglasDelNegocio;
 using GestorDocumentalOIJ.BW.Interfaces.BW;
 using GestorDocumentalOIJ.BW.Interfaces.DA;
 using System;
@@ -20,11 +21,21 @@ namespace GestorDocumentalOIJ.BW.CU
 
         public async Task<bool> actualizarSubclasificacion(Subclasificacion subclasificacion)
         {
+            (bool esValido, string mensaje) validacion = SubclasificacionRN.LaSubclasificacionEsValida(subclasificacion);
+
+            if (!validacion.esValido)
+                return false;
+
             return await _gestionarSubclasificacionDA.actualizarSubclasificacion(subclasificacion);
         }
 
         public async Task<bool> crearSubclasificacion(Subclasificacion subclasificacion)
         {
+            (bool esValido, string mensaje) validacion = SubclasificacionRN.LaSubclasificacionEsValida(subclasificacion);
+
+            if (!validacion.esValido)
+                return false;
+
             return await _gestionarSubclasificacionDA.crearSubclasificacion(subclasificacion);
         }
 

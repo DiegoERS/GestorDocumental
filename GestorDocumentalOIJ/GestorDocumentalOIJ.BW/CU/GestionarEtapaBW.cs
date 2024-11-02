@@ -1,4 +1,5 @@
 ﻿using GestorDocumentalOIJ.BC.Modelos;
+using GestorDocumentalOIJ.BC.ReglasDelNegocio;
 using GestorDocumentalOIJ.BW.Interfaces.BW;
 using GestorDocumentalOIJ.BW.Interfaces.DA;
 using System;
@@ -19,11 +20,20 @@ namespace GestorDocumentalOIJ.BW.CU
 
         public async Task<bool> ActualizarEtapa(Etapa etapa)
         {
+            (bool esValido, string mensaje) validacion = EtapaRN.LaEtapaEsValida(etapa);
+
+            if (!validacion.esValido)
+                return false;
+
             return await gestionarEtapaDA.ActualizarEtapa(etapa);
         }
 
         public async Task<bool> CrearEtapa(Etapa etapa)
         {
+            (bool esValido, string mensaje) validacion = EtapaRN.LaEtapaEsValida(etapa);
+            if (!validacion.esValido)
+                return false;
+
             return await gestionarEtapaDA.CrearEtapa(etapa);
         }
 
