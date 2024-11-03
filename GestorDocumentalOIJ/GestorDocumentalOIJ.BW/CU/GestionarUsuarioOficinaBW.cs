@@ -19,6 +19,11 @@ namespace GestorDocumentalOIJ.BW.CU
             _gestionarUsuarioOficinaDA = gestionarUsuarioOficinaDA;
         }
 
+        public async Task<IEnumerable<UsuarioOficina>> ObtenerUsuariosOficinas()
+        {
+            return await _gestionarUsuarioOficinaDA.ObtenerUsuariosOficinas();
+        }
+
         public async Task<bool> AsignarUsuarioAOficina(UsuarioOficina usuarioOficina)
         {
             (bool esValido, string mensaje) validacion = UsuarioOficinaRN.ElUsuarioOficinaEsValido(usuarioOficina);

@@ -20,6 +20,19 @@ namespace GestorDocumentalOIJ.DA.Acciones
             _context = context;
         }
 
+        public async Task<IEnumerable<UsuarioOficina>> ObtenerUsuariosOficinas()
+        {
+            var usuariosOficinas = await _context.UsuariosOficinas
+                .FromSqlRaw("EXEC SC.PA_ListarOficinaUsuario")
+                .ToListAsync();
+
+            return usuariosOficinas.Select(uo => new UsuarioOficina
+            {
+                UsuarioID = uo.UsuarioID,
+                OficinaID = uo.OficinaID
+            }).ToList();
+        }
+
         public async Task<bool> AsignarUsuarioAOficina(UsuarioOficina usuarioOficina)
         {
             var usuarioIDParameter = new SqlParameter("@pN_UsuarioID", usuarioOficina.UsuarioID);
@@ -27,8 +40,8 @@ namespace GestorDocumentalOIJ.DA.Acciones
 
             int resultado = await _context.Database.ExecuteSqlRawAsync(
                                                              "EXEC SC.PA_InsertarOficinaUsuario @pN_OficinaID, @pN_UsuarioID",
-                                                                  usuarioIDParameter,
-                                                                  oficinaIDParameter);
+                                                                  oficinaIDParameter,
+                                                                  usuarioIDParameter);
 
             return resultado > 0;
         }
@@ -40,8 +53,8 @@ namespace GestorDocumentalOIJ.DA.Acciones
 
             int resultado = await _context.Database.ExecuteSqlRawAsync(
                                                                   "EXEC SC.PA_EliminarOficinaUsuario @pN_OficinaID, @pN_UsuarioID",
-                                                                        usuarioIDParameter,
-                                                                        oficinaIDParameter);
+                                                                        oficinaIDParameter,
+                                                                        usuarioIDParameter);
 
             return resultado > 0;
         }

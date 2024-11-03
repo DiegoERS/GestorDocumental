@@ -20,6 +20,17 @@ namespace GestorDocumentalOIJ.DA.Acciones
             _context = context;
         }
 
+        public async Task<IEnumerable<NormaUsuario>> ObtenerNormasUsuarios()
+        {
+            var normasUsuarios = await _context.NormasUsuarios
+                .FromSqlRaw("EXEC GD.PA_ListarNormaUsuario")
+                .ToListAsync();
+            return normasUsuarios.Select(nu => new NormaUsuario
+            {
+                NormaID = nu.NormaID,
+                UsuarioID = nu.UsuarioID
+            }).ToList();
+        }
 
         public async Task<bool> AsignarNormaUsuario(NormaUsuario normaUsuario)
         {

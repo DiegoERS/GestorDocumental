@@ -19,6 +19,10 @@ namespace GestorDocumentalOIJ.BW.CU
             _gestionarNormaUsuarioDA = gestionarNormaUsuarioDA;
         }
 
+        public async Task<IEnumerable<NormaUsuario>> ObtenerNormasUsuarios()
+        {
+            return await _gestionarNormaUsuarioDA.ObtenerNormasUsuarios();
+        }
         public async Task<bool> AsignarNormaUsuario(NormaUsuario normaUsuario)
         {
             (bool esValido, string mensaje) validacion = NormaUsuarioRN.LaNormaUsuarioEsValida(normaUsuario);

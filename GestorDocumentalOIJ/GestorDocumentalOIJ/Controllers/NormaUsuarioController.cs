@@ -17,6 +17,12 @@ namespace GestorDocumentalOIJ.Controllers
             _gestionarNormaUsuarioBW = gestionarNormaUsuarioBW;
         }
 
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<NormaUsuarioDTO>>> ObtenerNormasUsuarios()
+        {
+            return Ok(NormaUsuarioDTOMapper.ConvertirListaDeNormasUsuariosADTO(await _gestionarNormaUsuarioBW.ObtenerNormasUsuarios()));
+        }
+
         [HttpPost("AsignarNormaUsuario")]
         public async Task<ActionResult<bool>> AsignarNormaUsuario(NormaUsuarioDTO normaUsuarioDTO)
         {

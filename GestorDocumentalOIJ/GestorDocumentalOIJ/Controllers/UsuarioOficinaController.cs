@@ -18,6 +18,11 @@ namespace GestorDocumentalOIJ.Controllers
             _gestionarUsuarioOficinaBW = gestionarUsuarioOficinaBW;
         }
 
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<UsuarioOficinaDTO>>> ObtenerUsuariosOficinas()
+        {
+            return Ok(UsuarioOficinaDTOMapper.ConvertirListaDeUsuariosOficinasADTO(await _gestionarUsuarioOficinaBW.ObtenerUsuariosOficinas()));
+        }
 
         [HttpPost("AsignarUsuarioAOficina")]
         public async Task<ActionResult<bool>> AsignarUsuarioAOficina(UsuarioOficinaDTO usuarioOficinaDTO)
