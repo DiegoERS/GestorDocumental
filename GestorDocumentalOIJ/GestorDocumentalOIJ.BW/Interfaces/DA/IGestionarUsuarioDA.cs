@@ -21,6 +21,6 @@ namespace GestorDocumentalOIJ.BW.Interfaces.DA
 
         Task<IEnumerable<Usuario>> ObtenerUsuariosPorOficinaID(int oficinaID);
 
-        Task<bool> Autenticar(string correo, string password);
+        Task<Usuario> Autenticar(string correo, string password);
     }
 }

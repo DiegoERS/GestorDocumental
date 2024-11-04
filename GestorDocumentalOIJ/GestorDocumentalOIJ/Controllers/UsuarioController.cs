@@ -62,9 +62,9 @@ namespace GestorDocumentalOIJ.Controllers
 
         [HttpPost("autenticar")]
 
-        public async Task<ActionResult<bool>> Autenticar(string Correo, string Password)
+        public async Task<ActionResult<UsuarioDTO>> Autenticar(string Correo, string Password)
         {
-            return Ok(await _gestionarUsuarioBW.Autenticar(Correo, Password));
+            return Ok(UsuarioDTOMapper.ConvertirUsuarioADTO(await _gestionarUsuarioBW.Autenticar(Correo, Password)));
         }
 
     }

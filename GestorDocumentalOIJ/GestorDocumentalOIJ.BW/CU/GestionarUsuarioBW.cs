@@ -33,7 +33,7 @@ namespace GestorDocumentalOIJ.BW.CU
             return await _gestionarUsuarioDA.ActualizarUsuario(usuario);
         }
 
-        public async Task<bool> Autenticar(string correo, string password)
+        public async Task<Usuario> Autenticar(string correo, string password)
         {
             return await _gestionarUsuarioDA.Autenticar(correo, password);
         }

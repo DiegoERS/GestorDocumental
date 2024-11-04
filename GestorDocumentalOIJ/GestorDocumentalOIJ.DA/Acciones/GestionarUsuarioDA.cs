@@ -45,38 +45,58 @@ namespace GestorDocumentalOIJ.DA.Acciones
             return resultado > 0;
         }
 
-        public async Task<bool> Autenticar(string correo, string password)  // cambiar a un sp normal para controlar devoluciones
+        public async Task<Usuario> Autenticar(string correo, string password)  // cambiar a un sp normal para controlar devoluciones
         {
-            // Obtener la cadena de conexión desde el DbContext
-            var connectionString = _context.Database.GetDbConnection().ConnectionString;
-
-            using (var connection = new SqlConnection(connectionString))
+            try
             {
-                await connection.OpenAsync();
-
-                using (var command = new SqlCommand("SC.PA_ValidarLoginUsuario", connection))
+                // Obtener la conexión de Entity Framework
+                using (var connection = _context.Database.GetDbConnection())
                 {
-                    command.CommandType = CommandType.StoredProcedure;
+                    await connection.OpenAsync();
 
-                    // Agregar parámetros de entrada
-                    command.Parameters.AddWithValue("@pC_Correo", correo);
-                    command.Parameters.AddWithValue("@pC_Password", password);
+                    // Crear el comando SQL para ejecutar el procedimiento almacenado
+                    using (var command = connection.CreateCommand())
+                    {
+                        command.CommandText = "SC.PA_ValidarLoginUsuario";
+                        command.CommandType = CommandType.StoredProcedure;
 
-                    // Configurar el parámetro de retorno
-                    var returnParameter = command.Parameters.Add("@ReturnVal", SqlDbType.Int);
-                    returnParameter.Direction = ParameterDirection.ReturnValue;
+                        // Añadir parámetros
+                        var correoParameter = new SqlParameter("@pC_Correo", SqlDbType.NVarChar, 255) { Value = correo };
+                        var passwordParameter = new SqlParameter("@pC_Password", SqlDbType.NVarChar, 255) { Value = password };
+                        command.Parameters.Add(correoParameter);
+                        command.Parameters.Add(passwordParameter);
 
-                    // Ejecutar el procedimiento almacenado
-                    await command.ExecuteNonQueryAsync();
-
-                    // Obtener el valor de retorno
-                    int result = (int)returnParameter.Value;
-
-                    // Retornar verdadero si el resultado es 0 (usuario válido), falso en caso contrario
-                    return result == 0;
+                        // Ejecutar el procedimiento y leer los resultados
+                        using (var reader = await command.ExecuteReaderAsync())
+                        {
+                            if (await reader.ReadAsync())
+                            {
+                                // Mapear los datos si se encontró un usuario
+                                var usuario = new Usuario
+                                {
+                                    Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                                    Nombre = reader.GetString(reader.GetOrdinal("Nombre")),
+                                    Apellido = reader.GetString(reader.GetOrdinal("Apellido")),
+                                    Correo = reader.GetString(reader.GetOrdinal("Correo")),
+                                    Password = reader.GetString(reader.GetOrdinal("Password")),
+                                    RolID = reader.GetInt32(reader.GetOrdinal("RolID")),
+                                    Activo = reader.GetBoolean(reader.GetOrdinal("Activo")),
+                                    Eliminado = reader.GetBoolean(reader.GetOrdinal("Eliminado"))
+                                };
+                                return usuario;
+                            }
+                        }
+                    }
                 }
             }
+            catch (SqlException ex)
+            {
+                // Manejar cualquier excepción de SQL
+                return null;
+            }
 
+            // Retornar null si no se encontró usuario o en caso de error
+            return null;
         }
 
         public async Task<bool> CrearUsuario(Usuario usuario)
