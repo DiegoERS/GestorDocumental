@@ -1,4 +1,5 @@
 ﻿using GestorDocumentalOIJ.BC.Modelos;
+using GestorDocumentalOIJ.BC.ReglasDelNegocio;
 using GestorDocumentalOIJ.BW.Interfaces.BW;
 using GestorDocumentalOIJ.BW.Interfaces.DA;
 using System;
@@ -20,11 +21,21 @@ namespace GestorDocumentalOIJ.BW.CU
 
         public async Task<bool> ActualizarPermiso(Permiso permiso)
         {
+            (bool esValido, string mensaje) validacion = PermisoRN.ElPermisoEsValido(permiso);
+
+            if (!validacion.esValido)
+                return false;
+
             return await _gestionarPermisoDA.ActualizarPermiso(permiso);
         }
 
         public async Task<bool> CrearPermiso(Permiso permiso)
         {
+            (bool esValido, string mensaje) validacion = PermisoRN.ElPermisoEsValido(permiso);
+
+            if (!validacion.esValido)
+                return false;
+
             return await _gestionarPermisoDA.CrearPermiso(permiso);
         }
 

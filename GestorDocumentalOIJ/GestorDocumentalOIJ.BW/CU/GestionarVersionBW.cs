@@ -1,4 +1,5 @@
 ﻿using GestorDocumentalOIJ.BC.Modelos;
+using GestorDocumentalOIJ.BC.ReglasDelNegocio;
 using GestorDocumentalOIJ.BW.Interfaces.BW;
 using GestorDocumentalOIJ.BW.Interfaces.DA;
 using System;
@@ -20,11 +21,20 @@ namespace GestorDocumentalOIJ.BW.CU
 
         public async Task<bool> ActualizarVersion(BC.Modelos.Version version)
         {
+            (bool esValido, string mensaje) validacion = VersionRN.LaVersionEsValida(version);
+
+            if (!validacion.esValido)
+                return false;
+
             return await _gestionarVersionDA.ActualizarVersion(version);
         }
 
         public async Task<bool> CrearVersion(BC.Modelos.Version version)
         {
+            (bool esValido, string mensaje) validacion = VersionRN.LaVersionEsValida(version);
+            if (!validacion.esValido)
+                return false;
+
             return await _gestionarVersionDA.CrearVersion(version);
         }
 

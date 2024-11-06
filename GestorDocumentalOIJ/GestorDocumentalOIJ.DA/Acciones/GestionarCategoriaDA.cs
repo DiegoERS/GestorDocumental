@@ -73,6 +73,8 @@ namespace GestorDocumentalOIJ.DA.Acciones
                                                                         usuarioIDParametro,
                                                                         oficinaIDParametro);
 
+            Console.WriteLine("resultado de columnas afectadas "+resultado);
+
             return resultado > 0;
 
         }

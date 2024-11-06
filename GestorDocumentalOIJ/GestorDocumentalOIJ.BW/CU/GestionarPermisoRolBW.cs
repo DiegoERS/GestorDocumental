@@ -1,4 +1,5 @@
 ﻿using GestorDocumentalOIJ.BC.Modelos;
+using GestorDocumentalOIJ.BC.ReglasDelNegocio;
 using GestorDocumentalOIJ.BW.Interfaces.BW;
 using GestorDocumentalOIJ.BW.Interfaces.DA;
 using System;
@@ -25,11 +26,21 @@ namespace GestorDocumentalOIJ.BW.CU
 
         public async Task<bool> AsignarPermisoARol(PermisoRol permisoRol)
         {
+            (bool esValido, string mensaje) validacion = PermisoRolRN.ElPermisoRolEsValido(permisoRol);
+
+            if (!validacion.esValido)
+                return false;
+
             return await _gestionarPermisoRolDA.AsignarPermisoARol(permisoRol);
         }
 
         public async Task<bool> RemoverPermisoARol(PermisoRol permisoRol)
         {
+            (bool esValido, string mensaje) validacion = PermisoRolRN.ElPermisoRolEsValido(permisoRol);
+
+            if (!validacion.esValido)
+                return false;
+
             return await _gestionarPermisoRolDA.RemoverPermisoARol(permisoRol);
         }
     }

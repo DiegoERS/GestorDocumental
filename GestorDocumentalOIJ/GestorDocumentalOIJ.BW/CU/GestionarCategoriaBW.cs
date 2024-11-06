@@ -1,4 +1,5 @@
 ﻿using GestorDocumentalOIJ.BC.Modelos;
+using GestorDocumentalOIJ.BC.ReglasDelNegocio;
 using GestorDocumentalOIJ.BW.Interfaces.BW;
 using GestorDocumentalOIJ.BW.Interfaces.DA;
 using System;
@@ -20,11 +21,19 @@ namespace GestorDocumentalOIJ.BW.CU
 
         public async Task<bool> ActualizarCategoria(Categoria categoria)
         {
+            (bool esValido, string mensaje) validacion = CategoriaRN.LaCategoriaEsValida(categoria);
+            if (!validacion.esValido)
+                return false;
+
             return await _gestionarCategoriaDA.ActualizarCategoria(categoria);
         }
 
         public async Task<bool> CrearCategoria(Categoria categoria)
         {
+            (bool esValido, string mensaje) validacion = CategoriaRN.LaCategoriaEsValida(categoria);
+            if (!validacion.esValido)
+                return false;
+
             return await _gestionarCategoriaDA.CrearCategoria(categoria);
         }
 

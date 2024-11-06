@@ -1,4 +1,5 @@
 ﻿using GestorDocumentalOIJ.BC.Modelos;
+using GestorDocumentalOIJ.BC.ReglasDelNegocio;
 using GestorDocumentalOIJ.BW.Interfaces.BW;
 using GestorDocumentalOIJ.BW.Interfaces.DA;
 using System;
@@ -24,12 +25,24 @@ namespace GestorDocumentalOIJ.BW.CU
         }
         public async Task<bool> AsignarOficinaAGestor(OficinaGestor oficinaGestor)
         {
+            (bool esValido, string mensaje) validacion = OficinaGestorRN.LaOficinaGestorEsValida(oficinaGestor);
+
+
+            if (!validacion.esValido)
+                return false;
+
             return await _gestionarOficinaGestorDA.AsignarOficinaAGestor(oficinaGestor);
         }
 
 
         public async Task<bool> RemoverOficinaAGestor(OficinaGestor oficinaGestor)
         {
+            (bool esValido, string mensaje) validacion = OficinaGestorRN.LaOficinaGestorEsValida(oficinaGestor);
+
+
+            if (!validacion.esValido)
+                return false;
+
             return await _gestionarOficinaGestorDA.RemoverOficinaAGestor(oficinaGestor);
         }
     }

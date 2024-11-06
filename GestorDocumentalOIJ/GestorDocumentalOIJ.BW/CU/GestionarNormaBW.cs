@@ -1,4 +1,5 @@
 ﻿using GestorDocumentalOIJ.BC.Modelos;
+using GestorDocumentalOIJ.BC.ReglasDelNegocio;
 using GestorDocumentalOIJ.BW.Interfaces.BW;
 using GestorDocumentalOIJ.BW.Interfaces.DA;
 using System;
@@ -20,11 +21,20 @@ namespace GestorDocumentalOIJ.BW.CU
 
         public async Task<bool> ActualizarNorma(Norma norma)
         {
+            (bool esValido, string mensaje) validacion = NormaRN.LaNormaEsValida(norma);
+
+            if (!validacion.esValido)
+                return false;
+
             return await _gestionarNormaDA.ActualizarNorma(norma);
         }
 
         public async Task<bool> CrearNorma(Norma norma)
         {
+            (bool esValido, string mensaje) validacion = NormaRN.LaNormaEsValida(norma);
+            if (!validacion.esValido)
+                return false;
+
             return await _gestionarNormaDA.CrearNorma(norma);
         }
 

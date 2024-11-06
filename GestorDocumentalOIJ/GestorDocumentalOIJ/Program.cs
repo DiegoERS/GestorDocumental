@@ -3,7 +3,11 @@ using GestorDocumentalOIJ.BW.Interfaces.BW;
 using GestorDocumentalOIJ.BW.Interfaces.DA;
 using GestorDocumentalOIJ.DA.Acciones;
 using GestorDocumentalOIJ.DA.Contexto;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +17,28 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+//builder.Services.AddAuthentication(options =>
+//{
+//    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+//    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+//    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+//}).AddJwtBearer(options =>
+//{
+//    options.TokenValidationParameters = new TokenValidationParameters
+//    {
+//        ValidateIssuer = false,
+//        ValidateAudience = false,
+//        ValidateLifetime = true,
+//        ValidateIssuerSigningKey = true,
+//        ValidIssuer = builder.Configuration["JwtSettings:Issuer"],
+//        ValidAudience = builder.Configuration["JwtSettings:Audience"],
+//        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:Secret"]))
+//    };
+//    options.RequireHttpsMetadata = false;
+//    options.SaveToken = true;
+//});
+
 
 //Inyeccion de dependencias
 builder.Services.AddTransient<IGestionarCategoriaBW, GestionarCategoriaBW>();
@@ -63,11 +89,11 @@ builder.Services.AddTransient<IGestionarPermisoOficinaDA, GestionarPermisoOficin
 builder.Services.AddTransient<IGestionarOficinaGestorDA, GestionarOficinaGestorDA>();
 builder.Services.AddTransient<IGestionarOficinaGestorBW, GestionarOficinaGestorBW>();
 
-builder.Services.AddTransient<IGestionarOficinaGestorDA, GestionarOficinaGestorDA>();
-builder.Services.AddTransient<IGestionarOficinaGestorBW, GestionarOficinaGestorBW>();
-
 builder.Services.AddTransient<IGestionarNormaUsuarioBW, GestionarNormaUsuarioBW>();
 builder.Services.AddTransient<IGestionarNormaUsuarioDA, GestionarNormaUsuarioDA>();
+
+builder.Services.AddTransient<IGestionarUsuarioOficinaBW, GestionarUsuarioOficinaBW>();
+builder.Services.AddTransient<IGestionarUsuarioOficinaDA, GestionarUsuarioOficinaDA>();
 
 
 
@@ -97,6 +123,7 @@ app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
+//app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

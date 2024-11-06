@@ -20,6 +20,6 @@ namespace GestorDocumentalOIJ.BW.Interfaces.BW
 
         Task<bool> EliminarUsuario(int idUsuario);
 
-        Task<bool> Autenticar(string correo, string password);
+        Task<Usuario> Autenticar(string correo, string password);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using GestorDocumentalOIJ.BC.Modelos;
+using GestorDocumentalOIJ.BC.ReglasDelNegocio;
 using GestorDocumentalOIJ.BW.Interfaces.BW;
 using GestorDocumentalOIJ.BW.Interfaces.DA;
 using System;
@@ -20,11 +21,20 @@ namespace GestorDocumentalOIJ.BW.CU
 
         public async Task<bool> ActualizarOficina(Oficina oficina)
         {
+            (bool esValido, string mensaje) validacion = OficinaRN.LaOficinaEsValida(oficina);
+
+            if (!validacion.esValido)
+                return false;
+
             return await _gestionarOficinaDA.ActualizarOficina(oficina);
         }
 
         public async Task<bool> CrearOficina(Oficina oficina)
         {
+            (bool esValido, string mensaje) validacion = OficinaRN.LaOficinaEsValida(oficina);
+            if (!validacion.esValido)
+                return false;
+
             return await _gestionarOficinaDA.CrearOficina(oficina);
         }
 

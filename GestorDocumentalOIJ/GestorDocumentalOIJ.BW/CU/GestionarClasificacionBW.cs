@@ -1,4 +1,5 @@
 ﻿using GestorDocumentalOIJ.BC.Modelos;
+using GestorDocumentalOIJ.BC.ReglasDelNegocio;
 using GestorDocumentalOIJ.BW.Interfaces.BW;
 using GestorDocumentalOIJ.BW.Interfaces.DA;
 using System;
@@ -20,11 +21,19 @@ namespace GestorDocumentalOIJ.BW.CU
 
         public async Task<bool> ActualizarClasificacion(Clasificacion clasificacion)
         {
+            (bool esValido, string mensaje) validacion = ClasificacionRN.LaClasificacionEsValida(clasificacion);
+            if (!validacion.esValido)
+                return false;
+
             return await _gestionarClasificacionDA.ActualizarClasificacion(clasificacion);
         }
 
         public async Task<bool> CrearClasificacion(Clasificacion clasificacion)
         {
+            (bool esValido, string mensaje) validacion = ClasificacionRN.LaClasificacionEsValida(clasificacion);
+            if (!validacion.esValido)
+                return false;
+
             return await _gestionarClasificacionDA.CrearClasificacion(clasificacion);
         }
 

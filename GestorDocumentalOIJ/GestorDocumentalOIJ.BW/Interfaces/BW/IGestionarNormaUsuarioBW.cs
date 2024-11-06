@@ -9,6 +9,7 @@ namespace GestorDocumentalOIJ.BW.Interfaces.BW
 {
     public interface IGestionarNormaUsuarioBW
     {
+        Task<IEnumerable<NormaUsuario>> ObtenerNormasUsuarios();
         Task<bool> AsignarNormaUsuario(NormaUsuario normaUsuario);
         Task<bool> EliminarNormaUsuario(NormaUsuario normaUsuario);
 

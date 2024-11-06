@@ -9,6 +9,7 @@ namespace GestorDocumentalOIJ.BW.Interfaces.DA
 {
     public interface IGestionarUsuarioOficinaDA
     {
+        Task<IEnumerable<UsuarioOficina>> ObtenerUsuariosOficinas();
         Task<bool> AsignarUsuarioAOficina(UsuarioOficina usuarioOficina);
 
         Task<bool> RemoverUsuarioAOficina(UsuarioOficina usuarioOficina);

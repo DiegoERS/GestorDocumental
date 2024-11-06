@@ -1,4 +1,5 @@
 ﻿using GestorDocumentalOIJ.BC.Modelos;
+using GestorDocumentalOIJ.BC.ReglasDelNegocio;
 using GestorDocumentalOIJ.BW.Interfaces.BW;
 using GestorDocumentalOIJ.BW.Interfaces.DA;
 using System;
@@ -20,11 +21,19 @@ namespace GestorDocumentalOIJ.BW.CU
 
         public async Task<bool> ActualizarDocumento(Documento documento)
         {
+            (bool esValido, string mensaje) validacion = DocumentoRN.ElDocumentoEsValido(documento);
+            if (!validacion.esValido)
+                return false;
+
             return await _gestionarDocumentoDA.ActualizarDocumento(documento);
         }
 
         public async Task<bool> CrearDocumento(Documento documento)
         {
+            (bool esValido, string mensaje) validacion = DocumentoRN.ElDocumentoEsValido(documento);
+            if (!validacion.esValido)
+                return false;
+
             return await _gestionarDocumentoDA.CrearDocumento(documento);
         }
 
