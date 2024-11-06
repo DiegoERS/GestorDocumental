@@ -2,6 +2,7 @@
 using GestorDocumentalOIJ.BW.Interfaces.BW;
 using GestorDocumentalOIJ.DTOs;
 using GestorDocumentalOIJ.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
