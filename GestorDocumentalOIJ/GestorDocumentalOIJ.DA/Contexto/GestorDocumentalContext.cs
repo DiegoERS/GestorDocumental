@@ -68,6 +68,7 @@ namespace GestorDocumentalOIJ.DA.Contexto
             modelBuilder.Entity<Entidades.ReporteDocumentosAntiguosDA>().HasNoKey();
             modelBuilder.Entity<Entidades.ReporteMaestroDocumentoPorNormaDA>().HasNoKey();
             modelBuilder.Entity<Entidades.ReporteBitacoraDeMovimientoDA>().HasNoKey();
+            modelBuilder.Entity<Entidades.ReporteMaestroDocumentosDA>().HasNoKey();
 
 
             // Si tienes otras configuraciones para otras entidades, colócalas aquí también

@@ -46,7 +46,7 @@ namespace GestorDocumentalOIJ.DA.Acciones
                 NombreDocumento = c.NombreDocumento,
                 Acceso = c.Acceso,
                 CodigoDocumento = c.CodigoDocumento,
-                Fecha = c.Fecha,
+                Fecha = c.Fecha.ToString(),
                 Movimiento = c.Movimiento,
                 Usuario = c.Usuario,
                 Version = c.Version
@@ -69,7 +69,7 @@ namespace GestorDocumentalOIJ.DA.Acciones
             {
                 TipoDocumento = c.TipoDocumento,
                 CodigoDocumento = c.CodigoDocumento,
-                Fecha = c.Fecha,
+                Fecha = c.Fecha.ToString(),
                 NombreDocumento = c.NombreDocumento,
                 ResumenDelCambio = c.ResumenDelCambio,
                 SCD = c.SCD,
@@ -99,7 +99,7 @@ namespace GestorDocumentalOIJ.DA.Acciones
             {
                 Acceso = c.Acceso, 
                 CodigoDocumento = c.CodigoDocumento,
-                Fecha = c.Fecha,
+                Fecha = c.Fecha.ToString(),
                 NombreDocumento = c.NombreDocumento,
                 OficinaResponsable = c.OficinaResponsable,
                 Version = c.Version
@@ -121,7 +121,7 @@ namespace GestorDocumentalOIJ.DA.Acciones
                 .ToListAsync();
             return documentosReporteDocumentosAntiguos.Select(c => new ReporteDocumentosAntiguos
             {
-                Fecha = c.Fecha,
+                Fecha = c.Fecha.ToString(),
                 Version = c.Version,
                 OficinaResponsable = c.OficinaResponsable,
                 NombreDocumento = c.NombreDocumento,
@@ -152,7 +152,7 @@ namespace GestorDocumentalOIJ.DA.Acciones
                 CodigoDocumento = c.CodigoDocumento,
                 NombreDocumento = c.NombreDocumento,
                 Version = c.Version,
-                Fecha = c.Fecha,
+                Fecha = c.Fecha.ToString(),
                 NombreNorma = c.NombreNorma,
                 ResumenDelCambio = c.ResumenDelCambio,
                 SCD = c.SCD
@@ -174,7 +174,7 @@ namespace GestorDocumentalOIJ.DA.Acciones
                 SCD = c.SCD,
                 ResumenDelCambio= c.ResumenDelCambio,
                 NombreDocumento = c.NombreDocumento,
-                Fecha = c.Fecha,
+                Fecha = c.Fecha.ToString(),
                 CodigoDocumento = c.CodigoDocumento,
                 Estado = c.Estado,
                 TipoDocumento = c.TipoDocumento,
@@ -200,7 +200,7 @@ namespace GestorDocumentalOIJ.DA.Acciones
             {
                 Acceso = c.Acceso,
                 CodigoDocumento = c.CodigoDocumento,
-                Fecha = c.Fecha,
+                Fecha = c.Fecha.ToString(),
                 NombreDocumento = c.NombreDocumento,
                 OficinaResponsable = c.OficinaResponsable,
                 Version = c.Version

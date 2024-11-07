@@ -12,7 +12,7 @@ namespace GestorDocumentalOIJ.DA.Entidades
         public string NombreDocumento { get; set; } = string.Empty; 
         public string Acceso { get; set; } = string.Empty;
         public int Version { get; set; }
-        public string Fecha { get; set; } = string.Empty;
+        public DateTime Fecha { get; set; }
         public string OficinaResponsable { get; set; } = string.Empty;
     }
 }
