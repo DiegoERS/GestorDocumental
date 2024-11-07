@@ -12,5 +12,6 @@ namespace GestorDocumentalOIJ.BC.Modelos
         public string TipoDocumento { get; set; } = string.Empty;
         public string FechaInicio { get; set; } = string.Empty;
         public string FechaFin { get; set; } = string.Empty;
+
     }
 }

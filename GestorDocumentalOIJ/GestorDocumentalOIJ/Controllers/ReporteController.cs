@@ -1,5 +1,6 @@
 ﻿using GestorDocumentalOIJ.BW.CU;
 using GestorDocumentalOIJ.BW.Interfaces.BW;
+using GestorDocumentalOIJ.DA.Entidades;
 using GestorDocumentalOIJ.DTOs;
 using GestorDocumentalOIJ.Utility;
 using Microsoft.AspNetCore.Mvc;
@@ -19,42 +20,42 @@ namespace GestorDocumentalOIJ.Controllers
 
         [HttpGet]
         [Route("ReporteBitacoraDeMovimiento")]
-        public async Task<ActionResult<IEnumerable<UsuarioDTO>>> ReporteBitacoraDeMovimiento(int oficinaID)
+        public async Task<ActionResult<IEnumerable<ReporteBitacoraDeMovimientoDTO>>> ReporteBitacoraDeMovimiento(ConsultaReporteBitacoraDeMovimientoDTO consultaReporteBitacoraDeMovimientoDTO)
         {
-            return null;
+            return Ok(ReporteBitacoraDeMovimientoDTOMapper.ConvertirListaDeReporteBitacoraDeMovimientoADTO(await _gestionarReporteBW.ObtenerReporteBitacoraDeMovimiento(ConsultaReporteBitacoraDeMovimientoDTOMapper.ConvertirDTOAConsultaReporteBitacoraDeMovimiento(consultaReporteBitacoraDeMovimientoDTO))));
         }
         
         [HttpGet]
         [Route("ReporteControlDeVersiones")]
-        public async Task<ActionResult<IEnumerable<UsuarioDTO>>> ReporteControlDeVersiones(int oficinaID)
+        public async Task<ActionResult<IEnumerable<ReporteControlDeVersionesDTO>>> ReporteControlDeVersiones(ConsultaReporteControlDeVersionesDTO consultaReporteControlDeVersionesDTO)
         {
             return null;
         }
         
         [HttpGet]
         [Route("ReporteDocumentosAntiguos")]
-        public async Task<ActionResult<IEnumerable<UsuarioDTO>>> ReporteDocumentosAntiguos(int oficinaID)
+        public async Task<ActionResult<IEnumerable<ReporteDocumentosAntiguosDTO>>> ReporteDocumentosAntiguos(ConsultaReporteDocumentosAntiguosDTO consultaReporteDocumentosAntiguosDTO)
         {
             return null;
         }
         
         [HttpGet]
         [Route("ReporteMaestroDocumentoPorNorma")]
-        public async Task<ActionResult<IEnumerable<UsuarioDTO>>> ReporteMaestroDocumentoPorNorma(int oficinaID)
+        public async Task<ActionResult<IEnumerable<ReporteMaestroDocumentoPorNormaDTO>>> ReporteMaestroDocumentoPorNorma(ConsultaReporteMaestroDocumentoPorNormaDTO consultaReporteMaestroDocumentoPorNormaDTO)
         {
             return null;
         }
 
         [HttpGet]
         [Route("ReporteMaestroDocumentos")]
-        public async Task<ActionResult<IEnumerable<UsuarioDTO>>> ReporteMaestroDocumentos(int oficinaID)
+        public async Task<ActionResult<IEnumerable<_ReporteMaestroDocumentosDTO>>> ReporteMaestroDocumentos(ConsultaReporteMaestroDocumentosDTO consultaReporteMaestroDocumentosDTO)
         {
             return null;
         }
 
         [HttpGet]
         [Route("ReporteDescargaDeDocumentos")]
-        public async Task<ActionResult<IEnumerable<UsuarioDTO>>> ReporteDescargaDeDocumentos(int oficinaID)
+        public async Task<ActionResult<IEnumerable<ReporteDescargaDeDocumentosDTO>>> ReporteDescargaDeDocumentos(ConsultaReporteDescargaDeDocumentosDTO consultaReporteDescargaDeDocumentosDTO)
         {
             return null;
         }
@@ -62,10 +63,9 @@ namespace GestorDocumentalOIJ.Controllers
 
         [HttpGet]
         [Route("ReportesDocSinMovimiento")]
-        public async Task<ActionResult<IEnumerable<ReportesDocSinMovimientoDTO>>> ReportesDocSinMovimiento(ConsultaReportesDocSinMovimientoDTO consultaReportesDocSinMovimientoDTO)
+        public async Task<ActionResult<IEnumerable<ReportesDocSinMovimientoDTO>>> ReportesDocSinMovimiento(ConsultaReporteDocSinMovimientoDTO consultaReportesDocSinMovimientoDTO)
         {
             return Ok(ReporteDocSinMovimientoDTOMapper.ConvertirListaDeReportesDocSinMovimientosADTO(await _gestionarReporteBW.ObtenerReportesDocSinMovimiento(ConsultaReporteDocSinMovimientoDTOMapper.ConvertirDTOAConsultaReportesDocSinMovimiento(consultaReportesDocSinMovimientoDTO))));
-
         }
     }
 }

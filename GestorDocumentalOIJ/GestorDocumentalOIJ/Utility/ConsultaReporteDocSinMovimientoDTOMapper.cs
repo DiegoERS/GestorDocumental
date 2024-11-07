@@ -5,9 +5,9 @@ namespace GestorDocumentalOIJ.Utility
 {
     public class ConsultaReporteDocSinMovimientoDTOMapper
     {
-        public static ConsultaReportesDocSinMovimientoDTO ConvertirConsultaReportesDocSinMovimientoADTO(ConsultaReportesDocSinMovimiento consultaReportesDocSin)
+        public static ConsultaReporteDocSinMovimientoDTO ConvertirConsultaReportesDocSinMovimientoADTO(ConsultaReportesDocSinMovimiento consultaReportesDocSin)
         {
-            return new ConsultaReportesDocSinMovimientoDTO()
+            return new ConsultaReporteDocSinMovimientoDTO()
             {
                 FechaFin = consultaReportesDocSin.FechaFin,
                 FechaInicio = consultaReportesDocSin.FechaInicio,
@@ -16,7 +16,7 @@ namespace GestorDocumentalOIJ.Utility
             };
         }
 
-        public static ConsultaReportesDocSinMovimiento ConvertirDTOAConsultaReportesDocSinMovimiento(ConsultaReportesDocSinMovimientoDTO consultaReportesDocSinMovimientoDTO)
+        public static ConsultaReportesDocSinMovimiento ConvertirDTOAConsultaReportesDocSinMovimiento(ConsultaReporteDocSinMovimientoDTO consultaReportesDocSinMovimientoDTO)
         {
             return new ConsultaReportesDocSinMovimiento()
             {

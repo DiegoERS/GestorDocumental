@@ -1,6 +1,6 @@
 ﻿namespace GestorDocumentalOIJ.DTOs
 {
-    public class ConsultaReportesDocSinMovimientoDTO
+    public class ConsultaReporteDocSinMovimientoDTO
     {
         public int OficinaID { get; set; }
         public string TipoDocumento { get; set; } = string.Empty;
