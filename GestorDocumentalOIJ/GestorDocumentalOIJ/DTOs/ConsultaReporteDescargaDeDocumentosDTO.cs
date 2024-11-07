@@ -8,5 +8,11 @@ namespace GestorDocumentalOIJ.DA.Entidades
 {
     public class ConsultaReporteDescargaDeDocumentosDTO
     {
+        public int Oficina { get; set; }
+        public int Usuario { get; set; }
+        public string CodigoDocumento { get; set; } = string.Empty;
+        public string NombreDocumento { get; set; } = string.Empty;
+        public string FechaInicio { get; set; } = string.Empty;
+        public string FechaFinal { get; set; } = string.Empty;
     }
 }

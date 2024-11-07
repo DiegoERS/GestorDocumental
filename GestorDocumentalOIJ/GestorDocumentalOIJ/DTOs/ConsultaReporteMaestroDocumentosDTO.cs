@@ -8,5 +8,7 @@ namespace GestorDocumentalOIJ.DA.Entidades
 {
     public class ConsultaReporteMaestroDocumentosDTO
     {
+        public int Oficina { get; set; }
+        public int TipoDocumento { get; set; }
     }
 }

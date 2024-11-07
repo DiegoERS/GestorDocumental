@@ -8,5 +8,8 @@ namespace GestorDocumentalOIJ.BC.Modelos
 {
     public class ConsultaReporteControlDeVersiones
     {
+        public string CodigoDocumento { get; set; } = string.Empty;
+        public string NombreDocumento { get; set; } = string.Empty;
+        public int TipoDocumento { get; set; }
     }
 }

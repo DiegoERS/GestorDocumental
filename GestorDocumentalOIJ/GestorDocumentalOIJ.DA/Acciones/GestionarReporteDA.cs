@@ -53,29 +53,133 @@ namespace GestorDocumentalOIJ.DA.Acciones
             }).ToList();
         }
 
-        public Task<IEnumerable<ReporteControlDeVersiones>> ObtenerReporteControlDeVersiones(ConsultaReporteControlDeVersiones consultaReporteControlDeVersiones)
+        public async Task<IEnumerable<ReporteControlDeVersiones>> ObtenerReporteControlDeVersiones(ConsultaReporteControlDeVersiones consultaReporteControlDeVersiones)
         {
-            throw new NotImplementedException();
+            var codigoDocParameter = new SqlParameter("@pC_CodigoDocumento", consultaReporteControlDeVersiones.CodigoDocumento);
+            var nombreDocumentoParameter = new SqlParameter("@pC_NombreDocumento", consultaReporteControlDeVersiones.NombreDocumento);
+            var tipoDocParameter = new SqlParameter("@pN_TipoDocumento", consultaReporteControlDeVersiones.TipoDocumento);
+
+            var documentosReporteControlDeVersiones = await _context.reporteReporteControlDeVersiones
+                .FromSqlRaw("EXEC GD.PA_ReporteControlDeVersiones @pC_CodigoDocumento, @pC_NombreDocumento, @pN_TipoDocumento",
+                                codigoDocParameter,
+                                nombreDocumentoParameter,
+                                tipoDocParameter)
+                .ToListAsync();
+            return documentosReporteControlDeVersiones.Select(c => new ReporteControlDeVersiones
+            {
+                TipoDocumento = c.TipoDocumento,
+                CodigoDocumento = c.CodigoDocumento,
+                Fecha = c.Fecha,
+                NombreDocumento = c.NombreDocumento,
+                ResumenDelCambio = c.ResumenDelCambio,
+                SCD = c.SCD,
+                Version = c.Version
+            }).ToList();
         }
 
-        public Task<IEnumerable<ReporteDescargaDeDocumentos>> ObtenerReporteDescargaDeDocumentos(ConsultaReporteDescargaDeDocumentos consultaReporteDescargaDeDocumentos)
+        public async Task<IEnumerable<ReporteDescargaDeDocumentos>> ObtenerReporteDescargaDeDocumentos(ConsultaReporteDescargaDeDocumentos consultaReporteDescargaDeDocumentos)
         {
-            throw new NotImplementedException();
+            var codigoDocParameter = new SqlParameter("@pC_CodigoDocumento", consultaReporteDescargaDeDocumentos.CodigoDocumento);
+            var nombreDocumentoParameter = new SqlParameter("@pC_NombreDocumento", consultaReporteDescargaDeDocumentos.NombreDocumento);
+            var usuarioIDParameter = new SqlParameter("@pN_UsuarioID", consultaReporteDescargaDeDocumentos.Usuario);
+            var oficinaIDParameter = new SqlParameter("@pN_OficinaID", consultaReporteDescargaDeDocumentos.Oficina);
+            var fechaFinParameter = new SqlParameter("@pF_FechaFinal", consultaReporteDescargaDeDocumentos.FechaFinal);
+            var fechaInicioParameter = new SqlParameter("@pF_FechaInicio", consultaReporteDescargaDeDocumentos.FechaInicio);
+
+            var documentosReporteDescargaDeDocumentos = await _context.reporteReporteDescargaDeDocumentos
+                .FromSqlRaw("EXEC GD.PA_ReporteDescargaDeDocumentos @pN_OficinaID, @pN_UsuarioID, @pC_CodigoDocumento, @pC_NombreDocumento, @pF_FechaInicio,@pF_FechaFinal",
+                                oficinaIDParameter,
+                                usuarioIDParameter,
+                                codigoDocParameter,
+                                nombreDocumentoParameter,
+                                fechaInicioParameter,
+                                fechaFinParameter)
+                .ToListAsync();
+            return documentosReporteDescargaDeDocumentos.Select(c => new ReporteDescargaDeDocumentos
+            {
+                Acceso = c.Acceso, 
+                CodigoDocumento = c.CodigoDocumento,
+                Fecha = c.Fecha,
+                NombreDocumento = c.NombreDocumento,
+                OficinaResponsable = c.OficinaResponsable,
+                Version = c.Version
+                
+            }).ToList();
         }
 
-        public Task<IEnumerable<ReporteDocumentosAntiguos>> ObtenerReporteDocumentosAntiguos(ConsultaReporteDocumentosAntiguos consultaReporteDocumentosAntiguos)
+        public async Task<IEnumerable<ReporteDocumentosAntiguos>> ObtenerReporteDocumentosAntiguos(ConsultaReporteDocumentosAntiguos consultaReporteDocumentosAntiguos)
         {
-            throw new NotImplementedException();
+            var fechaParameter = new SqlParameter("@pF_Fecha", consultaReporteDocumentosAntiguos.Fecha);
+            var tipoDocParameter = new SqlParameter("@pN_TipoDocumento", consultaReporteDocumentosAntiguos.TipoDocumento);
+            var oficinaIDParameter = new SqlParameter("@pN_OficinaID", consultaReporteDocumentosAntiguos.Oficina);
+
+            var documentosReporteDocumentosAntiguos = await _context.reporteReporteDocumentosAntiguos
+                .FromSqlRaw("EXEC GD.PA_ReporteDocumentosAntiguos @pN_OficinaID, @pN_TipoDocumento, @pF_Fecha",
+                                oficinaIDParameter,
+                                tipoDocParameter,
+                                fechaParameter)
+                .ToListAsync();
+            return documentosReporteDocumentosAntiguos.Select(c => new ReporteDocumentosAntiguos
+            {
+                Fecha = c.Fecha,
+                Version = c.Version,
+                OficinaResponsable = c.OficinaResponsable,
+                NombreDocumento = c.NombreDocumento,
+                CodigoDocumento = c.CodigoDocumento,
+                Acceso = c.Acceso
+               
+            }).ToList();
         }
 
-        public Task<IEnumerable<ReporteMaestroDocumentoPorNorma>> ObtenerReporteMaestroDocumentoPorNorma(ConsultaReporteMaestroDocumentoPorNorma consultaReporteMaestroDocumentoPorNorma)
+        public async Task<IEnumerable<ReporteMaestroDocumentoPorNorma>> ObtenerReporteMaestroDocumentoPorNorma(ConsultaReporteMaestroDocumentoPorNorma consultaReporteMaestroDocumentoPorNorma)
         {
-            throw new NotImplementedException();
+            var normaParameter = new SqlParameter("@pN_Norma", consultaReporteMaestroDocumentoPorNorma.Norma);
+            var oficinaIDParameter = new SqlParameter("@pN_OficinaID", consultaReporteMaestroDocumentoPorNorma.Oficina);
+            var categoriaParameter = new SqlParameter("@pN_Categoria", consultaReporteMaestroDocumentoPorNorma.Categoria);
+            var tipoDocParameter = new SqlParameter("@pN_TipoDocumento", consultaReporteMaestroDocumentoPorNorma.TipoDocumento);
+
+            var documentosReporteMaestroDocumentoPorNorma = await _context.reporteReporteMaestroDocumentoPorNorma
+                .FromSqlRaw("EXEC GD.PA_ReporteMaestroDocumentoPorNorma @pN_OficinaID, @pN_TipoDocumento, @pN_Categoria, @pN_Norma",
+                                normaParameter,
+                                oficinaIDParameter,
+                                categoriaParameter,
+                                tipoDocParameter)
+                .ToListAsync();
+            return documentosReporteMaestroDocumentoPorNorma.Select(c => new ReporteMaestroDocumentoPorNorma
+            {
+                TipoDocumento = c.TipoDocumento,
+                Acceso = c.Acceso,
+                CodigoDocumento = c.CodigoDocumento,
+                NombreDocumento = c.NombreDocumento,
+                Version = c.Version,
+                Fecha = c.Fecha,
+                NombreNorma = c.NombreNorma,
+                ResumenDelCambio = c.ResumenDelCambio,
+                SCD = c.SCD
+            }).ToList();
         }
 
-        public Task<IEnumerable<ReporteMaestroDocumentos>> ObtenerReporteMaestroDocumentos(ConsultaReporteMaestroDocumentos consultaReporteMaestroDocumentos)
+        public async Task<IEnumerable<ReporteMaestroDocumentos>> ObtenerReporteMaestroDocumentos(ConsultaReporteMaestroDocumentos consultaReporteMaestroDocumentos)
         {
-            throw new NotImplementedException();
+            var oficinaIDParameter = new SqlParameter("@pN_OficinaID", consultaReporteMaestroDocumentos.Oficina);
+            var tipoDocParameter = new SqlParameter("@pN_TipoDocumento", consultaReporteMaestroDocumentos.TipoDocumento);
+
+            var documentosReporteMaestroDocumentos = await _context.reporteReporteMaestroDocumentos
+                .FromSqlRaw("EXEC GD.PA_ReporteMaestroDocumentos @pN_OficinaID, @pN_TipoDocumento",
+                                oficinaIDParameter,
+                                tipoDocParameter)
+                .ToListAsync();
+            return documentosReporteMaestroDocumentos.Select(c => new ReporteMaestroDocumentos
+            {
+                SCD = c.SCD,
+                ResumenDelCambio= c.ResumenDelCambio,
+                NombreDocumento = c.NombreDocumento,
+                Fecha = c.Fecha,
+                CodigoDocumento = c.CodigoDocumento,
+                Estado = c.Estado,
+                TipoDocumento = c.TipoDocumento,
+                Version = c.Version
+            }).ToList();
         }
 
         public async Task<IEnumerable<ReporteDocSinMovimiento>> ObtenerReportesDocSinMovimiento(ConsultaReportesDocSinMovimiento consultaReportesDocSinMovimiento)

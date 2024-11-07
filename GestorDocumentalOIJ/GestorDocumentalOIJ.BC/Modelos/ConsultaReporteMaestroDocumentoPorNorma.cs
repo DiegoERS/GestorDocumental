@@ -8,5 +8,9 @@ namespace GestorDocumentalOIJ.DA.Entidades
 {
     public class ConsultaReporteMaestroDocumentoPorNorma
     {
+        public int Oficina { get; set; }
+        public int TipoDocumento { get; set; }
+        public int Norma { get; set; } 
+        public int Categoria { get; set; }
     }
 }

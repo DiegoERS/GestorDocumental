@@ -29,35 +29,35 @@ namespace GestorDocumentalOIJ.Controllers
         [Route("ReporteControlDeVersiones")]
         public async Task<ActionResult<IEnumerable<ReporteControlDeVersionesDTO>>> ReporteControlDeVersiones(ConsultaReporteControlDeVersionesDTO consultaReporteControlDeVersionesDTO)
         {
-            return Ok();
+            return Ok(ReporteControlDeVersionesDTOMapper.ConvertirListaDeReporteBitacoraDeMovimientoADTO(await _gestionarReporteBW.ObtenerReporteControlDeVersiones(ConsultaReporteControlDeVersionesDTOMapper.ConvertirDTOAConsultaReporteControlDeVersiones(consultaReporteControlDeVersionesDTO))));
         }
         
         [HttpGet]
         [Route("ReporteDocumentosAntiguos")]
         public async Task<ActionResult<IEnumerable<ReporteDocumentosAntiguosDTO>>> ReporteDocumentosAntiguos(ConsultaReporteDocumentosAntiguosDTO consultaReporteDocumentosAntiguosDTO)
         {
-            return Ok();
+            return Ok(ReporteDocumentosAntiguosDTOMapper.ConvertirListaDeReporteDocumentosAntiguosADTO(await _gestionarReporteBW.ObtenerReporteDocumentosAntiguos(ConsultaReporteDocumentosAntiguosDTOMapper.ConvertirDTOAConsultaReporteDocumentosAntiguos(consultaReporteDocumentosAntiguosDTO))));
         }
         
         [HttpGet]
         [Route("ReporteMaestroDocumentoPorNorma")]
         public async Task<ActionResult<IEnumerable<ReporteMaestroDocumentoPorNormaDTO>>> ReporteMaestroDocumentoPorNorma(ConsultaReporteMaestroDocumentoPorNormaDTO consultaReporteMaestroDocumentoPorNormaDTO)
         {
-            return Ok();
+            return Ok(ReporteMaestroDocumentoPorNormaDTOMapper.ConvertirListaDeReporteMaestroDocumentoPorNormaADTO(await _gestionarReporteBW.ObtenerReporteMaestroDocumentoPorNorma(ConsultaReporteMaestroDocumentoPorNormaDTOMapper.ConvertirDTOAConsultaReporteMaestroDocumentoPorNorma(consultaReporteMaestroDocumentoPorNormaDTO))));
         }
 
         [HttpGet]
         [Route("ReporteMaestroDocumentos")]
-        public async Task<ActionResult<IEnumerable<_ReporteMaestroDocumentosDTO>>> ReporteMaestroDocumentos(ConsultaReporteMaestroDocumentosDTO consultaReporteMaestroDocumentosDTO)
+        public async Task<ActionResult<IEnumerable<ReporteMaestroDocumentosDTO>>> ReporteMaestroDocumentos(ConsultaReporteMaestroDocumentosDTO consultaReporteMaestroDocumentosDTO)
         {
-            return Ok();
+            return Ok(ReporteMaestroDocumentosDTOMapper.ConvertirListaDeReporteMaestroDocumentosADTO(await _gestionarReporteBW.ObtenerReporteMaestroDocumentos(ConsultaReporteMaestroDocumentosDTOMapper.ConvertirDTOAConsultaReporteMaestroDocumentos(consultaReporteMaestroDocumentosDTO))));
         }
 
         [HttpGet]
         [Route("ReporteDescargaDeDocumentos")]
         public async Task<ActionResult<IEnumerable<ReporteDescargaDeDocumentosDTO>>> ReporteDescargaDeDocumentos(ConsultaReporteDescargaDeDocumentosDTO consultaReporteDescargaDeDocumentosDTO)
         {
-            return Ok();
+            return Ok(ReporteDescargaDeDocumentosDTOMapper.ConvertirListaDeReporteDescargaDeDocumentosADTO(await _gestionarReporteBW.ObtenerReporteDescargaDeDocumentos(ConsultaReporteDescargaDeDocumentosDTOMapper.ConvertirDTOAConsultaReporteDescargaDeDocumentos(consultaReporteDescargaDeDocumentosDTO))));
         }
 
 

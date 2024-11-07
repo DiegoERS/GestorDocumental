@@ -7,7 +7,7 @@ using GestorDocumentalOIJ.DTOs;
 
 namespace GestorDocumentalOIJ.Utility
 {
-    public class ConsultaReporteBitacoraDeMovimientoDTOMapper
+    public static class ConsultaReporteBitacoraDeMovimientoDTOMapper
     {
         public static ConsultaReporteBitacoraDeMovimientoDTO ConvertirConsultaReporteBitacoraDeMovimientoADTO(ConsultaReporteBitacoraDeMovimiento consultaReporteBitacoraDeMovimiento)
         {

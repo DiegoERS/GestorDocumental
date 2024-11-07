@@ -49,11 +49,11 @@ namespace GestorDocumentalOIJ.DA.Contexto
 
         public DbSet<Entidades.ReporteDocSinMovimientoDA> reporteDocSinMovimientos {  get; set; }
         public DbSet<Entidades.ReporteBitacoraDeMovimientoDA> reporteReporteBitacoraDeMovimiento { get; set; }
-        //public DbSet<Entidades.ReporteControlDeVersionesDA> reporteReporteControlDeVersiones { get; set; }
-        //public DbSet<Entidades.ReporteDescargaDeDocumentosDA> reporteReporteDescargaDeDocumentos { get; set; }
-        //public DbSet<Entidades.ReporteDocumentosAntiguosDA> reporteReporteDocumentosAntiguos { get; set; }
-        //public DbSet<Entidades.ReporteMaestroDocumentoPorNormaDA> reporteReporteMaestroDocumentoPorNorma { get; set; }
-        //public DbSet<Entidades.ReporteMaestroDocumentosDA> reporteReporteMaestroDocumentos { get; set; }
+        public DbSet<Entidades.ReporteControlDeVersionesDA> reporteReporteControlDeVersiones { get; set; }
+        public DbSet<Entidades.ReporteDescargaDeDocumentosDA> reporteReporteDescargaDeDocumentos { get; set; }
+        public DbSet<Entidades.ReporteDocumentosAntiguosDA> reporteReporteDocumentosAntiguos { get; set; }
+        public DbSet<Entidades.ReporteMaestroDocumentoPorNormaDA> reporteReporteMaestroDocumentoPorNorma { get; set; }
+        public DbSet<Entidades.ReporteMaestroDocumentosDA> reporteReporteMaestroDocumentos { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Entidades.PermisoOficinaDA>().HasNoKey();
@@ -62,6 +62,13 @@ namespace GestorDocumentalOIJ.DA.Contexto
             modelBuilder.Entity<Entidades.UsuarioOficinaDA>().HasNoKey();
             modelBuilder.Entity<Entidades.NormaUsuarioDA>().HasNoKey();
             modelBuilder.Entity<Entidades.UsuarioDA>().HasNoKey();
+            modelBuilder.Entity<Entidades.ReporteDocSinMovimientoDA>().HasNoKey();
+            modelBuilder.Entity<Entidades.ReporteDescargaDeDocumentosDA>().HasNoKey();
+            modelBuilder.Entity<Entidades.ReporteControlDeVersionesDA>().HasNoKey();
+            modelBuilder.Entity<Entidades.ReporteDocumentosAntiguosDA>().HasNoKey();
+            modelBuilder.Entity<Entidades.ReporteMaestroDocumentoPorNormaDA>().HasNoKey();
+            modelBuilder.Entity<Entidades.ReporteBitacoraDeMovimientoDA>().HasNoKey();
+
 
             // Si tienes otras configuraciones para otras entidades, colócalas aquí también
             base.OnModelCreating(modelBuilder);

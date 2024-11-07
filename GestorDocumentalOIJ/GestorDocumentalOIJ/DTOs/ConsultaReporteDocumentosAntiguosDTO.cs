@@ -8,5 +8,8 @@ namespace GestorDocumentalOIJ.DA.Entidades
 {
     public class ConsultaReporteDocumentosAntiguosDTO
     {
+        public int Oficina {  get; set; }
+        public int TipoDocumento { get; set; }
+        public string Fecha { get; set; } = string.Empty;
     }
 }
