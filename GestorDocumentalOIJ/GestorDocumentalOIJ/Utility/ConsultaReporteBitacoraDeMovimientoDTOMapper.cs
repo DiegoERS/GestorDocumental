@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GestorDocumentalOIJ.DTOs;
 
-namespace GestorDocumentalOIJ.DA.Entidades
+namespace GestorDocumentalOIJ.Utility
 {
     public class ConsultaReporteBitacoraDeMovimientoDTOMapper
     {

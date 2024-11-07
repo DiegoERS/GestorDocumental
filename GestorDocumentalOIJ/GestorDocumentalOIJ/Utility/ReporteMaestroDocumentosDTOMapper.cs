@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GestorDocumentalOIJ.DA.Entidades
+namespace GestorDocumentalOIJ.Utility
 {
-    public class ReporteMaestroDocumentosDTOMapper
+    public static class ReporteMaestroDocumentosDTOMapper
     {
     }
 }

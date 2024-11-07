@@ -89,7 +89,7 @@ namespace GestorDocumentalOIJ.DA.Acciones
                     }
                 }
             }
-            catch (SqlException ex)
+            catch (SqlException)
             {
                 // Manejar cualquier excepción de SQL
                 return null;

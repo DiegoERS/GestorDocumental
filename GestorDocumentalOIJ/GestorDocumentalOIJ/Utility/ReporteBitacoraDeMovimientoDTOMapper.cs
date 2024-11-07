@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GestorDocumentalOIJ.BC.Modelos;
+using GestorDocumentalOIJ.DA.Entidades;
 using GestorDocumentalOIJ.DTOs;
 
-namespace GestorDocumentalOIJ.DA.Entidades
+namespace GestorDocumentalOIJ.Utility
 {
     public class ReporteBitacoraDeMovimientoDTOMapper
     {

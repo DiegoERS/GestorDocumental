@@ -29,35 +29,35 @@ namespace GestorDocumentalOIJ.Controllers
         [Route("ReporteControlDeVersiones")]
         public async Task<ActionResult<IEnumerable<ReporteControlDeVersionesDTO>>> ReporteControlDeVersiones(ConsultaReporteControlDeVersionesDTO consultaReporteControlDeVersionesDTO)
         {
-            return null;
+            return Ok();
         }
         
         [HttpGet]
         [Route("ReporteDocumentosAntiguos")]
         public async Task<ActionResult<IEnumerable<ReporteDocumentosAntiguosDTO>>> ReporteDocumentosAntiguos(ConsultaReporteDocumentosAntiguosDTO consultaReporteDocumentosAntiguosDTO)
         {
-            return null;
+            return Ok();
         }
         
         [HttpGet]
         [Route("ReporteMaestroDocumentoPorNorma")]
         public async Task<ActionResult<IEnumerable<ReporteMaestroDocumentoPorNormaDTO>>> ReporteMaestroDocumentoPorNorma(ConsultaReporteMaestroDocumentoPorNormaDTO consultaReporteMaestroDocumentoPorNormaDTO)
         {
-            return null;
+            return Ok();
         }
 
         [HttpGet]
         [Route("ReporteMaestroDocumentos")]
         public async Task<ActionResult<IEnumerable<_ReporteMaestroDocumentosDTO>>> ReporteMaestroDocumentos(ConsultaReporteMaestroDocumentosDTO consultaReporteMaestroDocumentosDTO)
         {
-            return null;
+            return Ok();
         }
 
         [HttpGet]
         [Route("ReporteDescargaDeDocumentos")]
         public async Task<ActionResult<IEnumerable<ReporteDescargaDeDocumentosDTO>>> ReporteDescargaDeDocumentos(ConsultaReporteDescargaDeDocumentosDTO consultaReporteDescargaDeDocumentosDTO)
         {
-            return null;
+            return Ok();
         }
 
 
