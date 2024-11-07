@@ -29,6 +29,7 @@ namespace GestorDocumentalOIJ.Controllers
         [Route("ReporteControlDeVersiones")]
         public async Task<ActionResult<IEnumerable<ReporteControlDeVersionesDTO>>> ReporteControlDeVersiones([FromQuery] ConsultaReporteControlDeVersionesDTO consultaReporteControlDeVersionesDTO)
         {
+            Console.WriteLine("dato: "+consultaReporteControlDeVersionesDTO.CodigoDocumento);
             return Ok(ReporteControlDeVersionesDTOMapper.ConvertirListaDeReporteBitacoraDeMovimientoADTO(await _gestionarReporteBW.ObtenerReporteControlDeVersiones(ConsultaReporteControlDeVersionesDTOMapper.ConvertirDTOAConsultaReporteControlDeVersiones(consultaReporteControlDeVersionesDTO))));
         }
 
