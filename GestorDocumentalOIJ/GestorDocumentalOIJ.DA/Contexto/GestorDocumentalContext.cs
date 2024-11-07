@@ -47,7 +47,7 @@ namespace GestorDocumentalOIJ.DA.Contexto
 
         public DbSet<Entidades.NormaUsuarioDA> NormasUsuarios { get; set; }
 
-
+        public DbSet<Entidades.ReporteDocSinMovimientoDA> reporteDocSinMovimientos {  get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Entidades.PermisoOficinaDA>().HasNoKey();
