@@ -19,7 +19,7 @@ namespace GestorDocumentalOIJ.Controllers
         [HttpPost]
         public async Task<IActionResult> RegistrarEnBitacora(BitacoraMovimientoDTO bitacoraMovimientoDTO)
         {
-            return Ok(_gestionarBitacoraMovimientoBW.InsertarBitacoraMovimiento(BitacoraMovimientoDTOMapper.ConvertirDTOABitacoraMovimiento(bitacoraMovimientoDTO)));
+            return Ok(await _gestionarBitacoraMovimientoBW.InsertarBitacoraMovimiento(BitacoraMovimientoDTOMapper.ConvertirDTOABitacoraMovimiento(bitacoraMovimientoDTO)));
         }
     }
 }

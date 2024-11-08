@@ -8,7 +8,7 @@ namespace GestorDocumentalOIJ.DA.Entidades
 {
     public class BitacoraMovimientoDA
     {
-        public int IdMovimiento { get; set; }
+        public int Id { get; set; }
         public int VersionID { get; set; }
         public DateTime FechaIngreso { get; set; }
         public int UsuarioID { get; set; }
