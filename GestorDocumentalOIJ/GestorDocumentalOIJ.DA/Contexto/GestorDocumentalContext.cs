@@ -54,6 +54,7 @@ namespace GestorDocumentalOIJ.DA.Contexto
         public DbSet<Entidades.ReporteDocumentosAntiguosDA> reporteReporteDocumentosAntiguos { get; set; }
         public DbSet<Entidades.ReporteMaestroDocumentoPorNormaDA> reporteReporteMaestroDocumentoPorNorma { get; set; }
         public DbSet<Entidades.ReporteMaestroDocumentosDA> reporteReporteMaestroDocumentos { get; set; }
+        public DbSet<Entidades.BitacoraMovimientoDA > bitacoraMovimiento { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Entidades.PermisoOficinaDA>().HasNoKey();

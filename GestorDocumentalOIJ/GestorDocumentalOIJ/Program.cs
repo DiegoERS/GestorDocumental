@@ -98,6 +98,9 @@ builder.Services.AddTransient<IGestionarUsuarioOficinaDA, GestionarUsuarioOficin
 builder.Services.AddTransient<IGestionarReporteBW,GestionarReporteBW>();
 builder.Services.AddTransient<IGestionarReporteDA, GestionarReporteDA>();
 
+builder.Services.AddTransient<IGestionarBitacoraMovimientoBW, GestionarBitacoraMovimientoBW>();
+builder.Services.AddTransient<IGestionarBitacoraMovimientoDA,GestionarBitacoraMovimientoDA>();
+
 // Configurar la cadena de conexión a la base de datos
 
 builder.Services.AddDbContext<GestorDocumentalContext>(options =>
