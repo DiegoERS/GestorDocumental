@@ -6,7 +6,9 @@
         public string NombreDocumento { get; set; } = string.Empty;
         public string Acceso { get; set; } = string.Empty;
         public int Version { get; set; }
-        public string Fecha { get; set; } = string.Empty;
+        public string FechaIngreso { get; set; } = string.Empty;
         public string OficinaResponsable { get; set; } = string.Empty;
+        public int Visualizaciones { get; set; }
+        public int Descargas { get; set; }
     }
 }

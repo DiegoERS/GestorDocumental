@@ -17,9 +17,11 @@ namespace GestorDocumentalOIJ.Utility
                 Version = reporteDescargaDeDocumentos.Version,
                 Acceso =  reporteDescargaDeDocumentos.Acceso,
                 CodigoDocumento = reporteDescargaDeDocumentos.CodigoDocumento,
-                Fecha = reporteDescargaDeDocumentos.Fecha,
+                FechaIngreso = reporteDescargaDeDocumentos.FechaIngreso,
                 NombreDocumento = reporteDescargaDeDocumentos.NombreDocumento,
-                OficinaResponsable = reporteDescargaDeDocumentos.OficinaResponsable
+                OficinaResponsable = reporteDescargaDeDocumentos.OficinaResponsable,
+                Descargas = reporteDescargaDeDocumentos.Descargas,
+                Visualizaciones = reporteDescargaDeDocumentos.Visualizaciones
             };
         }
 
@@ -30,9 +32,11 @@ namespace GestorDocumentalOIJ.Utility
                 Version = reporteDescargaDeDocumentosDTO.Version,
                 Acceso = reporteDescargaDeDocumentosDTO.Acceso,
                 NombreDocumento = reporteDescargaDeDocumentosDTO.NombreDocumento,
-                Fecha = reporteDescargaDeDocumentosDTO.Fecha,
+                FechaIngreso = reporteDescargaDeDocumentosDTO.FechaIngreso,
                 OficinaResponsable = reporteDescargaDeDocumentosDTO.OficinaResponsable,
-                CodigoDocumento = reporteDescargaDeDocumentosDTO.CodigoDocumento
+                CodigoDocumento = reporteDescargaDeDocumentosDTO.CodigoDocumento,
+                Visualizaciones = reporteDescargaDeDocumentosDTO.Visualizaciones,
+                Descargas = reporteDescargaDeDocumentosDTO.Descargas
             };
         }
 
@@ -43,9 +47,11 @@ namespace GestorDocumentalOIJ.Utility
                 CodigoDocumento = c.CodigoDocumento,
                 OficinaResponsable = c.OficinaResponsable,
                 NombreDocumento = c.NombreDocumento,
-                Fecha = c.Fecha,
+                FechaIngreso = c.FechaIngreso,
                 Acceso = c.Acceso,
-                Version = c.Version
+                Version = c.Version,
+                Descargas = c.Descargas,
+                Visualizaciones = c.Visualizaciones
             });
         }
     }

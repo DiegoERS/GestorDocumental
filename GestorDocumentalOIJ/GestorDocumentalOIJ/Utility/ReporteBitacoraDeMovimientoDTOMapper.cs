@@ -17,7 +17,7 @@ namespace GestorDocumentalOIJ.Utility
             {
                 Acceso = reporteBitacoraDeMovimiento.Acceso,
                 CodigoDocumento = reporteBitacoraDeMovimiento.CodigoDocumento,
-                Fecha = reporteBitacoraDeMovimiento.Fecha,
+                FechaIngreso = reporteBitacoraDeMovimiento.FechaIngreso,
                 Movimiento = reporteBitacoraDeMovimiento.Movimiento,
                 NombreDocumento = reporteBitacoraDeMovimiento.NombreDocumento,
                 OficinaResponsable = reporteBitacoraDeMovimiento.OficinaResponsable,
@@ -35,7 +35,7 @@ namespace GestorDocumentalOIJ.Utility
                 OficinaResponsable = reporteBitacoraDeMovimientoDTO .OficinaResponsable,
                 NombreDocumento = reporteBitacoraDeMovimientoDTO.NombreDocumento,  
                 Movimiento = reporteBitacoraDeMovimientoDTO.Movimiento,
-                Fecha = reporteBitacoraDeMovimientoDTO.Fecha,       
+                FechaIngreso = reporteBitacoraDeMovimientoDTO.FechaIngreso,       
                 Acceso = reporteBitacoraDeMovimientoDTO.Acceso,
                 CodigoDocumento = reporteBitacoraDeMovimientoDTO.CodigoDocumento
             };
@@ -47,7 +47,7 @@ namespace GestorDocumentalOIJ.Utility
             {
                 Acceso = c.Acceso,
                 CodigoDocumento = c.CodigoDocumento,
-                Fecha= c.Fecha,
+                FechaIngreso = c.FechaIngreso,
                 Movimiento= c.Movimiento,
                 NombreDocumento = c.NombreDocumento,
                 OficinaResponsable = c.OficinaResponsable,

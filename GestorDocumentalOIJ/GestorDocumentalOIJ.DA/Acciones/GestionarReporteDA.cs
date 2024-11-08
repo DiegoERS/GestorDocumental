@@ -46,7 +46,7 @@ namespace GestorDocumentalOIJ.DA.Acciones
                 NombreDocumento = c.NombreDocumento,
                 Acceso = c.Acceso,
                 CodigoDocumento = c.CodigoDocumento,
-                Fecha = c.Fecha.ToString(),
+                FechaIngreso = c.FechaIngreso.ToString(),
                 Movimiento = c.Movimiento,
                 Usuario = c.Usuario,
                 Version = c.Version
@@ -99,10 +99,12 @@ namespace GestorDocumentalOIJ.DA.Acciones
             {
                 Acceso = c.Acceso, 
                 CodigoDocumento = c.CodigoDocumento,
-                Fecha = c.Fecha.ToString(),
+                FechaIngreso = c.FechaIngreso.ToString(),
                 NombreDocumento = c.NombreDocumento,
                 OficinaResponsable = c.OficinaResponsable,
-                Version = c.Version
+                Version = c.Version,
+                Visualizaciones = c.Visualizaciones,
+                Descargas = c.Descargas
                 
             }).ToList();
         }
