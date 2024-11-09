@@ -51,5 +51,15 @@ namespace GestorDocumentalOIJ.BW.CU
         {
             return await gestionarEtapaDA.ObtenerEtapas();
         }
+
+        public async Task<IEnumerable<Etapa>> ObtenerEtapasHuerfanas()
+        {
+            return await gestionarEtapaDA.ObtenerEtapasHuerfanas();
+        }
+
+        public async Task<IEnumerable<Etapa>> ObtenerEtapasPorNorma(int normaId)
+        {
+            return await gestionarEtapaDA.ObtenerEtapasPorNorma(normaId);
+        }
     }
 }

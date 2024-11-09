@@ -24,6 +24,20 @@ namespace GestorDocumentalOIJ.Controllers
             return Ok(EtapaDTOMapper.ConvertirListaDeEtapasADTO(await gestionarEtapaBW.ObtenerEtapas()));
         }
 
+        [HttpGet]
+        [Route("etapasHuerfanas")]
+        public async Task<ActionResult<IEnumerable<EtapaDTO>>> obtenerEtapasHuerfanas()
+        {
+            return Ok(EtapaDTOMapper.ConvertirListaDeEtapasADTO(await gestionarEtapaBW.ObtenerEtapasHuerfanas()));
+        }
+
+        [HttpGet]
+        [Route("etapasPorNorma/{normaId}")]
+        public async Task<ActionResult<IEnumerable<EtapaDTO>>> obtenerEtapasPorNorma(int normaId)
+        {
+            return Ok(EtapaDTOMapper.ConvertirListaDeEtapasADTO(await gestionarEtapaBW.ObtenerEtapasPorNorma(normaId)));
+        }
+
         [HttpGet("{id}")]
         public async Task<ActionResult<EtapaDTO>> obtenerEtapaPorId(int id)
         {
