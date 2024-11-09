@@ -35,7 +35,7 @@ namespace GestorDocumentalOIJ.DA.Acciones
             var codigoParameter = new SqlParameter("@pC_Codigo", documento.Codigo);
             var asuntoParameter = new SqlParameter("@pC_Asunto", documento.Asunto);
             var descripcionParameter = new SqlParameter("@pC_Descripcion", documento.Descripcion);
-            var palabraClaveParameter = new SqlParameter("@pC_PalabraClave", palabrasClavesSerializadas);
+            var palabraClaveParameter = new SqlParameter("@pC_PalabrasClave", palabrasClavesSerializadas);
             var categoriaIDParameter = new SqlParameter("@pN_CategoriaID", documento.CategoriaID);
             var tipoDocumentoParameter = new SqlParameter("@pN_TipoDocumento", documento.TipoDocumento);
             var oficinaIDParameter = new SqlParameter("@pN_OficinaID", documento.OficinaID);
@@ -50,12 +50,11 @@ namespace GestorDocumentalOIJ.DA.Acciones
             var oficinaUsuarioIDParameter = new SqlParameter("@pN_OficinaBitacoraID", documento.OficinaUsuarioID);
 
             int resultado = await _context.Database.ExecuteSqlRawAsync(
-                                                             "EXEC GD.PA_ActualizarDocumento @pN_Id, @pC_Codigo, @pC_Asunto, @pC_Descripcion, @pC_PalabraClave, @pN_CategoriaID, @pN_TipoDocumento, @pN_OficinaID, @pC_Vigencia, @pN_EtapaID, @pN_DoctoID,@pN_SubClasificacionID, @pB_Activo,@pB_Descargable, @pN_UsuarioID, @pN_OficinaBitacoraID, @pC_Doctos",
+                                                             "EXEC GD.PA_ActualizarDocumento @pN_Id, @pC_Codigo, @pC_Asunto, @pC_Descripcion, @pN_CategoriaID, @pN_TipoDocumento, @pN_OficinaID, @pC_Vigencia, @pN_EtapaID, @pN_DoctoID,@pN_SubClasificacionID, @pB_Activo,@pB_Descargable, @pN_UsuarioID, @pN_OficinaBitacoraID, @pC_PalabrasClave, @pC_Doctos",
                                                              idParameter,
                                                              codigoParameter,
                                                               asuntoParameter,
                                                               descripcionParameter,
-                                                              palabraClaveParameter,
                                                               categoriaIDParameter,
                                                               tipoDocumentoParameter,
                                                               oficinaIDParameter,
@@ -67,6 +66,7 @@ namespace GestorDocumentalOIJ.DA.Acciones
                                                               descargableParameter,
                                                               usuarioIDParameter,
                                                               oficinaUsuarioIDParameter,
+                                                              palabraClaveParameter,
                                                               doctosParameter);
 
             // Devuelve true si se afectó al menos una fila
@@ -78,10 +78,12 @@ namespace GestorDocumentalOIJ.DA.Acciones
             var listaSerializada = JsonConvert.SerializeObject(documento.doctos);
             var palabrasClavesSerializadas = JsonConvert.SerializeObject(documento.PalabraClave);
 
+            Console.WriteLine("Palabras Clave: " + palabrasClavesSerializadas);
+
             var codigoParameter = new SqlParameter("@pC_Codigo", documento.Codigo);
             var asuntoParameter = new SqlParameter("@pC_Asunto", documento.Asunto);
             var descripcionParameter = new SqlParameter("@pC_Descripcion", documento.Descripcion);
-            var palabraClaveParameter = new SqlParameter("@pC_PalabraClave", palabrasClavesSerializadas);
+            var palabraClaveParameter = new SqlParameter("@pC_PalabrasClave", palabrasClavesSerializadas);
             var categoriaIDParameter = new SqlParameter("@pN_CategoriaID", documento.CategoriaID);
             var tipoDocumentoParameter = new SqlParameter("@pN_TipoDocumento", documento.TipoDocumento);
             var oficinaIDParameter = new SqlParameter("@pN_OficinaID", documento.OficinaID);
@@ -96,11 +98,10 @@ namespace GestorDocumentalOIJ.DA.Acciones
             var oficinaUsuarioIDParameter = new SqlParameter("@pN_OficinaBitacoraID", documento.OficinaUsuarioID);
 
             int resultado = await _context.Database.ExecuteSqlRawAsync(
-                                                                        "EXEC GD.PA_InsertarDocumento @pC_Codigo, @pC_Asunto, @pC_Descripcion, @pC_PalabraClave, @pN_CategoriaID, @pN_TipoDocumento, @pN_OficinaID, @pC_Vigencia, @pN_EtapaID, @pN_SubClasificacionID, @pB_Activo, @pB_Descargable, @pN_DocToID, @pN_UsuarioID, @pN_OficinaBitacoraID, @pC_Doctos",
+                                                                        "EXEC GD.PA_InsertarDocumento @pC_Codigo, @pC_Asunto, @pC_Descripcion, @pN_CategoriaID, @pN_TipoDocumento, @pN_OficinaID, @pC_Vigencia, @pN_EtapaID, @pN_SubClasificacionID, @pB_Activo, @pB_Descargable, @pN_DocToID, @pN_UsuarioID, @pN_OficinaBitacoraID, @pC_PalabrasClave, @pC_Doctos",
                                                                         codigoParameter,
                                                                         asuntoParameter,
                                                                         descripcionParameter,
-                                                                        palabraClaveParameter,
                                                                         categoriaIDParameter,
                                                                         tipoDocumentoParameter,
                                                                         oficinaIDParameter,
@@ -112,6 +113,7 @@ namespace GestorDocumentalOIJ.DA.Acciones
                                                                         doctoIdParameter, 
                                                                         usuarioIDParameter,
                                                                         oficinaUsuarioIDParameter,
+                                                                        palabraClaveParameter,
                                                                         doctosParameter);
 
 
@@ -155,6 +157,7 @@ namespace GestorDocumentalOIJ.DA.Acciones
                         // Lee los resultados
                         while (await reader.ReadAsync())
                         {
+                            IEnumerable<string> palabrasClave = new List<string>();
                             // Crea una nueva instancia de DocumentoExtendido y asigna los valores
                             var documentoExtendido = new Documento
                             {
@@ -170,7 +173,8 @@ namespace GestorDocumentalOIJ.DA.Acciones
                                 doctoId = reader.GetInt32(reader.GetOrdinal("DocToID")),
                                 NormaID = reader.GetInt32(reader.GetOrdinal("NormaID")),
                                 VersionID = reader.GetInt32(reader.GetOrdinal("VersionID")),
-                                ClasificacionID = reader.GetInt32(reader.GetOrdinal("ClasificacionID"))
+                                ClasificacionID = reader.GetInt32(reader.GetOrdinal("ClasificacionID")),
+                                PalabraClave = reader.IsDBNull(reader.GetOrdinal("PalabrasClave")) ? palabrasClave : JsonConvert.DeserializeObject<List<PalabraClave>>(reader.GetString(reader.GetOrdinal("PalabrasClave"))).Select(p => p.palabraClave).ToList(),
                             };
 
                             // Agrega el objeto a la lista
@@ -215,7 +219,7 @@ namespace GestorDocumentalOIJ.DA.Acciones
                                 Descripcion = reader.IsDBNull(reader.GetOrdinal("Descripcion")) ? string.Empty : reader.GetString(reader.GetOrdinal("Descripcion")),
                                 CategoriaID = reader.IsDBNull(reader.GetOrdinal("CategoriaID")) ? 0 : reader.GetInt32(reader.GetOrdinal("CategoriaID")),
                                 TipoDocumento = reader.IsDBNull(reader.GetOrdinal("TipoDocumento")) ? 0 : reader.GetInt32(reader.GetOrdinal("TipoDocumento")),
-                                PalabraClave = reader.IsDBNull(reader.GetOrdinal("PalabraClave")) ?  palabrasClave: JsonConvert.DeserializeObject<IEnumerable<string>>(reader.GetString(reader.GetOrdinal("PalabraClave"))),
+                                PalabraClave = reader.IsDBNull(reader.GetOrdinal("PalabrasClave")) ?  palabrasClave : JsonConvert.DeserializeObject<List<PalabraClave>>(reader.GetString(reader.GetOrdinal("PalabrasClave"))).Select(p => p.palabraClave).ToList(),
                                 OficinaID = reader.IsDBNull(reader.GetOrdinal("OficinaID")) ? 0 : reader.GetInt32(reader.GetOrdinal("OficinaID")),
                                 Vigencia = reader.IsDBNull(reader.GetOrdinal("Vigencia")) ? string.Empty : reader.GetString(reader.GetOrdinal("Vigencia")),
                                 EtapaID = reader.IsDBNull(reader.GetOrdinal("EtapaID")) ? 0 : reader.GetInt32(reader.GetOrdinal("EtapaID")),
@@ -254,13 +258,13 @@ namespace GestorDocumentalOIJ.DA.Acciones
 
                 if (documentoDA != null)
                 {
-                  Console.WriteLine(documentoDA.ToString());
+                  Console.WriteLine(documentoDA.PalabrasClave);
                     return new Documento()
                     {
                         Codigo = documentoDA.Codigo,
                         Asunto = documentoDA.Asunto,
                         Descripcion = documentoDA.Descripcion,
-                        PalabraClave =JsonConvert.DeserializeObject<IEnumerable<string>>(documentoDA.PalabraClave),
+                        PalabraClave =JsonConvert.DeserializeObject<List<PalabraClave>>(documentoDA.PalabrasClave).Select(p => p.palabraClave).ToList(),
                         CategoriaID = documentoDA.CategoriaID,
                         TipoDocumento = documentoDA.TipoDocumento,
                         OficinaID = documentoDA.OficinaID,
