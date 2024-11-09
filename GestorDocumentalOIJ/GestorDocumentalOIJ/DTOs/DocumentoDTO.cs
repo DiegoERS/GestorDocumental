@@ -8,7 +8,7 @@ namespace GestorDocumentalOIJ.DTOs
         public string Codigo { get; set; } = string.Empty;
         public string Asunto { get; set; } = string.Empty;
         public string Descripcion { get; set; } = string.Empty;
-        public string PalabraClave { get; set; } = string.Empty;
+        public IEnumerable<string> PalabraClave { get; set; } = new List<string>();
         public int CategoriaID { get; set; }
         public int TipoDocumento { get; set; }
         public int OficinaID { get; set; }

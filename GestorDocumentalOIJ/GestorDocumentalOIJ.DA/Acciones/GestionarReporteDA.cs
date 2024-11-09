@@ -55,12 +55,14 @@ namespace GestorDocumentalOIJ.DA.Acciones
 
         public async Task<IEnumerable<ReporteControlDeVersiones>> ObtenerReporteControlDeVersiones(ConsultaReporteControlDeVersiones consultaReporteControlDeVersiones)
         {
+            var oficinaIDParameter = new SqlParameter("@pN_OficinaID", consultaReporteControlDeVersiones.Oficina);
             var codigoDocParameter = new SqlParameter("@pC_CodigoDocumento", consultaReporteControlDeVersiones.CodigoDocumento);
             var nombreDocumentoParameter = new SqlParameter("@pC_NombreDocumento", consultaReporteControlDeVersiones.NombreDocumento);
             var tipoDocParameter = new SqlParameter("@pN_TipoDocumento", consultaReporteControlDeVersiones.TipoDocumento);
 
             var documentosReporteControlDeVersiones = await _context.reporteReporteControlDeVersiones
-                .FromSqlRaw("EXEC GD.PA_ReporteControlDeVersiones @pC_CodigoDocumento, @pC_NombreDocumento, @pN_TipoDocumento",
+                .FromSqlRaw("EXEC GD.PA_ReporteControlDeVersiones @pN_OficinaID, @pC_CodigoDocumento, @pC_NombreDocumento, @pN_TipoDocumento",
+                                oficinaIDParameter,
                                 codigoDocParameter,
                                 nombreDocumentoParameter,
                                 tipoDocParameter)

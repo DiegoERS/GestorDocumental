@@ -23,7 +23,8 @@ namespace GestorDocumentalOIJ.Utility
                 justificacion = version.justificacion,
                 archivo = SaveFiles.GetIFormFile(version.urlVersion),
                 UsuarioLogID = version.UsuarioLogID,
-                OficinaID = version.OficinaID
+                OficinaID = version.OficinaID,
+                urlVersion = version.urlVersion
             };
         }
 
