@@ -175,6 +175,8 @@ namespace GestorDocumentalOIJ.DA.Acciones
                                 VersionID = reader.GetInt32(reader.GetOrdinal("VersionID")),
                                 ClasificacionID = reader.GetInt32(reader.GetOrdinal("ClasificacionID")),
                                 PalabraClave = reader.IsDBNull(reader.GetOrdinal("PalabrasClave")) ? palabrasClave : JsonConvert.DeserializeObject<List<PalabraClave>>(reader.GetString(reader.GetOrdinal("PalabrasClave"))).Select(p => p.palabraClave).ToList(),
+                                descargable = !reader.IsDBNull(reader.GetOrdinal("descargable")) && reader.GetBoolean(reader.GetOrdinal("descargable")),
+                                activo = reader.GetBoolean(reader.GetOrdinal("Activo"))
                             };
 
                             // Agrega el objeto a la lista
