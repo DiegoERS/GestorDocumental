@@ -3,9 +3,11 @@ using GestorDocumentalOIJ.BW.Interfaces.BW;
 using GestorDocumentalOIJ.BW.Interfaces.DA;
 using GestorDocumentalOIJ.DA.Acciones;
 using GestorDocumentalOIJ.DA.Contexto;
+using GestorDocumentalOIJ.Utility;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
@@ -18,26 +20,22 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//builder.Services.AddAuthentication(options =>
-//{
-//    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-//    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-//    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-//}).AddJwtBearer(options =>
-//{
-//    options.TokenValidationParameters = new TokenValidationParameters
-//    {
-//        ValidateIssuer = false,
-//        ValidateAudience = false,
-//        ValidateLifetime = true,
-//        ValidateIssuerSigningKey = true,
-//        ValidIssuer = builder.Configuration["JwtSettings:Issuer"],
-//        ValidAudience = builder.Configuration["JwtSettings:Audience"],
-//        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:Secret"]))
-//    };
-//    options.RequireHttpsMetadata = false;
-//    options.SaveToken = true;
-//});
+var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("5f27de4fcb458f61c065fe8e497170b907ef9c6074a43c871568a0df6b6da46c83473261b1b2f45018413479f74ffa7f9adfec6f83d464da1c921dc5050e6229"));
+
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
+{
+    opt.TokenValidationParameters = new TokenValidationParameters
+    {
+
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = key,
+        ValidateAudience = false,
+        ValidateIssuer = false,
+    };
+});
+
+
 
 
 //Inyeccion de dependencias
@@ -101,6 +99,8 @@ builder.Services.AddTransient<IGestionarReporteDA, GestionarReporteDA>();
 builder.Services.AddTransient<IGestionarBitacoraMovimientoBW, GestionarBitacoraMovimientoBW>();
 builder.Services.AddTransient<IGestionarBitacoraMovimientoDA,GestionarBitacoraMovimientoDA>();
 
+builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddScoped<UsuarioSesionHttp>();
 // Configurar la cadena de conexión a la base de datos
 
 builder.Services.AddDbContext<GestorDocumentalContext>(options =>

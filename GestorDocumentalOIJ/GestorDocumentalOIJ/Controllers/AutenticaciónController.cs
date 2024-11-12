@@ -4,6 +4,7 @@ using GestorDocumentalOIJ.DTOs;
 using GestorDocumentalOIJ.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -18,11 +19,14 @@ namespace GestorDocumentalOIJ.Controllers
     {
         private readonly IConfiguration _configuration;
         private readonly IGestionarUsuarioBW _userService;
+        private readonly UsuarioSesionHttp _usuarioSesion;
 
-        public AutenticaciónController(IConfiguration configuration, IGestionarUsuarioBW userService)
+
+        public AutenticaciónController(IConfiguration configuration, IGestionarUsuarioBW userService, UsuarioSesionHttp usuarioSesionHttp)
         {
             _configuration = configuration;
             _userService = userService;
+            _usuarioSesion = usuarioSesionHttp;
         }
 
         // Endpoint para registrar
@@ -50,31 +54,48 @@ namespace GestorDocumentalOIJ.Controllers
 
         // Endpoint para verificar si el usuario está activo
         [HttpGet("isactive")]
-        [Authorize]
         public IActionResult IsActive()
         {
-            return Ok("Usuario activo");
+            var usuario = _usuarioSesion.GetUsuarioSesion();
+
+            if (usuario != null)
+            {
+                return Ok("Usuario activo");
+            }
+            return BadRequest("Usuario no encontrado");
         }
 
         // Método privado para generar el token JWT
         private string GenerateJwtToken(Usuario user)
         {
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.UTF8.GetBytes(_configuration["JwtSettings:Secret"]);
-            var tokenDescriptor = new SecurityTokenDescriptor
+            
+            try
             {
-                Subject = new ClaimsIdentity(new[]
-                {
-                new Claim(JwtRegisteredClaimNames.Sub, user.Correo),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-            }),
-                Expires = DateTime.UtcNow.AddMinutes(Convert.ToDouble(_configuration["JwtSettings:ExpiresInMinutes"])),
-                Issuer = _configuration["JwtSettings:Issuer"],
-                Audience = _configuration["JwtSettings:Audience"],
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                var claims = new List<Claim>
+            {
+                 new Claim(ClaimTypes.Email, user.Correo),
+                 new Claim(ClaimTypes.Role, user.RolID.ToString())
             };
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            return tokenHandler.WriteToken(token);
+
+                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtSettings:Secret"]));
+                var credential = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+
+                var tokenDescription = new SecurityTokenDescriptor
+                {
+                    Subject = new ClaimsIdentity(claims),
+                    Expires = DateTime.UtcNow.AddMinutes(30),
+                    SigningCredentials = credential
+                };
+
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var token = tokenHandler.CreateToken(tokenDescription);
+
+                return tokenHandler.WriteToken(token);
+            }catch (Exception ex)
+            {
+
+                throw new Exception(ex.ToString());
+            }
         }
     }
 }
