@@ -19,84 +19,26 @@ namespace GestorDocumentalOIJ.Controllers
     {
         private readonly IConfiguration _configuration;
         private readonly IGestionarUsuarioBW _userService;
-        private readonly UsuarioSesionHttp _usuarioSesion;
 
 
-        public AutenticaciónController(IConfiguration configuration, IGestionarUsuarioBW userService, UsuarioSesionHttp usuarioSesionHttp)
+        public AutenticaciónController(IConfiguration configuration, IGestionarUsuarioBW userService)
         {
             _configuration = configuration;
             _userService = userService;
-            _usuarioSesion = usuarioSesionHttp;
         }
 
         // Endpoint para registrar
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] UsuarioDTO model)
+        public async Task<ActionResult<bool>> Register(UsuarioDTO model)
         {
-            var success = await _userService.CrearUsuario(UsuarioDTOMapper.ConvertirDTOAUsuario(model));
-            if (!success)
-                return BadRequest("Error al registrar el usuario.");
-
-            return Ok("Usuario registrado exitosamente");
+            return Ok(await _userService.CrearUsuario(UsuarioDTOMapper.ConvertirDTOAUsuario(model)));
         }
 
         // Endpoint para loguear
         [HttpPost("login")]
-        public async Task<IActionResult> Login(string Correo, string Password)
+        public async Task<ActionResult<UsuarioDTO>> Login(string Correo, string Password)
         {
-            var user = await _userService.Autenticar(Correo, Password);
-            if (user == null)
-                return Unauthorized("Credenciales inválidas");
-
-            var token = GenerateJwtToken(user);
-            return Ok(new { Token = token });
-        }
-
-        // Endpoint para verificar si el usuario está activo
-        [HttpGet("isactive")]
-        public IActionResult IsActive()
-        {
-            var usuario = _usuarioSesion.GetUsuarioSesion();
-
-            if (usuario != null)
-            {
-                return Ok("Usuario activo");
-            }
-            return BadRequest("Usuario no encontrado");
-        }
-
-        // Método privado para generar el token JWT
-        private string GenerateJwtToken(Usuario user)
-        {
-            
-            try
-            {
-                var claims = new List<Claim>
-            {
-                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                 new Claim(ClaimTypes.Email, user.Correo),
-                 new Claim(ClaimTypes.Role, user.RolID.ToString())
-            };
-
-                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtSettings:Secret"]));
-                var credential = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
-
-                var tokenDescription = new SecurityTokenDescriptor
-                {
-                    Subject = new ClaimsIdentity(claims),
-                    Expires = DateTime.UtcNow.AddMinutes(30),
-                    SigningCredentials = credential
-                };
-
-                var tokenHandler = new JwtSecurityTokenHandler();
-                var token = tokenHandler.CreateToken(tokenDescription);
-
-                return tokenHandler.WriteToken(token);
-            }catch (Exception ex)
-            {
-
-                throw new Exception(ex.ToString());
-            }
+           return Ok(UsuarioDTOMapper.ConvertirUsuarioADTO(await _userService.Autenticar(Correo, Password)));
         }
     }
 }

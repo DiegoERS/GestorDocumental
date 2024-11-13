@@ -20,24 +20,6 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("5f27de4fcb458f61c065fe8e497170b907ef9c6074a43c871568a0df6b6da46c83473261b1b2f45018413479f74ffa7f9adfec6f83d464da1c921dc5050e6229"));
-
-
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
-{
-    opt.TokenValidationParameters = new TokenValidationParameters
-    {
-
-        ValidateIssuerSigningKey = true,
-        IssuerSigningKey = key,
-        ValidateAudience = false,
-        ValidateIssuer = false,
-    };
-});
-
-
-
-
 //Inyeccion de dependencias
 builder.Services.AddTransient<IGestionarCategoriaBW, GestionarCategoriaBW>();
 builder.Services.AddTransient<IGestionarCategoriaDA, GestionarCategoriaDA>();
@@ -99,8 +81,6 @@ builder.Services.AddTransient<IGestionarReporteDA, GestionarReporteDA>();
 builder.Services.AddTransient<IGestionarBitacoraMovimientoBW, GestionarBitacoraMovimientoBW>();
 builder.Services.AddTransient<IGestionarBitacoraMovimientoDA,GestionarBitacoraMovimientoDA>();
 
-builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-builder.Services.AddScoped<UsuarioSesionHttp>();
 // Configurar la cadena de conexión a la base de datos
 
 builder.Services.AddDbContext<GestorDocumentalContext>(options =>
@@ -127,7 +107,6 @@ app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
-app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
