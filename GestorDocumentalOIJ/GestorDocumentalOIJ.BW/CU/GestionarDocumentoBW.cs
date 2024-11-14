@@ -52,9 +52,9 @@ namespace GestorDocumentalOIJ.BW.CU
             return await _gestionarDocumentoDA.ObtenerDocumentos();
         }
 
-        public async Task<IEnumerable<DocumentoExtendido>> ObtenerConsultaDocumentos()
+        public async Task<IEnumerable<DocumentoExtendido>> ObtenerConsultaDocumentos(int usuarioID)
         {
-            return await _gestionarDocumentoDA.ObtenerConsultaDocumentos();
+            return await _gestionarDocumentoDA.ObtenerConsultaDocumentos(usuarioID);
         }
 
     }
