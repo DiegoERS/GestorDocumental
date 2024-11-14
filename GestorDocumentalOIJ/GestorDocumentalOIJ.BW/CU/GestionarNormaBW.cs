@@ -52,5 +52,10 @@ namespace GestorDocumentalOIJ.BW.CU
         {
             return await _gestionarNormaDA.ObtenerNorma(id);
         }
+
+        public async Task<IEnumerable<Norma>> ListarNormaUsuario(int usuarioID)
+        {
+            return await _gestionarNormaDA.ListarNormaUsuario(usuarioID);
+        }
     }
 }

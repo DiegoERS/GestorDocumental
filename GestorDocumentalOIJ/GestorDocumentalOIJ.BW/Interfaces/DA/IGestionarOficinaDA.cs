@@ -15,5 +15,7 @@ namespace GestorDocumentalOIJ.BW.Interfaces.DA
         Task<bool> CrearOficina(Oficina oficina);
         Task<bool> ActualizarOficina(Oficina oficina);
         Task<bool> EliminarOficina(int id);
+
+        Task<IEnumerable<Oficina>> ObtenerOficinasCodigo();
     }
 }

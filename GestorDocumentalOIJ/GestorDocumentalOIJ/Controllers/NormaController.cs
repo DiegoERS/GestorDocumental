@@ -47,5 +47,10 @@ namespace GestorDocumentalOIJ.Controllers
             return Ok(await _gestionarNormaBW.EliminarNorma(EliminarRequestDTOMapper.ConvertirDTOAEliminarRequest(eliminarRequestDTO)));
         }
 
+        [HttpGet("usuario/{usuarioID}")]
+        public async Task<ActionResult<IEnumerable<NormaDTO>>> obtenerNormasPorUsuario(int usuarioID)
+        {
+            return Ok(NormaDTOMapper.ConvertirListaDeNormasADTO(await _gestionarNormaBW.ListarNormaUsuario(usuarioID)));
+        }
     }
 }

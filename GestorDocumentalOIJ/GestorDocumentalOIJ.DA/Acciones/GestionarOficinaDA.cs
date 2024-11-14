@@ -126,6 +126,22 @@ namespace GestorDocumentalOIJ.DA.Acciones
             }).ToList();
         }
 
+
+        public async Task<IEnumerable<Oficina>> ObtenerOficinasCodigo()
+        {
+            var oficinas = await _context.Oficinas
+                .FromSqlRaw("EXEC SC.PA_ListarOficinasCodigo")
+                .ToListAsync();
+            return oficinas.Select(o => new Oficina
+            {
+                Id = o.Id,
+                Nombre = o.Nombre,
+                CodigoOficina = o.CodigoOficina,
+                Gestor = o.Gestor,
+                Eliminado = o.Eliminado
+            }).ToList();
+        }
+
     }
 
 }

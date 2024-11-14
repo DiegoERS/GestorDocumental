@@ -29,5 +29,7 @@ namespace GestorDocumentalOIJ.DTOs
 
         public int UsuarioID { get; set; }
         public int OficinaUsuarioID { get; set; }
+
+        public int numeroVersion { get; set; }
     }
 }

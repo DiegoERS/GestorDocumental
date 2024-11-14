@@ -176,7 +176,8 @@ namespace GestorDocumentalOIJ.DA.Acciones
                                 ClasificacionID = reader.GetInt32(reader.GetOrdinal("ClasificacionID")),
                                 PalabraClave = reader.IsDBNull(reader.GetOrdinal("PalabrasClave")) ? palabrasClave : JsonConvert.DeserializeObject<List<PalabraClave>>(reader.GetString(reader.GetOrdinal("PalabrasClave"))).Select(p => p.palabraClave).ToList(),
                                 descargable = !reader.IsDBNull(reader.GetOrdinal("descargable")) && reader.GetBoolean(reader.GetOrdinal("descargable")),
-                                activo = reader.GetBoolean(reader.GetOrdinal("Activo"))
+                                activo = reader.GetBoolean(reader.GetOrdinal("Activo")),
+                                numeroVersion = reader.GetInt32(reader.GetOrdinal("NumeroVersion"))
                             };
 
                             // Agrega el objeto a la lista
@@ -232,6 +233,7 @@ namespace GestorDocumentalOIJ.DA.Acciones
                                 ClasificacionID = reader.IsDBNull(reader.GetOrdinal("ClasificacionID")) ? 0 : reader.GetInt32(reader.GetOrdinal("ClasificacionID")),
                                 descargable = !reader.IsDBNull(reader.GetOrdinal("descargable")) && reader.GetBoolean(reader.GetOrdinal("descargable")),
                                 urlVersion = reader.IsDBNull(reader.GetOrdinal("urlVersion")) ? string.Empty : reader.GetString(reader.GetOrdinal("urlVersion")),
+                                numeroVersion= reader.IsDBNull(reader.GetOrdinal("NumeroVersion")) ? 0 : reader.GetInt32(reader.GetOrdinal("NumeroVersion"))
                             };
 
                             // Agrega el objeto a la lista

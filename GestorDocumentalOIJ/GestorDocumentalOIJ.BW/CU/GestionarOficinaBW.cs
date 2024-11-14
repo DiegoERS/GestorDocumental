@@ -61,6 +61,11 @@ namespace GestorDocumentalOIJ.BW.CU
         }
 
 
+        public async Task<IEnumerable<Oficina>> ObtenerOficinasCodigo()
+        {
+            return await _gestionarOficinaDA.ObtenerOficinasCodigo();
+        }
+
 
 
     }
