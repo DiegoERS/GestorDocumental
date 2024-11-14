@@ -14,5 +14,7 @@ namespace GestorDocumentalOIJ.BW.Interfaces.BW
         Task<bool> CrearNorma(Norma norma);
         Task<bool> ActualizarNorma(Norma norma);
         Task<bool> EliminarNorma(EliminarRequest eliminarRequest);
+
+        Task<IEnumerable<Norma>> ListarNormaUsuario(int usuarioID);
     }
 }

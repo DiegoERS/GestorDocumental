@@ -92,11 +92,11 @@ namespace GestorDocumentalOIJ.DA.Acciones
             catch (SqlException)
             {
                 // Manejar cualquier excepción de SQL
-                return null;
+                return new Usuario();
             }
 
             // Retornar null si no se encontró usuario o en caso de error
-            return null;
+            return new Usuario();
         }
 
         public async Task<bool> CrearUsuario(Usuario usuario)

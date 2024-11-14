@@ -15,6 +15,7 @@ namespace GestorDocumentalOIJ.Utility
         {
             return new ConsultaReporteControlDeVersionesDTO()
             {
+                Oficina = consultaReporteControlDeVersiones.Oficina,
                 CodigoDocumento = consultaReporteControlDeVersiones.CodigoDocumento,
                 NombreDocumento = consultaReporteControlDeVersiones.NombreDocumento,
                 TipoDocumento = consultaReporteControlDeVersiones.TipoDocumento
@@ -25,6 +26,7 @@ namespace GestorDocumentalOIJ.Utility
         {
             return new ConsultaReporteControlDeVersiones()
             {
+                Oficina = consultaReporteControlDeVersionesDTO.Oficina,
                 CodigoDocumento = consultaReporteControlDeVersionesDTO.CodigoDocumento,
                 TipoDocumento = consultaReporteControlDeVersionesDTO.TipoDocumento,
                 NombreDocumento = consultaReporteControlDeVersionesDTO.NombreDocumento

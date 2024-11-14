@@ -79,7 +79,8 @@ namespace GestorDocumentalOIJ.Utility
                 VersionID = d.VersionID,
                 ClasificacionID = d.ClasificacionID,
                 UsuarioID = d.UsuarioID,
-                OficinaUsuarioID = d.OficinaUsuarioID
+                OficinaUsuarioID = d.OficinaUsuarioID,
+                numeroVersion = d.numeroVersion
             });
         }
 
@@ -109,7 +110,8 @@ namespace GestorDocumentalOIJ.Utility
                 Archivo = SaveFiles.GetIFormFile(d.urlVersion),
                 urlArchivo = d.urlVersion,
                 UsuarioID = d.UsuarioID,
-                OficinaUsuarioID = d.OficinaUsuarioID
+                OficinaUsuarioID = d.OficinaUsuarioID,
+                numeroVersion = d.numeroVersion
 
             });
         }

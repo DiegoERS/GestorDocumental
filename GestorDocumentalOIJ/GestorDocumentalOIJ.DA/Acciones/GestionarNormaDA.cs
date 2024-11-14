@@ -93,6 +93,24 @@ namespace GestorDocumentalOIJ.DA.Acciones
         }
 
 
+        public async Task<IEnumerable<Norma>> ListarNormaUsuario(int usuarioID)
+        {
+            var idParametro = new SqlParameter("@pN_UsuarioID", usuarioID);
+            var normas = await _context.Normas
+         .FromSqlRaw("EXEC GD.PA_ListarNormasusuario @pN_UsuarioID", idParametro)
+         .ToListAsync();
+
+            
+            return normas.Select(n => new Norma
+            {
+                Id = n.Id,
+                Nombre = n.Nombre,
+                Descripcion = n.Descripcion,
+                Eliminado = n.Eliminado
+            }).ToList();
+        }
+
+
         public async Task<Norma> ObtenerNorma(int id)
         {
             try

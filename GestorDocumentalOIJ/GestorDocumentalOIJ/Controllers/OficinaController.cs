@@ -56,5 +56,12 @@ namespace GestorDocumentalOIJ.Controllers
             return Ok(await _gestionarOficinaBW.EliminarOficina(id));
         }
 
+        [HttpGet]
+        [Route("ObtenerOficinasCodigo")]
+        public async Task<ActionResult<IEnumerable<OficinaDTO>>> ObtenerOficinasCodigo()
+        {
+            return Ok(OficinaDTOMapper.ConvertirListaDeOficinasADTO(await _gestionarOficinaBW.ObtenerOficinasCodigo()));
+        }
+
     }
 }

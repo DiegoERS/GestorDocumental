@@ -99,8 +99,50 @@ namespace GestorDocumentalOIJ.DA.Acciones
                 eliminado = e.eliminado,
                 color = e.color,
                 EtapaPadreID = e.EtapaPadreID,
-                normaID = e.normaID
+                normaID = e.normaID,
+                Consecutivo = e.Consecutivo
             }).ToList(); 
+        }
+
+        public async Task<IEnumerable<Etapa>> ObtenerEtapasHuerfanas()
+        {
+
+            var etapas = await _context.Etapas
+                .FromSqlRaw("EXEC GD.PA_ListarEtapasHuerfanas")
+                .ToListAsync();
+
+            return etapas.Select(e => new Etapa
+            {
+                Id = e.Id,
+                Nombre = e.Nombre,
+                Descripcion = e.Descripcion,
+                eliminado = e.eliminado,
+                color = e.color,
+                EtapaPadreID = e.EtapaPadreID,
+                normaID = e.normaID,
+                Consecutivo = e.Consecutivo
+            }).ToList();
+        }
+
+        public async Task<IEnumerable<Etapa>> ObtenerEtapasPorNorma(int normaId)
+        {
+            var normaIdParametro = new SqlParameter("@pN_NormaID", normaId);
+
+            var etapas = await _context.Etapas
+                .FromSqlRaw("EXEC GD.PA_ObtenerEtapasPorNormaId @pN_NormaID", normaIdParametro)
+                .ToListAsync();
+
+            return etapas.Select(e => new Etapa
+            {
+                Id = e.Id,
+                Nombre = e.Nombre,
+                Descripcion = e.Descripcion,
+                eliminado = e.eliminado,
+                color = e.color,
+                EtapaPadreID = e.EtapaPadreID,
+                normaID = e.normaID,
+                Consecutivo = e.Consecutivo
+            }).ToList();
         }
 
         public async Task<Etapa> ObtenerEtapaPorId(int id)
@@ -124,7 +166,8 @@ namespace GestorDocumentalOIJ.DA.Acciones
                         eliminado = etapaDA.eliminado,
                         color = etapaDA.color,
                         EtapaPadreID=etapaDA.EtapaPadreID,
-                        normaID = etapaDA.normaID
+                        normaID = etapaDA.normaID,
+                        Consecutivo = etapaDA.Consecutivo
                     };
                 }
 

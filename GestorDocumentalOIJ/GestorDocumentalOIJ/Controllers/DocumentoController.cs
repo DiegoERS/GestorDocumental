@@ -24,11 +24,11 @@ namespace GestorDocumentalOIJ.Controllers
         }
 
         [HttpGet]
-        [Route("ConsultarDocumentos")]
+        [Route("ConsultarDocumentos/{usuarioID}")]
 
-        public async Task<ActionResult<IEnumerable<DocumentoExtendidoDTO>>> ObtenerConsultaDocumentos()
+        public async Task<ActionResult<IEnumerable<DocumentoExtendidoDTO>>> ObtenerConsultaDocumentos(int usuarioID)
         {
-            return Ok(DocumentoDTOMapper.ConvertirListaDeDocumentosExtendidosADTO(await _gestionarDocumentoBW.ObtenerConsultaDocumentos()));
+            return Ok(DocumentoDTOMapper.ConvertirListaDeDocumentosExtendidosADTO(await _gestionarDocumentoBW.ObtenerConsultaDocumentos(usuarioID)));
         }
 
         [HttpGet("{id}")]

@@ -12,7 +12,7 @@ namespace GestorDocumentalOIJ.DA.Entidades
         public string Codigo { get; set; } = string.Empty;
         public string Asunto { get; set; } = string.Empty;
         public string Descripcion { get; set; } = string.Empty;
-        public string PalabraClave { get; set; } = string.Empty;
+        public string PalabrasClave { get; set; } = string.Empty;
         public int CategoriaID { get; set; }
         public int TipoDocumento { get; set; }
         public int OficinaID { get; set; }

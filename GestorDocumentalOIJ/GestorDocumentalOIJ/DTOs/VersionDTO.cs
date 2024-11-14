@@ -24,5 +24,7 @@
         public string justificacion { get; set; } = string.Empty;
         public int UsuarioLogID { get; set; }
         public int OficinaID { get; set; }
+
+        public string urlVersion { get; set; } = string.Empty;
     }
 }

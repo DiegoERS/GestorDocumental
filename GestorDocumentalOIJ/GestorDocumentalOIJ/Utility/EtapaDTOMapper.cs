@@ -17,7 +17,8 @@ namespace GestorDocumentalOIJ.Utility
                 EtapaPadreID = etapa.EtapaPadreID,
                 color = etapa.color,
                 UsuarioID = etapa.UsuarioID,
-                OficinaID = etapa.OficinaID
+                OficinaID = etapa.OficinaID,
+                Consecutivo = etapa.Consecutivo
             };
         }
 
@@ -33,7 +34,8 @@ namespace GestorDocumentalOIJ.Utility
                 EtapaPadreID = etapaDTO.EtapaPadreID,
                 color = etapaDTO.color,
                 UsuarioID = etapaDTO.UsuarioID,
-                OficinaID = etapaDTO.OficinaID
+                OficinaID = etapaDTO.OficinaID,
+                Consecutivo = etapaDTO.Consecutivo
             };
         }
 
@@ -49,7 +51,8 @@ namespace GestorDocumentalOIJ.Utility
                 EtapaPadreID= e.EtapaPadreID,
                 color = e.color,
                 UsuarioID = e.UsuarioID,
-                OficinaID = e.OficinaID
+                OficinaID = e.OficinaID,
+                Consecutivo = e.Consecutivo
             });
         }
     }

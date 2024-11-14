@@ -9,7 +9,7 @@
         public string color { get; set; } = string.Empty;
         public int EtapaPadreID { get; set; }
         public int normaID { get; set; }
-
+        public int Consecutivo { get; set; }
         public int UsuarioID { get; set; }
         public int OficinaID { get; set; }
     }
