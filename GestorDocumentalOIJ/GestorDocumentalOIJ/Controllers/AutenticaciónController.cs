@@ -38,7 +38,14 @@ namespace GestorDocumentalOIJ.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<UsuarioDTO>> Login(string Correo, string Password)
         {
-           return Ok(UsuarioDTOMapper.ConvertirUsuarioADTO(await _userService.Autenticar(Correo, Password)));
+           var usuario=UsuarioDTOMapper.ConvertirUsuarioADTO(await _userService.Autenticar(Correo, Password));
+
+            if (usuario.Id!=0)
+            {
+                return Ok(usuario);
+            }
+
+            return NotFound();
         }
     }
 }
