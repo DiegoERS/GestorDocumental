@@ -12,7 +12,7 @@ namespace GestorDocumentalOIJ.BW.Interfaces.DA
         Task<IEnumerable<Documento>> ObtenerDocumentos();
         Task<IEnumerable<DocumentoExtendido>> ObtenerConsultaDocumentos(int usuarioID);
         Task<Documento> obtenerDocumentoPorId(int id);
-        Task<bool> CrearDocumento(Documento documento);
+        Task<int> CrearDocumento(Documento documento);
         Task<bool> ActualizarDocumento(Documento documento);
         Task<bool> EliminarDocumento(EliminarRequest eliminarRequest);
 

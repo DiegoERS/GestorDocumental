@@ -41,7 +41,7 @@ namespace GestorDocumentalOIJ.Controllers
 
         [HttpPost]
 
-        public async Task<ActionResult<bool>> CrearDocumento(DocumentoDTO documentoDTO)
+        public async Task<ActionResult<int>> CrearDocumento(DocumentoDTO documentoDTO)
         {
             return Ok(await _gestionarDocumentoBW.CrearDocumento(DocumentoDTOMapper.ConvertirDTOADocumento(documentoDTO)));
         }

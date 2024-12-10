@@ -73,7 +73,7 @@ namespace GestorDocumentalOIJ.DA.Acciones
             return resultado > 0;
         }
 
-        public async Task<bool> CrearDocumento(Documento documento)
+        public async Task<int> CrearDocumento(Documento documento)
         {
             var listaSerializada = JsonConvert.SerializeObject(documento.doctos);
             var palabrasClavesSerializadas = JsonConvert.SerializeObject(documento.PalabraClave);
@@ -116,8 +116,21 @@ namespace GestorDocumentalOIJ.DA.Acciones
                                                                         palabraClaveParameter,
                                                                         doctosParameter);
 
+            int documentoID = -1;
 
-            return resultado > 0;
+            if(resultado > 0)
+            {
+                var documentoInsertado = await _context.Documentos
+                    .FirstOrDefaultAsync
+                    (d => d.Codigo == documento.Codigo && d.Asunto == documento.Asunto);
+
+                if (documentoInsertado != null)
+                {
+                    documentoID = documentoInsertado.Id;
+                }
+            }
+
+            return documentoID;
         }
 
 

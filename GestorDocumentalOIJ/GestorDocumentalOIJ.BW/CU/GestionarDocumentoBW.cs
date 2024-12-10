@@ -28,11 +28,11 @@ namespace GestorDocumentalOIJ.BW.CU
             return await _gestionarDocumentoDA.ActualizarDocumento(documento);
         }
 
-        public async Task<bool> CrearDocumento(Documento documento)
+        public async Task<int> CrearDocumento(Documento documento)
         {
             (bool esValido, string mensaje) validacion = DocumentoRN.ElDocumentoEsValido(documento);
             if (!validacion.esValido)
-                return false;
+                return -1;
 
             return await _gestionarDocumentoDA.CrearDocumento(documento);
         }

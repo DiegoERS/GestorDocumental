@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GestorDocumentalOIJ.BW")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a27df649e9f9e20ce63f2e82d6ef15be9531718c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b2d8f2d82a31d2c820beb556a741a7c014acfffd")]
 [assembly: System.Reflection.AssemblyProductAttribute("GestorDocumentalOIJ.BW")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GestorDocumentalOIJ.BW")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
