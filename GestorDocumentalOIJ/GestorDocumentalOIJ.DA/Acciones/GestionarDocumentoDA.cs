@@ -120,9 +120,9 @@ namespace GestorDocumentalOIJ.DA.Acciones
 
             if(resultado > 0)
             {
-                var documentoInsertado = await _context.Documentos
-                    .FirstOrDefaultAsync
-                    (d => d.Codigo == documento.Codigo && d.Asunto == documento.Asunto);
+                IEnumerable<Documento> documentos = await this.ObtenerDocumentos();
+
+                var documentoInsertado = documentos.FirstOrDefault(d => d.Codigo == documento.Codigo && d.Asunto == documento.Asunto);
 
                 if (documentoInsertado != null)
                 {
